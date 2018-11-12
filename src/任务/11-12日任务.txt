@@ -1,0 +1,12 @@
+巧克力同学：
+1、git 设置好自己的 name email   在config里面配置，具体百度
+2、然后git add remote 我的仓库a573369119
+3、git clone克隆我的仓库。然后你就会看到有很多文件下载到你的文件夹
+4、建立自己的分支 git branch  【name】 命令。
+5、切换自己的分支 git checkout    git branch 查看是否在分支类。
+6、分支创建好了，就 git add . 再 git commit -m "注释 ，随便写"  再 git push origin 你的分支名。
+7、到我的github 页面去查看一下 左边的 branch 有没有你的 分支，现在有 master 和 mb_branch 
+完了吧。熟悉操作也行，尽量不要动master。
+
+分支随便建。合并分支有冲突你可以试试解决冲突。
+////////////////////
