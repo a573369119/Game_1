@@ -26,9 +26,16 @@ var SelectMeditor = /** @class */ (function (_super) {
     };
     /**事件绑定 */
     SelectMeditor.prototype.addEvents = function () {
+        this.view.btn_First.on(Laya.Event.CLICK, this, this.onSelectBoxStart);
     };
     /**事件移除 */
     SelectMeditor.prototype.removeEvents = function () {
+        this.view.btn_First.off(Laya.Event.CLICK, this, this.onSelectBoxStart);
+    };
+    /**按钮事件 进入季度关卡 */
+    SelectMeditor.prototype.onSelectBoxStart = function () {
+        //进入选择关卡
+        GameManager.ins_.runMediator(GameData.SELECT_BOX_MEDIATOR);
     };
     return SelectMeditor;
 }(BaseMeditor));

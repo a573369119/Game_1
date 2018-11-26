@@ -39,6 +39,8 @@ var GameData = /** @class */ (function () {
     GameData.START_GAME_MEDIATOR = 1;
     /**季度选择 调度器 */
     GameData.SELECT_MEDIATOR = 2;
+    /**盒子选择 调度器 */
+    GameData.SELECT_BOX_MEDIATOR = 3;
     GameData.ins_ = new GameData();
     return GameData;
 }());

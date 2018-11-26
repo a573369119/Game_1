@@ -12,6 +12,8 @@ var GameManager = /** @class */ (function () {
                 return new StartGameMeditor(meditorName, GameData.START_VIEW);
             case GameData.SELECT_MEDIATOR:
                 return new SelectMeditor(meditorName, GameData.SELECT_VIEW);
+            case GameData.SELECT_BOX_MEDIATOR:
+                return new SelectBoxMeditor(meditorName, GameData.SELECT_BOX_VIEW);
             default:
                 console.log("没有该  mediator");
                 break;
@@ -20,7 +22,6 @@ var GameManager = /** @class */ (function () {
     //-----------------------------------------------------------------------------------------------------------
     /**启动 调度器*/
     GameManager.prototype.runMediator = function (meditorName) {
-        console.log(meditorName);
         if (this.MeditorDic.get(meditorName)) {
             console.log("调度器已有");
         }

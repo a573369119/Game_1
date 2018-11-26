@@ -19,6 +19,8 @@ class GameManager{
                 return new StartGameMeditor(meditorName,GameData.START_VIEW);
             case GameData.SELECT_MEDIATOR : 
                 return new SelectMeditor(meditorName,GameData.SELECT_VIEW); 
+            case GameData.SELECT_BOX_MEDIATOR : 
+                return new SelectBoxMeditor(meditorName,GameData.SELECT_BOX_VIEW); 
             default : 
                 console.log("没有该  mediator");
                 break;
@@ -30,7 +32,6 @@ class GameManager{
     /**启动 调度器*/
     public runMediator(meditorName:any) : void
     {
-        console.log(meditorName);
         if(this.MeditorDic.get(meditorName))
         {
             console.log("调度器已有");

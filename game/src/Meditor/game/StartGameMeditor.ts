@@ -26,8 +26,6 @@ class StartGameMeditor extends BaseMeditor{
     protected removeEvents() : void
     {
         this.view.btn_StartGame.off(Laya.Event.CLICK,this,this.onGameStart);
-        this.view.btn_Imgs.off(Laya.Event.CLICK,this,this.onImgs);
-        this.view.btn_About.off(Laya.Event.CLICK,this,this.onAbout);
     }
 
     /**按钮事件 游戏开始 */
