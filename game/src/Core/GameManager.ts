@@ -17,7 +17,9 @@ class GameManager{
         {   //注册 Mediator    Case  [需要到GameData相应的 MEIDIATOR 下自己注册一个] : this.MeditorDic.set(meditorName,new XXXMediator(meditorName，(选填-有视图填没视图不填)[在GameData.ts 对应的VIEW下注册个VIEW的标识]));
             case GameData.START_GAME_MEDIATOR : 
                 return new StartGameMeditor(meditorName,GameData.START_VIEW);
-            default :
+            case GameData.SELECT_MEDIATOR : 
+                return new SelectMeditor(meditorName,GameData.SELECT_VIEW); 
+            default : 
                 console.log("没有该  mediator");
                 break;
         }

@@ -29,17 +29,16 @@ var BaseMeditor = /** @class */ (function () {
     };
     /**添加事件 */
     BaseMeditor.prototype.addEvents = function () {
-        this.dispose();
     };
     /**移除事件 */
     BaseMeditor.prototype.removeEvents = function () {
     };
     /**离开 关闭 销毁*/
     BaseMeditor.prototype.dispose = function () {
-        GameManager.ins_.destroyMediator(this.mediator);
         this.removeEvents();
         ViewManager.ins_.destroView(this.view, this.arr_url);
         this.view = null;
+        GameManager.ins_.destroyMediator(this.mediator);
     };
     return BaseMeditor;
 }());

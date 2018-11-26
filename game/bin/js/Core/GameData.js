@@ -2,7 +2,6 @@
  * 游戏数据定义
  */
 var GameData = /** @class */ (function () {
-    //public static START_GAME_MEDIATOR : number = 1;
     //---------------------------Mediator----------------
     function GameData() {
     }
@@ -38,6 +37,8 @@ var GameData = /** @class */ (function () {
     //---------------------------Mediator----------------
     /**开始游戏 调度器*/
     GameData.START_GAME_MEDIATOR = 1;
+    /**季度选择 调度器 */
+    GameData.SELECT_MEDIATOR = 1;
     GameData.ins_ = new GameData();
     return GameData;
 }());

@@ -34,7 +34,8 @@ class GameData{
     //---------------------------Mediator----------------
     /**开始游戏 调度器*/
     public static START_GAME_MEDIATOR : number = 1;
-    //public static START_GAME_MEDIATOR : number = 1;
+    /**季度选择 调度器 */
+    public static SELECT_MEDIATOR : number = 1;
     
     //---------------------------Mediator----------------
 
