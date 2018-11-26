@@ -30,6 +30,7 @@ class GameManager{
     /**启动 调度器*/
     public runMediator(meditorName:any) : void
     {
+        console.log(meditorName);
         if(this.MeditorDic.get(meditorName))
         {
             console.log("调度器已有");

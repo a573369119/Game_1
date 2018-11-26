@@ -4,6 +4,8 @@
 class BaseMeditor {
     /**该界面 */
     protected view : any;
+    /**界面名字 */
+    protected viewName : number;
     /**资源 */
     protected arr_url : any;
     /**Meditor的名字 */
@@ -16,6 +18,7 @@ class BaseMeditor {
      */
     constructor(mediatorName?:number,view?:number,assate?:any)
     {
+        this.viewName = view
         if(mediatorName)
         {
             this.mediator = mediatorName;
@@ -28,7 +31,6 @@ class BaseMeditor {
         if(view)
         {
             ViewManager.ins_.LoadingView(view,this,this.init,assate);
-            this.view = ViewManager.ins_.getView(view);
         }
         else
         {
@@ -39,6 +41,7 @@ class BaseMeditor {
     /**数据初始化*/
     protected init() : void
     {
+        this.view = ViewManager.ins_.getView(this.viewName);
         this.addEvents();
     }   
 

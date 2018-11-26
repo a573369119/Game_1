@@ -8,6 +8,7 @@ var BaseMeditor = /** @class */ (function () {
      * assate : 是否有资源图需要加载，（选填）
      */
     function BaseMeditor(mediatorName, view, assate) {
+        this.viewName = view;
         if (mediatorName) {
             this.mediator = mediatorName;
         }
@@ -17,7 +18,6 @@ var BaseMeditor = /** @class */ (function () {
         }
         if (view) {
             ViewManager.ins_.LoadingView(view, this, this.init, assate);
-            this.view = ViewManager.ins_.getView(view);
         }
         else {
             this.init();
@@ -25,6 +25,7 @@ var BaseMeditor = /** @class */ (function () {
     }
     /**数据初始化*/
     BaseMeditor.prototype.init = function () {
+        this.view = ViewManager.ins_.getView(this.viewName);
         this.addEvents();
     };
     /**添加事件 */

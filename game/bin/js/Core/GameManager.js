@@ -20,6 +20,7 @@ var GameManager = /** @class */ (function () {
     //-----------------------------------------------------------------------------------------------------------
     /**启动 调度器*/
     GameManager.prototype.runMediator = function (meditorName) {
+        console.log(meditorName);
         if (this.MeditorDic.get(meditorName)) {
             console.log("调度器已有");
         }

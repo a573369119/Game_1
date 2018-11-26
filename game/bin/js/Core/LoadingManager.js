@@ -29,7 +29,6 @@ var LoadingManager = /** @class */ (function () {
         if (this.callBackDic.get(caller) != callBack) {
             this.callBackDic.set(caller, callBack);
         }
-        console.log(this.callBackDic.get(caller));
         Laya.loader.load(this.arr_LoadingUi, Laya.Handler.create(this, this.onLoadingUi, [caller]));
     };
     /**资源加载完成 */
