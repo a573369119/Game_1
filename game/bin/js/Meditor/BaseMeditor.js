@@ -35,9 +35,14 @@ var BaseMeditor = /** @class */ (function () {
     BaseMeditor.prototype.removeEvents = function () {
     };
     /**离开 关闭 销毁*/
-    BaseMeditor.prototype.dispose = function () {
+    BaseMeditor.prototype.dispose = function (toView) {
+        if (toView) {
+            ViewManager.ins_.returnView(toView);
+        }
+        else {
+            ViewManager.ins_.destroView(this.viewName, this.arr_url);
+        }
         this.removeEvents();
-        ViewManager.ins_.destroView(this.view, this.arr_url);
         this.view = null;
         GameManager.ins_.destroyMediator(this.mediator);
     };

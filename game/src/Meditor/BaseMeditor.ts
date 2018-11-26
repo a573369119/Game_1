@@ -58,10 +58,17 @@ class BaseMeditor {
     }
 
     /**离开 关闭 销毁*/
-    protected dispose() : void
+    protected dispose(toView?:number) : void
     {
+        if(toView)
+        {
+            ViewManager.ins_.returnView(toView);
+        }
+        else
+        {
+            ViewManager.ins_.destroView(this.viewName,this.arr_url);
+        }
         this.removeEvents();
-        ViewManager.ins_.destroView(this.view,this.arr_url);
         this.view = null;
         GameManager.ins_.destroyMediator(this.mediator);
     }

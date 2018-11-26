@@ -26,16 +26,34 @@ var SelectMeditor = /** @class */ (function (_super) {
     };
     /**事件绑定 */
     SelectMeditor.prototype.addEvents = function () {
-        this.view.btn_First.on(Laya.Event.CLICK, this, this.onSelectBoxStart);
+        this.view.btn_First.on(Laya.Event.CLICK, this, this.onSelectBoxStart, [1]);
+        this.view.btn_Second.on(Laya.Event.CLICK, this, this.onSelectBoxStart, [2]);
+        this.view.btn_Third.on(Laya.Event.CLICK, this, this.onSelectBoxStart, [3]);
+        this.view.btn_First_.on(Laya.Event.CLICK, this, this.onSelectBoxStart, [1]);
+        this.view.btn_Second_.on(Laya.Event.CLICK, this, this.onSelectBoxStart, [2]);
+        this.view.btn_Third_.on(Laya.Event.CLICK, this, this.onSelectBoxStart, [3]);
+        this.view.btn_Exit.on(Laya.Event.CLICK, this, this.onExit);
     };
     /**事件移除 */
     SelectMeditor.prototype.removeEvents = function () {
         this.view.btn_First.off(Laya.Event.CLICK, this, this.onSelectBoxStart);
+        this.view.btn_Second.off(Laya.Event.CLICK, this, this.onSelectBoxStart);
+        this.view.btn_Third.off(Laya.Event.CLICK, this, this.onSelectBoxStart);
+        this.view.btn_First_.off(Laya.Event.CLICK, this, this.onSelectBoxStart);
+        this.view.btn_Second_.off(Laya.Event.CLICK, this, this.onSelectBoxStart);
+        this.view.btn_Third_.off(Laya.Event.CLICK, this, this.onSelectBoxStart);
+        this.view.btn_Exit.off(Laya.Event.CLICK, this, this.onExit);
     };
     /**按钮事件 进入季度关卡 */
-    SelectMeditor.prototype.onSelectBoxStart = function () {
+    SelectMeditor.prototype.onSelectBoxStart = function (index) {
+        console.log("进入第：" + index + "季");
         //进入选择关卡
         GameManager.ins_.runMediator(GameData.SELECT_BOX_MEDIATOR);
+        GameManager.ins_.getMediator(GameData.SELECT_BOX_MEDIATOR).setSelectQuarter(index);
+    };
+    /**按钮事件 退出 */
+    SelectMeditor.prototype.onExit = function () {
+        this.dispose();
     };
     return SelectMeditor;
 }(BaseMeditor));

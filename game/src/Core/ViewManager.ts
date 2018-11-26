@@ -84,6 +84,13 @@ class ViewManager{
     /**返回页面  ui:指定返回Ui*/
     public returnView(ui:number) : void
     {
+        while(this.viewsDic.get(++ui))
+        {
+            console.log("删除界面 :" + ui);//需要测试
+            this.viewsDic.remove(ui);
+        }
+        /**需要测试 */
+        this.currentView = ui;
         this.viewsDic.get(ui).destroyChildren();
     }
 
@@ -104,6 +111,8 @@ class ViewManager{
         {
             view.removeSelf();
             this.viewsDic.remove(ui);
+            this.currentView -=1;
+            console.log(this.viewsDic);
         }
         else
         {

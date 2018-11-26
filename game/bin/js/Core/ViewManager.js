@@ -59,6 +59,12 @@ var ViewManager = /** @class */ (function () {
     ///////////////////////-------------------外部方法----------------------
     /**返回页面  ui:指定返回Ui*/
     ViewManager.prototype.returnView = function (ui) {
+        while (this.viewsDic.get(++ui)) {
+            console.log("删除界面 :" + ui); //需要测试
+            this.viewsDic.remove(ui);
+        }
+        /**需要测试 */
+        this.currentView = ui;
         this.viewsDic.get(ui).destroyChildren();
     };
     /**获取视图 */
@@ -74,6 +80,8 @@ var ViewManager = /** @class */ (function () {
         if (view) {
             view.removeSelf();
             this.viewsDic.remove(ui);
+            this.currentView -= 1;
+            console.log(this.viewsDic);
         }
         else {
             console.log("未找到该视图 - viewManager");

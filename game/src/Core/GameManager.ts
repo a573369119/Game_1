@@ -39,16 +39,16 @@ class GameManager{
         else
         {   
             this.MeditorDic.set(meditorName,this.selectMeditor(meditorName));
-            console.log(this.MeditorDic);
-            console.log(this.MeditorDic.get(meditorName));        
+            //console.log(this.MeditorDic);
+            //console.log(this.MeditorDic.get(meditorName));        
         }
     }
 
     /**销毁 调度器 */
     public destroyMediator(meditorName:number) : void
     {      
-        console.log(this.MeditorDic);
-        console.log(this.MeditorDic.get(meditorName));  
+        //console.log(this.MeditorDic);
+        //console.log(this.MeditorDic.get(meditorName));  
         let mediator = this.MeditorDic.get(meditorName);
         if(mediator)
         {
@@ -59,5 +59,19 @@ class GameManager{
             console.log("没有该 meiditor - destoryMeditor");
         }
         
+    }
+
+    /**获取 调度器 */
+    public getMediator(meditorName:number) : any
+    {
+        let mediator = this.MeditorDic.get(meditorName);
+        if(mediator)
+        {
+            return mediator;
+        }
+        else
+        {
+            console.log("没有该Meidiator - GameManager");
+        }
     }
 }

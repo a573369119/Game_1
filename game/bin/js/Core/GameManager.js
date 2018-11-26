@@ -27,20 +27,30 @@ var GameManager = /** @class */ (function () {
         }
         else {
             this.MeditorDic.set(meditorName, this.selectMeditor(meditorName));
-            console.log(this.MeditorDic);
-            console.log(this.MeditorDic.get(meditorName));
+            //console.log(this.MeditorDic);
+            //console.log(this.MeditorDic.get(meditorName));        
         }
     };
     /**销毁 调度器 */
     GameManager.prototype.destroyMediator = function (meditorName) {
-        console.log(this.MeditorDic);
-        console.log(this.MeditorDic.get(meditorName));
+        //console.log(this.MeditorDic);
+        //console.log(this.MeditorDic.get(meditorName));  
         var mediator = this.MeditorDic.get(meditorName);
         if (mediator) {
             this.MeditorDic.remove(meditorName);
         }
         else {
             console.log("没有该 meiditor - destoryMeditor");
+        }
+    };
+    /**获取 调度器 */
+    GameManager.prototype.getMediator = function (meditorName) {
+        var mediator = this.MeditorDic.get(meditorName);
+        if (mediator) {
+            return mediator;
+        }
+        else {
+            console.log("没有该Meidiator - GameManager");
         }
     };
     GameManager.ins_ = new GameManager();

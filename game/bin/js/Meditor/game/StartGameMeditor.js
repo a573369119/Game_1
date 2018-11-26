@@ -33,6 +33,8 @@ var StartGameMeditor = /** @class */ (function (_super) {
     /**事件移除 */
     StartGameMeditor.prototype.removeEvents = function () {
         this.view.btn_StartGame.off(Laya.Event.CLICK, this, this.onGameStart);
+        this.view.btn_Imgs.off(Laya.Event.CLICK, this, this.onImgs);
+        this.view.btn_About.off(Laya.Event.CLICK, this, this.onAbout);
     };
     /**按钮事件 游戏开始 */
     StartGameMeditor.prototype.onGameStart = function () {
