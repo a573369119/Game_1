@@ -1,27 +1,92 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var View = laya.ui.View;
 var Dialog = laya.ui.Dialog;
 var ui;
 (function (ui) {
-    var test;
-    (function (test) {
-        var TestPageUI = (function (_super) {
-            __extends(TestPageUI, _super);
-            function TestPageUI() {
-                _super.call(this);
-            }
-            TestPageUI.prototype.createChildren = function () {
-                _super.prototype.createChildren.call(this);
-                this.createView(ui.test.TestPageUI.uiView);
-            };
-            TestPageUI.uiView = { "type": "View", "child": [{ "props": { "x": 0, "y": 0, "skin": "comp/bg.png", "sizeGrid": "30,4,4,4", "width": 600, "height": 400 }, "type": "Image" }, { "props": { "x": 41, "y": 56, "skin": "comp/button.png", "label": "点我赋值", "width": 150, "height": 37, "sizeGrid": "4,4,4,4", "var": "btn" }, "type": "Button" }, { "props": { "x": 401, "y": 56, "skin": "comp/clip_num.png", "clipX": 10, "var": "clip" }, "type": "Clip" }, { "props": { "x": 220, "y": 143, "skin": "comp/combobox.png", "labels": "select1,select2,selecte3", "selectedIndex": 1, "sizeGrid": "4,20,4,4", "width": 200, "height": 23, "var": "combobox" }, "type": "ComboBox" }, { "props": { "x": 220, "y": 96, "skin": "comp/tab.png", "labels": "tab1,tab2,tab3", "var": "tab" }, "type": "Tab" }, { "props": { "x": 259, "y": 223, "skin": "comp/vscroll.png", "height": 150 }, "type": "VScrollBar" }, { "props": { "x": 224, "y": 223, "skin": "comp/vslider.png", "height": 150 }, "type": "VSlider" }, { "type": "List", "child": [{ "type": "Box", "child": [{ "props": { "skin": "comp/label.png", "text": "this is a list", "x": 26, "y": 5, "width": 78, "height": 20, "fontSize": 14, "name": "label" }, "type": "Label" }, { "props": { "x": 0, "y": 2, "skin": "comp/clip_num.png", "clipX": 10, "name": "clip" }, "type": "Clip" }], "props": { "name": "render", "x": 0, "y": 0, "width": 112, "height": 30 } }], "props": { "x": 452, "y": 68, "width": 128, "height": 299, "vScrollBarSkin": "comp/vscroll.png", "repeatX": 1, "var": "list" } }, { "props": { "x": 563, "y": 4, "skin": "comp/btn_close.png", "name": "close" }, "type": "Button" }, { "props": { "x": 41, "y": 112, "skin": "comp/button.png", "label": "点我赋值", "width": 150, "height": 66, "sizeGrid": "4,4,4,4", "labelSize": 30, "labelBold": true, "var": "btn2" }, "type": "Button" }, { "props": { "x": 220, "y": 188, "skin": "comp/checkbox.png", "label": "checkBox1", "var": "check" }, "type": "CheckBox" }, { "props": { "x": 220, "y": 61, "skin": "comp/radiogroup.png", "labels": "radio1,radio2,radio3", "label2'": "", "var": "radio" }, "type": "RadioGroup" }, { "type": "Panel", "child": [{ "props": { "skin": "comp/image.png" }, "type": "Image" }], "props": { "x": 299, "y": 223, "width": 127, "height": 150, "vScrollBarSkin": "comp/vscroll.png" } }, { "props": { "x": 326, "y": 188, "skin": "comp/checkbox.png", "label": "checkBox2", "labelColors": "#ff0000" }, "type": "CheckBox" }, { "type": "Box", "child": [{ "props": { "y": 70, "skin": "comp/progress.png", "width": 150, "height": 14, "sizeGrid": "4,4,4,4", "name": "progress" }, "type": "ProgressBar" }, { "props": { "y": 103, "skin": "comp/label.png", "text": "This is a Label", "width": 137, "height": 26, "fontSize": 20, "name": "label" }, "type": "Label" }, { "props": { "y": 148, "skin": "comp/textinput.png", "text": "textinput", "width": 150, "name": "input" }, "type": "TextInput" }, { "props": { "skin": "comp/hslider.png", "width": 150, "name": "slider" }, "type": "HSlider" }, { "props": { "y": 34, "skin": "comp/hscroll.png", "width": 150, "name": "scroll" }, "type": "HScrollBar" }], "props": { "x": 41, "y": 197, "var": "box" } }], "props": { "width": 600, "height": 400 } };
-            return TestPageUI;
-        }(View));
-        test.TestPageUI = TestPageUI;
-    })(test = ui.test || (ui.test = {}));
+    var LoadingUI = /** @class */ (function (_super) {
+        __extends(LoadingUI, _super);
+        function LoadingUI() {
+            return _super.call(this) || this;
+        }
+        LoadingUI.prototype.createChildren = function () {
+            _super.prototype.createChildren.call(this);
+            this.createView(ui.LoadingUI.uiView);
+        };
+        LoadingUI.uiView = { "type": "View", "props": { "width": 750, "height": 1334 }, "child": [{ "type": "Image", "props": { "y": -3, "x": -12, "width": 787, "skin": "unpackage/loadingBg.jpg", "height": 1392 } }, { "type": "Label", "props": { "y": 928, "x": 141, "width": 499, "var": "lab_Progress", "text": "加载中（20%）", "height": 50, "fontSize": 50, "color": "#ffffff", "align": "center" } }, { "type": "Image", "props": { "y": 248, "x": 91, "width": 588, "skin": "unpackage/cutRope.png", "height": 522 } }, { "type": "Image", "props": { "y": 891, "x": 137, "skin": "loadingView/loading2.png" } }, { "type": "Image", "props": { "y": 895, "x": 141, "width": 311, "var": "img_Progress", "skin": "loadingView/loading1.png", "sizeGrid": "0,9,0,8", "height": 20 } }] };
+        return LoadingUI;
+    }(View));
+    ui.LoadingUI = LoadingUI;
+})(ui || (ui = {}));
+(function (ui) {
+    var SelectUI = /** @class */ (function (_super) {
+        __extends(SelectUI, _super);
+        function SelectUI() {
+            return _super.call(this) || this;
+        }
+        SelectUI.prototype.createChildren = function () {
+            _super.prototype.createChildren.call(this);
+            this.createView(ui.SelectUI.uiView);
+        };
+        SelectUI.uiView = { "type": "View", "props": { "width": 750, "height": 1334 }, "child": [{ "type": "Image", "props": { "y": 0, "x": 0, "width": 752, "skin": "unpackage/loadingBg.jpg", "height": 1331 } }, { "type": "Label", "props": { "y": 102, "x": 76, "width": 600, "var": "btn_First", "text": "第一季", "height": 191, "fontSize": 120, "font": "Microsoft YaHei", "align": "center" } }, { "type": "Label", "props": { "y": 343, "x": 76, "width": 600, "var": "btn_Second", "text": "第一季", "height": 191, "fontSize": 120, "font": "Microsoft YaHei", "align": "center" } }, { "type": "Label", "props": { "y": 605, "x": 78, "width": 600, "var": "btn_Third", "text": "第一季", "height": 191, "fontSize": 120, "font": "Microsoft YaHei", "align": "center" } }, { "type": "Image", "props": { "y": 1168, "x": 37, "width": 139, "skin": "publicAssets/exit_R.png", "height": 132 } }, { "type": "Image", "props": { "y": 206, "x": 360, "skin": "publicAssets/start1.png" } }, { "type": "Image", "props": { "y": 719, "x": 347, "skin": "publicAssets/start1.png" } }, { "type": "Image", "props": { "y": 461, "x": 354, "skin": "publicAssets/start1.png" } }, { "type": "Image", "props": { "y": 874, "x": 101, "width": 559, "skin": "comp/blank.png", "height": 256 } }] };
+        return SelectUI;
+    }(View));
+    ui.SelectUI = SelectUI;
+})(ui || (ui = {}));
+(function (ui) {
+    var SelectBoxUI = /** @class */ (function (_super) {
+        __extends(SelectBoxUI, _super);
+        function SelectBoxUI() {
+            return _super.call(this) || this;
+        }
+        SelectBoxUI.prototype.createChildren = function () {
+            _super.prototype.createChildren.call(this);
+            this.createView(ui.SelectBoxUI.uiView);
+        };
+        SelectBoxUI.uiView = { "type": "View", "props": { "width": 750, "height": 1334 }, "child": [{ "type": "Image", "props": { "y": 29, "x": 36, "width": 97, "skin": "comp/blank.png", "height": 103 } }, { "type": "Image", "props": { "y": 30, "x": 166, "width": 97, "skin": "comp/blank.png", "height": 103 } }, { "type": "Image", "props": { "y": 19, "x": 635, "width": 79, "skin": "comp/blank.png", "height": 67 } }, { "type": "Image", "props": { "y": 1189, "x": 29, "width": 131, "skin": "publicAssets/exit_R.png", "height": 124 } }, { "type": "Panel", "props": { "y": 308, "x": 3, "width": 747, "height": 574 }, "child": [{ "type": "Image", "props": { "y": 83, "x": 139, "width": 429, "var": "img_Box1", "skin": "selectBox/box1.png", "height": 459 } }, { "type": "Image", "props": { "y": 83, "x": 607, "width": 429, "var": "img_Box2", "skin": "selectBox/box2.png", "height": 459 }, "child": [{ "type": "Image", "props": { "y": 191, "x": -2, "width": 439, "skin": "selectBox/boxLock.png", "height": 199 } }] }, { "type": "Image", "props": { "y": 83, "x": 1075, "width": 429, "var": "img_Box3", "skin": "selectBox/box4.png", "height": 459 }, "child": [{ "type": "Image", "props": { "y": 200, "x": -7, "width": 439, "skin": "selectBox/boxLock.png", "height": 199 } }] }, { "type": "Image", "props": { "y": 83, "x": 1536, "width": 429, "var": "img_Box4", "skin": "selectBox/box3.png", "height": 459 }, "child": [{ "type": "Image", "props": { "y": 211, "x": -5, "width": 439, "skin": "selectBox/boxLock.png", "height": 199 } }] }] }, { "type": "Image", "props": { "y": 942, "x": 226, "var": "img_SelectBox", "skin": "publicAssets/start1.png" }, "child": [{ "type": "Image", "props": { "y": 7, "x": 7, "width": 42, "skin": "publicAssets/start2.png", "height": 50 } }] }, { "type": "Image", "props": { "y": 920, "x": 234, "width": 13, "skin": "comp/blank.png", "height": 14 } }, { "type": "Image", "props": { "y": 921, "x": 311, "width": 13, "skin": "comp/blank.png", "height": 14 } }, { "type": "Image", "props": { "y": 921, "x": 273, "width": 13, "skin": "comp/blank.png", "height": 14 } }, { "type": "Image", "props": { "y": 922, "x": 348, "width": 13, "skin": "comp/blank.png", "height": 14 } }, { "type": "Image", "props": { "y": 921, "x": 428, "width": 13, "skin": "comp/blank.png", "height": 14 } }, { "type": "Image", "props": { "y": 921, "x": 386, "width": 13, "skin": "comp/blank.png", "height": 14 } }] };
+        return SelectBoxUI;
+    }(View));
+    ui.SelectBoxUI = SelectBoxUI;
+})(ui || (ui = {}));
+(function (ui) {
+    var SelectRoundUI = /** @class */ (function (_super) {
+        __extends(SelectRoundUI, _super);
+        function SelectRoundUI() {
+            return _super.call(this) || this;
+        }
+        SelectRoundUI.prototype.createChildren = function () {
+            _super.prototype.createChildren.call(this);
+            this.createView(ui.SelectRoundUI.uiView);
+        };
+        SelectRoundUI.uiView = { "type": "View", "props": { "width": 750, "height": 1334 }, "child": [{ "type": "Image", "props": { "y": 21, "x": 34, "width": 98, "skin": "comp/blank.png", "height": 92 } }, { "type": "Image", "props": { "y": 20, "x": 159, "width": 98, "skin": "comp/blank.png", "height": 92 } }, { "type": "Image", "props": { "y": 24, "x": 674, "width": 57, "skin": "comp/blank.png", "height": 58 } }] };
+        return SelectRoundUI;
+    }(View));
+    ui.SelectRoundUI = SelectRoundUI;
+})(ui || (ui = {}));
+(function (ui) {
+    var StartGameUI = /** @class */ (function (_super) {
+        __extends(StartGameUI, _super);
+        function StartGameUI() {
+            return _super.call(this) || this;
+        }
+        StartGameUI.prototype.createChildren = function () {
+            _super.prototype.createChildren.call(this);
+            this.createView(ui.StartGameUI.uiView);
+        };
+        StartGameUI.uiView = { "type": "View", "props": { "width": 750, "height": 1334 }, "child": [{ "type": "Image", "props": { "y": 1, "x": -704, "width": 2388, "skin": "unpackage/startGameBg.jpg", "height": 1343 } }, { "type": "Image", "props": { "y": 180, "x": 125, "width": 466, "skin": "unpackage/cutRope.png", "height": 414 } }, { "type": "Image", "props": { "y": 654, "x": 169, "width": 414, "var": "btn_StartGame", "skin": "publicAssets/btn1_2.png", "sizeGrid": "0,52,0,48", "height": 119 } }, { "type": "Image", "props": { "y": 823, "x": 171, "width": 414, "skin": "publicAssets/btn1_2.png", "sizeGrid": "0,52,0,48", "height": 119 } }, { "type": "Image", "props": { "y": 981, "x": 170, "width": 414, "skin": "publicAssets/btn1_2.png", "sizeGrid": "0,52,0,48", "height": 119 } }, { "type": "Label", "props": { "y": 677, "x": 200, "width": 357, "var": "lab_StartGame", "text": "开始游戏", "height": 58, "fontSize": 50, "font": "Microsoft YaHei", "bold": true, "align": "center" } }, { "type": "Label", "props": { "y": 1006, "x": 202, "width": 357, "text": "关于", "height": 58, "fontSize": 50, "font": "Microsoft YaHei", "align": "center" } }, { "type": "Label", "props": { "y": 846, "x": 202, "width": 357, "text": "图集", "height": 58, "fontSize": 50, "font": "Microsoft YaHei", "align": "center" } }] };
+        return StartGameUI;
+    }(View));
+    ui.StartGameUI = StartGameUI;
 })(ui || (ui = {}));
 //# sourceMappingURL=layaUI.max.all.js.map

@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":3,
+    "selecteID":2,
     "props":{"width":750,"sceneColor":"#000000","height":1334},
     "nodeParent":-1,
     "label":"View",
@@ -30,7 +30,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":180,"x":125,"width":466,"skin":"publicAssets/cutRope.png","height":414},
+            "props":{"y":180,"x":125,"width":466,"skin":"unpackage/cutRope.png","height":414},
             "nodeParent":1,
             "label":"Image",
             "isDirectory":false,

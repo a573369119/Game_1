@@ -2,6 +2,19 @@
  * 游戏数据定义
  */
 class GameData{
+    //---------------------------stage--------------------
+    /**屏幕宽度 */
+    public static STAGE_WIDTH : number = 750;
+    /**屏幕高度 */
+    public static STAGE_HEIGHT : number = 1334;
+    /**适配模式 */
+    public static STAGE_SCALE_MODE : string = "exactfit";
+    /**竖屏 */
+    public static STAGE_SCREEN_MODE : string = "vertical";
+    /**对齐方式 */
+    public static STAGE_ALIGN_V : string = "middle"; 
+    public static STAGE_ALIGN_H : string = "center";
+    //---------------------------colider------------------
     /**预设碰撞距离 像素*/
     public static COLLIDE_DISTANCE : number = 50;
     //---------------------------view---------------------
@@ -18,9 +31,15 @@ class GameData{
     /**游戏界面 */
     public static GAME_VIEW : number = 5;
     //---------------------------view---------------------
+    //---------------------------Mediator----------------
+    /**开始游戏 调度器*/
+    public static START_GAME_MEDIATOR : number = 1;
+    //public static START_GAME_MEDIATOR : number = 1;
+    
+    //---------------------------Mediator----------------
 
     constructor(){
-
+        
     }
     public static ins_ : GameData = new GameData();
     
