@@ -2,6 +2,23 @@
 import View=laya.ui.View;
 import Dialog=laya.ui.Dialog;
 module ui {
+    export class BoxUI extends View {
+		public moster:Laya.Image;
+		public img_box:Laya.Image;
+
+        public static  uiView:any ={"type":"View","props":{"width":500,"height":500},"child":[{"type":"Image","props":{"y":271,"x":173,"width":177,"skin":"publicAssets/black.jpg","height":143}},{"type":"Image","props":{"y":282,"x":187,"width":280,"var":"moster","skin":"publicAssets/moster.png","height":157}},{"type":"Image","props":{"y":20,"x":39,"width":429,"var":"img_box","skin":"selectBox/box1.png","height":459}}]};
+        constructor(){ super()}
+        createChildren():void {
+        
+            super.createChildren();
+            this.createView(ui.BoxUI.uiView);
+
+        }
+
+    }
+}
+
+module ui {
     export class LoadingUI extends View {
 		public lab_Progress:Laya.Label;
 		public img_Progress:Laya.Image;
@@ -42,15 +59,11 @@ module ui {
 
 module ui {
     export class SelectBoxUI extends View {
-		public btn_Exit:Laya.Image;
 		public panel_ShowBox:Laya.Panel;
-		public img_Box1:Laya.Image;
-		public img_Box2:Laya.Image;
-		public img_Box3:Laya.Image;
-		public img_Box4:Laya.Image;
 		public img_SelectBox:Laya.Image;
+		public btn_Exit:Laya.Image;
 
-        public static  uiView:any ={"type":"View","props":{"width":750,"height":1334},"child":[{"type":"Image","props":{"y":0,"x":0,"width":748,"skin":"unpackage/startGameBg.jpg","height":1340}},{"type":"Image","props":{"y":29,"x":36,"width":97,"skin":"comp/blank.png","height":103}},{"type":"Image","props":{"y":30,"x":166,"width":97,"skin":"comp/blank.png","height":103}},{"type":"Image","props":{"y":19,"x":635,"width":79,"skin":"comp/blank.png","height":67}},{"type":"Image","props":{"y":1189,"x":29,"width":131,"var":"btn_Exit","skin":"publicAssets/exit_R.png","height":124}},{"type":"Panel","props":{"y":308,"x":3,"width":747,"var":"panel_ShowBox","height":574,"hScrollBarSkin":"comp/hscroll.png"},"child":[{"type":"Image","props":{"y":312,"x":176,"width":363,"skin":"publicAssets/black.jpg","height":162}},{"type":"Image","props":{"y":337,"x":278,"width":318,"skin":"publicAssets/moster.png","height":178}},{"type":"Image","props":{"y":83,"x":139,"width":429,"var":"img_Box1","skin":"selectBox/box1.png","height":459}},{"type":"Image","props":{"y":83,"x":607,"width":429,"var":"img_Box2","skin":"selectBox/box2.png","height":459},"child":[{"type":"Image","props":{"y":191,"x":-2,"width":439,"skin":"selectBox/boxLock.png","height":199}}]},{"type":"Image","props":{"y":83,"x":1075,"width":429,"var":"img_Box3","skin":"selectBox/box4.png","height":459},"child":[{"type":"Image","props":{"y":200,"x":-7,"width":439,"skin":"selectBox/boxLock.png","height":199}}]},{"type":"Image","props":{"y":83,"x":1536,"width":429,"var":"img_Box4","skin":"selectBox/box3.png","height":459},"child":[{"type":"Image","props":{"y":211,"x":-5,"width":439,"skin":"selectBox/boxLock.png","height":199}}]}]},{"type":"Image","props":{"y":942,"x":226,"var":"img_SelectBox","skin":"publicAssets/start1.png"},"child":[{"type":"Image","props":{"y":7,"x":7,"width":42,"skin":"publicAssets/start2.png","height":50}}]},{"type":"Image","props":{"y":920,"x":234,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":311,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":273,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":922,"x":348,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":428,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":386,"width":13,"skin":"comp/blank.png","height":14}}]};
+        public static  uiView:any ={"type":"View","props":{"width":750,"height":1334},"child":[{"type":"Image","props":{"y":0,"x":0,"width":748,"skin":"unpackage/startGameBg.jpg","height":1340}},{"type":"Image","props":{"y":29,"x":36,"width":97,"skin":"comp/blank.png","height":103}},{"type":"Image","props":{"y":30,"x":166,"width":97,"skin":"comp/blank.png","height":103}},{"type":"Image","props":{"y":19,"x":635,"width":79,"skin":"comp/blank.png","height":67}},{"type":"Panel","props":{"y":308,"x":3,"width":747,"var":"panel_ShowBox","height":574,"hScrollBarSkin":"comp/hscroll.png"}},{"type":"Image","props":{"y":942,"x":226,"var":"img_SelectBox","skin":"publicAssets/start1.png"},"child":[{"type":"Image","props":{"y":7,"x":7,"width":42,"skin":"publicAssets/start2.png","height":50}}]},{"type":"Image","props":{"y":920,"x":234,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":311,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":273,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":922,"x":348,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":428,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":386,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":1189,"x":19,"width":147,"var":"btn_Exit","skin":"publicAssets/exit_R.png","height":140}}]};
         constructor(){ super()}
         createChildren():void {
         

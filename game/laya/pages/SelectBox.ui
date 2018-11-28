@@ -1,7 +1,7 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":6,
+    "selectedBox":1,
     "selecteID":25,
     "props":{"width":750,"sceneColor":"#8b8b8b","height":1334},
     "nodeParent":-1,
@@ -66,144 +66,17 @@
         },
         {
             "x":15,
-            "type":"Image",
-            "props":{"y":1189,"x":29,"width":131,"var":"btn_Exit","skin":"publicAssets/exit_R.png","height":124},
-            "nodeParent":1,
-            "label":"Image(btn_Exit)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":5,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
             "type":"Panel",
             "props":{"y":308,"x":3,"width":747,"var":"panel_ShowBox","height":574,"hScrollBarSkin":"comp/hscroll.png"},
             "nodeParent":1,
             "label":"Panel(panel_ShowBox)",
             "isOpen":true,
-            "isDirectory":true,
+            "isDirectory":false,
             "isAniNode":true,
-            "hasChild":true,
+            "hasChild":false,
             "compId":6,
             "child":[
-                {
-                    "x":30,
-                    "type":"Image",
-                    "props":{"y":312,"x":176,"width":363,"skin":"publicAssets/black.jpg","height":162},
-                    "nodeParent":6,
-                    "label":"Image",
-                    "isOpen":true,
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":25,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "props":{"y":337,"x":278,"width":318,"skin":"publicAssets/moster.png","height":178},
-                    "nodeParent":6,
-                    "label":"Image",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":23,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "props":{"y":83,"x":139,"width":429,"var":"img_Box1","skin":"selectBox/box1.png","height":459},
-                    "nodeParent":6,
-                    "label":"Image(img_Box1)",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":7,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "props":{"y":83,"x":607,"width":429,"var":"img_Box2","skin":"selectBox/box2.png","height":459},
-                    "nodeParent":6,
-                    "label":"Image(img_Box2)",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":8,
-                    "child":[
-                        {
-                            "type":"Image",
-                            "props":{"y":191,"x":-2,"width":439,"skin":"selectBox/boxLock.png","height":199},
-                            "nodeParent":8,
-                            "label":"Image",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":19,
-                            "child":[
-                                ]
-                        }]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "props":{"y":83,"x":1075,"width":429,"var":"img_Box3","skin":"selectBox/box4.png","height":459},
-                    "nodeParent":6,
-                    "label":"Image(img_Box3)",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":10,
-                    "child":[
-                        {
-                            "type":"Image",
-                            "props":{"y":200,"x":-7,"width":439,"skin":"selectBox/boxLock.png","height":199},
-                            "nodeParent":10,
-                            "label":"Image",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":20,
-                            "child":[
-                                ]
-                        }]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "props":{"y":83,"x":1536,"width":429,"var":"img_Box4","skin":"selectBox/box3.png","height":459},
-                    "nodeParent":6,
-                    "label":"Image(img_Box4)",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":9,
-                    "child":[
-                        {
-                            "type":"Image",
-                            "props":{"y":211,"x":-5,"width":439,"skin":"selectBox/boxLock.png","height":199},
-                            "nodeParent":9,
-                            "label":"Image",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":21,
-                            "child":[
-                                ]
-                        }]
-                }],
+                ],
             "$HIDDEN":false
         },
         {
@@ -306,6 +179,19 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":18,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":1189,"x":19,"width":147,"var":"btn_Exit","skin":"publicAssets/exit_R.png","height":140},
+            "nodeParent":1,
+            "label":"Image(btn_Exit)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":25,
             "child":[
                 ]
         }],
