@@ -7,6 +7,8 @@ class SelectBoxMeditor extends BaseMeditor{
     /** 季度关卡配置 */
     /** 盒子 */
     private arr_Box : Array<Box>;
+    /**点点 */
+    private arr_Point : Array<Laya.Image>;
     /** 测试 - 盒子数量 */
     private boxCount : number;
     /**小怪兽 */
@@ -15,6 +17,8 @@ class SelectBoxMeditor extends BaseMeditor{
     private posX: number;
     /**滑动条数只保存 */
     private sliderKeep : number;
+    /**当前滑动点 */
+    private currentPoint : Laya.Image;
 
 
 
@@ -31,9 +35,10 @@ class SelectBoxMeditor extends BaseMeditor{
     {
         super.init();
         this.arr_Box = new Array<Box>() ;
+        this.arr_Point = new Array<Laya.Image>();
         this.posX = 250;
-        this.view.panel_ShowBox.hScrollBar.visible = false;
-    }
+        this.scrollBarSetting();
+    }       
 
     /**事件绑定 */
     protected addEvents() : void
@@ -41,7 +46,7 @@ class SelectBoxMeditor extends BaseMeditor{
         this.view.btn_Exit.on(Laya.Event.CLICK,this,this.onExit);
         this.view.panel_ShowBox.hScrollBar.changeHandler =new Laya.Handler(this,this.scrollChange); 
         this.view.panel_ShowBox.on(Laya.Event.MOUSE_DOWN,this,this.onMouseDow);
-        this.view.panel_ShowBox.on(Laya.Event.MOUSE_UP,this,this.onMouseUp);
+        this.view.on(Laya.Event.MOUSE_UP,this,this.onMouseUp);
     }
 
     /**事件移除 */
@@ -50,7 +55,7 @@ class SelectBoxMeditor extends BaseMeditor{
         this.view.btn_Exit.off(Laya.Event.CLICK,this,this.onExit);
         this.view.panel_ShowBox.hScrollBar.changeHandler = null;
         this.view.panel_ShowBox.off(Laya.Event.MOUSE_DOWN,this,this.onMouseDow);
-        this.view.panel_ShowBox.off(Laya.Event.MOUSE_UP,this,this.onMouseUp);   
+        this.view.off(Laya.Event.MOUSE_UP,this,this.onMouseUp);   
 
     }
 
@@ -75,19 +80,28 @@ class SelectBoxMeditor extends BaseMeditor{
     private createBox() : void
     {
         let box : Box;
+        let img_Point : Laya.Image;
         this.boxCount = 5;//测试
         for(let i=0; i<this.boxCount;i++)
         {
             //
             box = new Box(this.view);
+            img_Point = new Laya.Image();
+            img_Point.skin = "selectBox/point1.png";
+            img_Point.x += 70 * i;
+            this.view.sprite_SelectBox.addChild(img_Point);
             box.boxUI.x += (box.boxUI.width + 50)*i;
+            this.arr_Point.push(img_Point);
             this.arr_Box.push(box);
             if(i == this.boxCount-1 )
             {
                 box.boxUI.width += 125;
             }
         }
-
+        this.currentPoint = this.arr_Point[0];
+        this.currentPoint.scale(0.5,0.5);
+        this.arr_Point[0].skin = "selectBox/point.png";
+        this.view.img_SelectBox.x = this.currentPoint.x - 5;
     }
 
     /**事件绑定 给盒子 */
@@ -114,30 +128,21 @@ class SelectBoxMeditor extends BaseMeditor{
     /**时间 鼠标抬起 */
     private onMouseUp() : void
     {
-        // console.log(this.arr_Box[0].boxUI.img_box.x);
-        // console.log(this.view.panel_ShowBox.hScrollBar.value);
         let value = this.view.panel_ShowBox.hScrollBar.value;
-        if(value < 275)
+        for(let i=0; i<this.arr_Box.length ; i++)
         {
-            console.log("1");
-        }
-        else if(value >=275 && value <= 275+550)
-        {
-            console.log("2");
-        }
-        else if(value >=275+550 && value <= 275+550*2)
-        {
-            console.log("3");
-        }
-        else if(value >=275+550*2 && value <= 275+550*3)
-        {
-            console.log("4");
-        }
-        else
-        {
-            console.log("5");            
+            if(i==0 && value < 275)
+            {
+                Laya.Tween.to(this.view.panel_ShowBox.hScrollBar,{value:0},100);
+            }
+            else if(value >= 275 + 550*(i-1) && value < 275 + 550*i)
+            {
+                Laya.Tween.to(this.view.panel_ShowBox.hScrollBar,{value:(550*i - 20)},100);                
+            } 
         }
     }
+
+    /** */
 
     /**面板滚动*/
     private scrollChange(value) : void
@@ -199,4 +204,11 @@ class SelectBoxMeditor extends BaseMeditor{
         }
     }
     
+    /**scrollBar 设置 */
+    private scrollBarSetting() : void
+    {
+        this.view.panel_ShowBox.hScrollBar.visible = false;
+        this.view.panel_ShowBox.hScrollBar.elasticDistance = 0;
+        this.view.panel_ShowBox.hScrollBar.rollRatio = 0;
+    }
 }

@@ -22,8 +22,9 @@ class Box {
             this.boxUI.img_box.skin = skin;
         }
         else
-        {
-            this.boxUI.img_box.skin = "selectBox/box1.png";            
+        { 
+            this.boxUI.img_box.visible = false;
+            this.boxUI.img_BoxDefault.visible = true;      
         }
         this.boxUI.x = this.initX;
         this.boxUI.y = this.iniY;
