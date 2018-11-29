@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":2,
+    "selecteID":6,
     "props":{"width":500,"sceneColor":"#ffffff","height":500},
     "nodeParent":-1,
     "label":"View",
@@ -27,14 +27,15 @@
         },
         {
             "x":15,
-            "type":"Image",
-            "props":{"y":282,"x":187,"width":280,"var":"moster","skin":"publicAssets/moster.png","height":157},
+            "type":"Sprite",
+            "props":{"y":281,"x":67,"width":193,"var":"sprite_BoxParent","height":150},
             "nodeParent":1,
-            "label":"Image(moster)",
+            "label":"Sprite(sprite_BoxParent)",
+            "isOpen":true,
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":5,
+            "compId":6,
             "child":[
                 ]
         },

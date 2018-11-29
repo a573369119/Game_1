@@ -3,6 +3,8 @@
  */
 var Box = /** @class */ (function () {
     function Box(view, skin) {
+        this.initX = 102;
+        this.iniY = 29;
         this.boxUI = new ui.BoxUI();
         if (skin) {
             this.boxUI.img_box.skin = skin;
@@ -10,8 +12,8 @@ var Box = /** @class */ (function () {
         else {
             this.boxUI.img_box.skin = "selectBox/box1.png";
         }
-        this.boxUI.x = 102;
-        this.boxUI.y = 29;
+        this.boxUI.x = this.initX;
+        this.boxUI.y = this.iniY;
         view.panel_ShowBox.addChild(this.boxUI);
     }
     return Box;

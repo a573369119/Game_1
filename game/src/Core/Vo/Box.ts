@@ -8,8 +8,14 @@ class Box {
     public skin : string; 
     /**UI */
     public boxUI : ui.BoxUI;
+    /**初始横坐标 */
+    public initX : number;
+    /**初始纵坐标 */
+    public iniY : number;
 
     constructor(view:any,skin?: string){
+        this.initX = 102;
+        this.iniY = 29;
         this.boxUI = new ui.BoxUI();
         if(skin)
         {
@@ -19,8 +25,8 @@ class Box {
         {
             this.boxUI.img_box.skin = "selectBox/box1.png";            
         }
-        this.boxUI.x = 102;
-        this.boxUI.y = 29;
+        this.boxUI.x = this.initX;
+        this.boxUI.y = this.iniY;
         view.panel_ShowBox.addChild(this.boxUI);
     }
 

@@ -3,10 +3,10 @@ import View=laya.ui.View;
 import Dialog=laya.ui.Dialog;
 module ui {
     export class BoxUI extends View {
-		public moster:Laya.Image;
+		public sprite_BoxParent:Laya.Sprite;
 		public img_box:Laya.Image;
 
-        public static  uiView:any ={"type":"View","props":{"width":500,"height":500},"child":[{"type":"Image","props":{"y":271,"x":173,"width":177,"skin":"publicAssets/black.jpg","height":143}},{"type":"Image","props":{"y":282,"x":187,"width":280,"var":"moster","skin":"publicAssets/moster.png","height":157}},{"type":"Image","props":{"y":20,"x":39,"width":429,"var":"img_box","skin":"selectBox/box1.png","height":459}}]};
+        public static  uiView:any ={"type":"View","props":{"width":500,"height":500},"child":[{"type":"Image","props":{"y":271,"x":173,"width":177,"skin":"publicAssets/black.jpg","height":143}},{"type":"Sprite","props":{"y":281,"x":67,"width":193,"var":"sprite_BoxParent","height":150}},{"type":"Image","props":{"y":20,"x":39,"width":429,"var":"img_box","skin":"selectBox/box1.png","height":459}}]};
         constructor(){ super()}
         createChildren():void {
         
@@ -59,11 +59,12 @@ module ui {
 
 module ui {
     export class SelectBoxUI extends View {
+		public moster:Laya.Image;
 		public panel_ShowBox:Laya.Panel;
 		public img_SelectBox:Laya.Image;
 		public btn_Exit:Laya.Image;
 
-        public static  uiView:any ={"type":"View","props":{"width":750,"height":1334},"child":[{"type":"Image","props":{"y":0,"x":0,"width":748,"skin":"unpackage/startGameBg.jpg","height":1340}},{"type":"Image","props":{"y":29,"x":36,"width":97,"skin":"comp/blank.png","height":103}},{"type":"Image","props":{"y":30,"x":166,"width":97,"skin":"comp/blank.png","height":103}},{"type":"Image","props":{"y":19,"x":635,"width":79,"skin":"comp/blank.png","height":67}},{"type":"Panel","props":{"y":308,"x":3,"width":747,"var":"panel_ShowBox","height":574,"hScrollBarSkin":"comp/hscroll.png"}},{"type":"Image","props":{"y":942,"x":226,"var":"img_SelectBox","skin":"publicAssets/start1.png"},"child":[{"type":"Image","props":{"y":7,"x":7,"width":42,"skin":"publicAssets/start2.png","height":50}}]},{"type":"Image","props":{"y":920,"x":234,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":311,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":273,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":922,"x":348,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":428,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":386,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":1189,"x":19,"width":147,"var":"btn_Exit","skin":"publicAssets/exit_R.png","height":140}}]};
+        public static  uiView:any ={"type":"View","props":{"width":750,"height":1334},"child":[{"type":"Image","props":{"y":0,"x":0,"width":748,"skin":"unpackage/startGameBg.jpg","height":1340}},{"type":"Image","props":{"y":29,"x":36,"width":97,"skin":"comp/blank.png","height":103}},{"type":"Image","props":{"y":30,"x":166,"width":97,"skin":"comp/blank.png","height":103}},{"type":"Image","props":{"y":19,"x":635,"width":79,"skin":"comp/blank.png","height":67}},{"type":"Image","props":{"y":596,"x":269,"width":283,"var":"moster","skin":"publicAssets/moster.png","height":158}},{"type":"Panel","props":{"y":308,"x":3,"width":747,"var":"panel_ShowBox","height":574,"hScrollBarSkin":"comp/hscroll.png"}},{"type":"Image","props":{"y":942,"x":226,"var":"img_SelectBox","skin":"publicAssets/start1.png"},"child":[{"type":"Image","props":{"y":7,"x":7,"width":42,"skin":"publicAssets/start2.png","height":50}}]},{"type":"Image","props":{"y":920,"x":234,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":311,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":273,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":922,"x":348,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":428,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":921,"x":386,"width":13,"skin":"comp/blank.png","height":14}},{"type":"Image","props":{"y":1189,"x":19,"width":147,"var":"btn_Exit","skin":"publicAssets/exit_R.png","height":140}}]};
         constructor(){ super()}
         createChildren():void {
         
