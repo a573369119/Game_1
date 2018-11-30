@@ -12,6 +12,7 @@ class StartGameMeditor extends BaseMeditor{
     protected init() : void
     {
         super.init();
+        Laya.timer.loop(50,this,this.roundLamp);
     }
 
     /**事件绑定 */
@@ -28,6 +29,7 @@ class StartGameMeditor extends BaseMeditor{
         this.view.btn_StartGame.off(Laya.Event.CLICK,this,this.onGameStart);
         this.view.btn_Imgs.off(Laya.Event.CLICK,this,this.onImgs);
         this.view.btn_About.off(Laya.Event.CLICK,this,this.onAbout);
+        Laya.timer.clear(this,this.roundLamp);
     }
 
     /**按钮事件 游戏开始 */
@@ -47,5 +49,11 @@ class StartGameMeditor extends BaseMeditor{
     private onAbout() : void
     {
 
+    }
+
+    /**旋转 */
+    private roundLamp() : void
+    {
+        this.view.round_Lamp.rotation += 0.2;
     }
 }

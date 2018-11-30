@@ -23,6 +23,7 @@ var StartGameMeditor = /** @class */ (function (_super) {
     /**初始化 */
     StartGameMeditor.prototype.init = function () {
         _super.prototype.init.call(this);
+        Laya.timer.loop(50, this, this.roundLamp);
     };
     /**事件绑定 */
     StartGameMeditor.prototype.addEvents = function () {
@@ -35,6 +36,7 @@ var StartGameMeditor = /** @class */ (function (_super) {
         this.view.btn_StartGame.off(Laya.Event.CLICK, this, this.onGameStart);
         this.view.btn_Imgs.off(Laya.Event.CLICK, this, this.onImgs);
         this.view.btn_About.off(Laya.Event.CLICK, this, this.onAbout);
+        Laya.timer.clear(this, this.roundLamp);
     };
     /**按钮事件 游戏开始 */
     StartGameMeditor.prototype.onGameStart = function () {
@@ -46,6 +48,10 @@ var StartGameMeditor = /** @class */ (function (_super) {
     };
     /**按钮事件 点击关于 */
     StartGameMeditor.prototype.onAbout = function () {
+    };
+    /**旋转 */
+    StartGameMeditor.prototype.roundLamp = function () {
+        this.view.round_Lamp.rotation += 0.2;
     };
     return StartGameMeditor;
 }(BaseMeditor));

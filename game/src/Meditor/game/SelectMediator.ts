@@ -13,6 +13,7 @@ class SelectMeditor extends BaseMeditor{
     protected init() : void
     {
         super.init();
+        Laya.timer.loop(50,this,this.roundLamp);
     }
 
     /**事件绑定 */
@@ -26,6 +27,7 @@ class SelectMeditor extends BaseMeditor{
         this.view.btn_Third_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[3]);
         
         this.view.btn_Exit.on(Laya.Event.CLICK,this,this.onExit);
+
     }
 
     /**事件移除 */
@@ -38,7 +40,9 @@ class SelectMeditor extends BaseMeditor{
         this.view.btn_Second_.off(Laya.Event.CLICK,this,this.onSelectBoxStart);
         this.view.btn_Third_.off(Laya.Event.CLICK,this,this.onSelectBoxStart);
 
-        this.view.btn_Exit.off(Laya.Event.CLICK,this,this.onExit);        
+        this.view.btn_Exit.off(Laya.Event.CLICK,this,this.onExit); 
+
+        Laya.timer.clear(this,this.roundLamp);       
     }
 
      /**按钮事件 进入季度关卡 */
@@ -54,5 +58,11 @@ class SelectMeditor extends BaseMeditor{
     private onExit() : void
     {
         this.dispose();
+    }
+
+    /**旋转 */
+    private roundLamp() : void
+    {
+        this.view.round_Lamp.rotation += 0.2;
     }
 }

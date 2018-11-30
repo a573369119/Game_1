@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":9,
+    "selecteID":16,
     "props":{"width":750,"sceneColor":"#000000","height":1334},
     "nodeParent":-1,
     "label":"View",
@@ -25,7 +25,7 @@
             "child":[
                 ],
             "$LOCKED":true,
-            "$HIDDEN":true
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -39,6 +39,31 @@
             "compId":3,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "props":{"y":663,"x":341,"width":1600,"var":"round_Lamp","pivotY":800,"pivotX":800,"height":1600},
+            "nodeParent":1,
+            "label":"Sprite(round_Lamp)",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":16,
+            "child":[
+                {
+                    "type":"Image",
+                    "props":{"y":800,"x":800,"width":1600,"skin":"unpackage/lamp.png","pivotY":800,"pivotX":800,"height":1600},
+                    "nodeParent":16,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":15,
+                    "child":[
+                        ]
+                }]
         },
         {
             "x":15,

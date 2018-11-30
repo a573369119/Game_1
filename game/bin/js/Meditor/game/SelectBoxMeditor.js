@@ -23,6 +23,7 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
     /**初始化 */
     SelectBoxMeditor.prototype.init = function () {
         _super.prototype.init.call(this);
+        Laya.timer.loop(50, this, this.roundLamp);
         this.arr_Box = new Array();
         this.arr_Point = new Array();
         this.posX = 250;
@@ -41,6 +42,7 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
         this.view.panel_ShowBox.hScrollBar.changeHandler = null;
         this.view.panel_ShowBox.off(Laya.Event.MOUSE_DOWN, this, this.onMouseDow);
         this.view.off(Laya.Event.MOUSE_UP, this, this.onMouseUp);
+        Laya.timer.clear(this, this.roundLamp);
     };
     /**设置季度 - Meditor 起始点*/
     SelectBoxMeditor.prototype.setSelectQuarter = function (index) {
@@ -61,7 +63,6 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
         var img_Point;
         this.boxCount = 5; //测试
         for (var i = 0; i < this.boxCount; i++) {
-            //
             box = new Box(this.view);
             img_Point = new Laya.Image();
             img_Point.skin = "selectBox/point1.png";
@@ -74,10 +75,10 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
                 box.boxUI.width += 125;
             }
         }
-        this.currentPoint = this.arr_Point[0];
-        this.currentPoint.scale(0.5, 0.5);
-        this.arr_Point[0].skin = "selectBox/point.png";
-        this.view.img_SelectBox.x = this.currentPoint.x - 5;
+        this.setCurrentPoint(0);
+        var lastBox = this.arr_Box[this.arr_Box.length - 1];
+        var lastPoint = this.arr_Point[this.arr_Point.length - 1];
+        this.scale = (lastPoint.x + lastPoint.width) / (lastBox.initX + lastBox.boxUI.x + lastBox.boxUI.width);
     };
     /**事件绑定 给盒子 */
     SelectBoxMeditor.prototype.addBoxEvent = function () {
@@ -87,7 +88,7 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
     };
     /**事件 点击盒子 */
     SelectBoxMeditor.prototype.clickBox = function (index) {
-        // console.log("点击盒子" + index);
+        console.log("进入盒子" + index);
     };
     /**事件 面板被点下   2250*/
     SelectBoxMeditor.prototype.onMouseDow = function () {
@@ -95,19 +96,44 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
     /**时间 鼠标抬起 */
     SelectBoxMeditor.prototype.onMouseUp = function () {
         var value = this.view.panel_ShowBox.hScrollBar.value;
-        for (var i = 0; i < this.arr_Box.length; i++) {
-            if (i == 0 && value < 275) {
-                Laya.Tween.to(this.view.panel_ShowBox.hScrollBar, { value: 0 }, 100);
-            }
-            else if (value >= 275 + 550 * (i - 1) && value < 275 + 550 * i) {
-                Laya.Tween.to(this.view.panel_ShowBox.hScrollBar, { value: (550 * i - 20) }, 100);
-            }
+        var i = this.mouseJudge(value);
+        if (i == 0) {
+            Laya.Tween.to(this.view.panel_ShowBox.hScrollBar, { value: 0 }, 100);
+        }
+        else {
+            Laya.Tween.to(this.view.panel_ShowBox.hScrollBar, { value: (550 * i - 20) }, 100);
         }
     };
-    /** */
+    /**当前选择点 */
+    SelectBoxMeditor.prototype.setCurrentPoint = function (value) {
+        var i = this.mouseJudge(value);
+        if (this.currentPoint != this.arr_Point[i]) {
+            if (this.currentPoint == null) {
+                this.currentPoint = this.arr_Point[0];
+            }
+            else {
+                this.currentPoint.skin = "selectBox/point1.png";
+                this.currentPoint = this.arr_Point[i];
+            }
+            this.currentPoint.skin = "selectBox/point.png";
+            this.view.img_SelectBox.zOrder = 10;
+        }
+        this.listPoint();
+    };
+    /**点点排版 */
+    SelectBoxMeditor.prototype.listPoint = function () {
+        for (var i = 0; i < this.arr_Point.length; i++) {
+            this.arr_Point[i].y = 0;
+            this.arr_Point[i].x = 0;
+            this.arr_Point[i].x += 70 * i;
+        }
+        this.currentPoint.y = -15;
+        this.currentPoint.x -= 10;
+    };
     /**面板滚动*/
     SelectBoxMeditor.prototype.scrollChange = function (value) {
         var box;
+        this.view.img_SelectBox.x = value * (this.scale + 0.0289) - 10; //0.289距离宽就变大，距离低就变小
         for (var i = 0; i < this.arr_Box.length; i++) {
             if (value <= 130) {
                 this.arr_Box[0].boxUI.sprite_BoxParent.addChild(this.moster);
@@ -128,6 +154,7 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
                 this.moster.removeSelf();
             }
         }
+        this.setCurrentPoint(value);
     };
     /**怪物移动 */
     SelectBoxMeditor.prototype.mosterMove = function (value, i, mix) {
@@ -138,15 +165,15 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
             this.moster.x = value - mix - 60;
         }
     };
-    /**鼠标的左右判断 */
+    /**判断在哪个店 */
     SelectBoxMeditor.prototype.mouseJudge = function (value) {
-        if (this.sliderKeep - value >= 0) {
-            this.sliderKeep = value; //右
-            return 1;
-        }
-        else {
-            this.sliderKeep = value; //左         
-            return -1;
+        for (var i = 0; i < this.arr_Box.length; i++) {
+            if (i == 0 && value < 275) {
+                return 0;
+            }
+            else if (value >= 275 + 550 * (i - 1) && value < 275 + 550 * i) {
+                return i;
+            }
         }
     };
     /**scrollBar 设置 */
@@ -154,6 +181,10 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
         this.view.panel_ShowBox.hScrollBar.visible = false;
         this.view.panel_ShowBox.hScrollBar.elasticDistance = 0;
         this.view.panel_ShowBox.hScrollBar.rollRatio = 0;
+    };
+    /**旋转 */
+    SelectBoxMeditor.prototype.roundLamp = function () {
+        this.view.round_Lamp.rotation += 0.2;
     };
     return SelectBoxMeditor;
 }(BaseMeditor));

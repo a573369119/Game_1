@@ -74,7 +74,10 @@ P 8D653B00 boxLock.png
 P 2CAD9145 point.png
 P 2118ED1D point1.png
 P 2118ED1D point2.png
+P 8DC789D7 selectBoxBottom.png
 P 8C681CE0 selectPoint.png
+P F76973CF shop.png
+P D32C9DEE super.png
 D selectRound
 P 3E41A961 star0.png
 P 3E8245E9 star1.png
@@ -82,5 +85,6 @@ P 22D4863D star2.png
 P 8AD5CCAB star3.png
 D unpackage
 R 1637DB99 cutRope.png
+R 59B2E47F lamp.png
 R 086E2414 loadingBg.jpg
 R C5973349 startGameBg.jpg

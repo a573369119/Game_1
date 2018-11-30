@@ -19,6 +19,9 @@ class SelectBoxMeditor extends BaseMeditor{
     private sliderKeep : number;
     /**当前滑动点 */
     private currentPoint : Laya.Image;
+    /**比例设置 */
+    private scale : number;
+
 
 
 
@@ -34,6 +37,7 @@ class SelectBoxMeditor extends BaseMeditor{
     protected init() : void
     {
         super.init();
+        Laya.timer.loop(50,this,this.roundLamp);
         this.arr_Box = new Array<Box>() ;
         this.arr_Point = new Array<Laya.Image>();
         this.posX = 250;
@@ -56,7 +60,7 @@ class SelectBoxMeditor extends BaseMeditor{
         this.view.panel_ShowBox.hScrollBar.changeHandler = null;
         this.view.panel_ShowBox.off(Laya.Event.MOUSE_DOWN,this,this.onMouseDow);
         this.view.off(Laya.Event.MOUSE_UP,this,this.onMouseUp);   
-
+        Laya.timer.clear(this,this.roundLamp);
     }
 
     /**设置季度 - Meditor 起始点*/
@@ -84,7 +88,6 @@ class SelectBoxMeditor extends BaseMeditor{
         this.boxCount = 5;//测试
         for(let i=0; i<this.boxCount;i++)
         {
-            //
             box = new Box(this.view);
             img_Point = new Laya.Image();
             img_Point.skin = "selectBox/point1.png";
@@ -98,10 +101,10 @@ class SelectBoxMeditor extends BaseMeditor{
                 box.boxUI.width += 125;
             }
         }
-        this.currentPoint = this.arr_Point[0];
-        this.currentPoint.scale(0.5,0.5);
-        this.arr_Point[0].skin = "selectBox/point.png";
-        this.view.img_SelectBox.x = this.currentPoint.x - 5;
+        this.setCurrentPoint(0);
+        let lastBox = this.arr_Box[this.arr_Box.length-1];
+        let lastPoint = this.arr_Point[this.arr_Point.length-1];
+        this.scale = (lastPoint.x + lastPoint.width)/(lastBox.initX + lastBox.boxUI.x + lastBox.boxUI.width);
     }
 
     /**事件绑定 给盒子 */
@@ -117,7 +120,7 @@ class SelectBoxMeditor extends BaseMeditor{
     /**事件 点击盒子 */
     private clickBox(index) : void
     {
-        // console.log("点击盒子" + index);
+        console.log("进入盒子" + index);
     }
 
     /**事件 面板被点下   2250*/
@@ -129,25 +132,56 @@ class SelectBoxMeditor extends BaseMeditor{
     private onMouseUp() : void
     {
         let value = this.view.panel_ShowBox.hScrollBar.value;
-        for(let i=0; i<this.arr_Box.length ; i++)
+        let i = this.mouseJudge(value);
+        if(i == 0)
         {
-            if(i==0 && value < 275)
-            {
-                Laya.Tween.to(this.view.panel_ShowBox.hScrollBar,{value:0},100);
-            }
-            else if(value >= 275 + 550*(i-1) && value < 275 + 550*i)
-            {
-                Laya.Tween.to(this.view.panel_ShowBox.hScrollBar,{value:(550*i - 20)},100);                
-            } 
+            Laya.Tween.to(this.view.panel_ShowBox.hScrollBar,{value:0},100);
+        }
+        else
+        {
+            Laya.Tween.to(this.view.panel_ShowBox.hScrollBar,{value:(550*i - 20)},100);         
         }
     }
 
-    /** */
+    /**当前选择点 */
+    private setCurrentPoint(value) : void
+    {
+        let i = this.mouseJudge(value);
+        if(this.currentPoint != this.arr_Point[i])
+        {
+            if(this.currentPoint == null)
+            {
+                this.currentPoint = this.arr_Point[0];   
+            }
+            else
+            {
+                this.currentPoint.skin =  "selectBox/point1.png";
+                this.currentPoint = this.arr_Point[i];
+            }
+            this.currentPoint.skin = "selectBox/point.png";
+            this.view.img_SelectBox.zOrder = 10;
+        }
+
+        this.listPoint();
+    }
+    /**点点排版 */
+    private listPoint() : void
+    {
+        for(let i=0;i<this.arr_Point.length ;i++)
+        {
+           this.arr_Point[i].y = 0;
+           this.arr_Point[i].x = 0;
+           this.arr_Point[i].x += 70 * i;
+        }
+        this.currentPoint.y = -15;
+        this.currentPoint.x -= 10;
+    }
 
     /**面板滚动*/
     private scrollChange(value) : void
     {
         let box : ui.BoxUI;
+        this.view.img_SelectBox.x = value*(this.scale + 0.0289) - 10;//0.289距离宽就变大，距离低就变小
         for(let i=0; i<this.arr_Box.length;i++)
         {
             if(value <= 130)
@@ -173,6 +207,7 @@ class SelectBoxMeditor extends BaseMeditor{
                 this.moster.removeSelf();
             }
         }
+        this.setCurrentPoint(value);
 
     }
 
@@ -189,18 +224,19 @@ class SelectBoxMeditor extends BaseMeditor{
         }
     }
 
-    /**鼠标的左右判断 */
+    /**判断在哪个店 */
     private mouseJudge(value) : number
     {
-        if(this.sliderKeep - value >= 0)
+        for(let i=0; i<this.arr_Box.length ; i++)
         {
-            this.sliderKeep = value;//右
-            return 1;
-        }
-        else
-        { 
-            this.sliderKeep = value;   //左         
-            return -1;
+            if(i==0 && value < 275)
+            {
+                return 0;
+            }
+            else if(value >= 275 + 550*(i-1) && value < 275 + 550*i)
+            {
+                return i;   
+            } 
         }
     }
     
@@ -210,5 +246,11 @@ class SelectBoxMeditor extends BaseMeditor{
         this.view.panel_ShowBox.hScrollBar.visible = false;
         this.view.panel_ShowBox.hScrollBar.elasticDistance = 0;
         this.view.panel_ShowBox.hScrollBar.rollRatio = 0;
+    }
+
+    /**旋转 */
+    private roundLamp() : void
+    {
+        this.view.round_Lamp.rotation += 0.2;
     }
 }

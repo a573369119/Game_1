@@ -23,6 +23,7 @@ var SelectMeditor = /** @class */ (function (_super) {
     /**初始化 */
     SelectMeditor.prototype.init = function () {
         _super.prototype.init.call(this);
+        Laya.timer.loop(50, this, this.roundLamp);
     };
     /**事件绑定 */
     SelectMeditor.prototype.addEvents = function () {
@@ -43,6 +44,7 @@ var SelectMeditor = /** @class */ (function (_super) {
         this.view.btn_Second_.off(Laya.Event.CLICK, this, this.onSelectBoxStart);
         this.view.btn_Third_.off(Laya.Event.CLICK, this, this.onSelectBoxStart);
         this.view.btn_Exit.off(Laya.Event.CLICK, this, this.onExit);
+        Laya.timer.clear(this, this.roundLamp);
     };
     /**按钮事件 进入季度关卡 */
     SelectMeditor.prototype.onSelectBoxStart = function (index) {
@@ -54,6 +56,10 @@ var SelectMeditor = /** @class */ (function (_super) {
     /**按钮事件 退出 */
     SelectMeditor.prototype.onExit = function () {
         this.dispose();
+    };
+    /**旋转 */
+    SelectMeditor.prototype.roundLamp = function () {
+        this.view.round_Lamp.rotation += 0.2;
     };
     return SelectMeditor;
 }(BaseMeditor));
