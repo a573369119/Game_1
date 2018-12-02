@@ -43,10 +43,11 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
         this.view.panel_ShowBox.off(Laya.Event.MOUSE_DOWN, this, this.onMouseDow);
         this.view.off(Laya.Event.MOUSE_UP, this, this.onMouseUp);
         Laya.timer.clear(this, this.roundLamp);
+        this.remBoxEvent();
     };
     /**设置季度 - Meditor 起始点*/
     SelectBoxMeditor.prototype.setSelectQuarter = function (index) {
-        this.setSelectQuarter = index; //现在默认第一季度
+        this.selectQuarter = index; //现在默认第一季度
         this.moster = this.view.moster;
         this.moster.removeSelf();
         this.createBox();
@@ -63,7 +64,7 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
         var img_Point;
         this.boxCount = 5; //测试
         for (var i = 0; i < this.boxCount; i++) {
-            box = new Box(this.view);
+            box = new Box(this.view, this.selectQuarter, i);
             img_Point = new Laya.Image();
             img_Point.skin = "selectBox/point1.png";
             img_Point.x += 70 * i;
@@ -86,9 +87,17 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
             this.arr_Box[i].boxUI.img_box.on(Laya.Event.CLICK, this, this.clickBox, [i]);
         }
     };
+    /**事件移除 盒子 */
+    SelectBoxMeditor.prototype.remBoxEvent = function () {
+        for (var i = 0; i < this.arr_Box.length; i++) {
+            this.arr_Box[i].boxUI.img_box.off(Laya.Event.CLICK, this, this.clickBox);
+        }
+    };
     /**事件 点击盒子 */
     SelectBoxMeditor.prototype.clickBox = function (index) {
         console.log("进入盒子" + index);
+        GameManager.ins_.runMediator(GameData.SELECT_ROUND_MEDIATOR);
+        GameManager.ins_.getMediator(GameData.SELECT_ROUND_MEDIATOR).setRound(this.selectQuarter, index);
     };
     /**事件 面板被点下   2250*/
     SelectBoxMeditor.prototype.onMouseDow = function () {

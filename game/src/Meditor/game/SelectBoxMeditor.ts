@@ -61,12 +61,14 @@ class SelectBoxMeditor extends BaseMeditor{
         this.view.panel_ShowBox.off(Laya.Event.MOUSE_DOWN,this,this.onMouseDow);
         this.view.off(Laya.Event.MOUSE_UP,this,this.onMouseUp);   
         Laya.timer.clear(this,this.roundLamp);
+
+        this.remBoxEvent();
     }
 
     /**设置季度 - Meditor 起始点*/
     public setSelectQuarter(index) : void
     {
-        this.setSelectQuarter = index;//现在默认第一季度
+        this.selectQuarter = index;//现在默认第一季度
         this.moster = this.view.moster;
         this.moster.removeSelf();
         this.createBox();
@@ -88,7 +90,7 @@ class SelectBoxMeditor extends BaseMeditor{
         this.boxCount = 5;//测试
         for(let i=0; i<this.boxCount;i++)
         {
-            box = new Box(this.view);
+            box = new Box(this.view,this.selectQuarter,i);
             img_Point = new Laya.Image();
             img_Point.skin = "selectBox/point1.png";
             img_Point.x += 70 * i;
@@ -117,10 +119,25 @@ class SelectBoxMeditor extends BaseMeditor{
         
     }
 
+    /**事件移除 盒子 */
+    private remBoxEvent() : void
+    {
+        for(let i=0; i<this.arr_Box.length; i++)
+        {
+            this.arr_Box[i].boxUI.img_box.off(Laya.Event.CLICK,this,this.clickBox);
+        }
+        
+    }
+
     /**事件 点击盒子 */
     private clickBox(index) : void
     {
         console.log("进入盒子" + index);
+        GameManager.ins_.runMediator(GameData.SELECT_ROUND_MEDIATOR);
+        GameManager.ins_.getMediator(GameData.SELECT_ROUND_MEDIATOR).setRound(this.selectQuarter,index);
+        
+
+
     }
 
     /**事件 面板被点下   2250*/
@@ -180,7 +197,7 @@ class SelectBoxMeditor extends BaseMeditor{
     /**面板滚动*/
     private scrollChange(value) : void
     {
-        let box : ui.BoxUI;
+        let box : ui.SelectBox.BoxUI;
         this.view.img_SelectBox.x = value*(this.scale + 0.0289) - 10;//0.289距离宽就变大，距离低就变小
         for(let i=0; i<this.arr_Box.length;i++)
         {

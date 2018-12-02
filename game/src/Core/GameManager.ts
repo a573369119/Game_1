@@ -21,6 +21,8 @@ class GameManager{
                 return new SelectMeditor(meditorName,GameData.SELECT_VIEW); 
             case GameData.SELECT_BOX_MEDIATOR : 
                 return new SelectBoxMeditor(meditorName,GameData.SELECT_BOX_VIEW); 
+            case GameData.SELECT_ROUND_MEDIATOR:
+                return new SelectRoundMediator(meditorName,GameData.SELECT_ROUND_VIEW);
             default : 
                 console.log("没有该  mediator");
                 break;
@@ -30,7 +32,7 @@ class GameManager{
 //-----------------------------------------------------------------------------------------------------------
 
     /**启动 调度器*/
-    public runMediator(meditorName:any) : void
+    public runMediator(meditorName:any) : any
     {
         if(this.MeditorDic.get(meditorName))
         {
@@ -38,7 +40,7 @@ class GameManager{
         }
         else
         {   
-            this.MeditorDic.set(meditorName,this.selectMeditor(meditorName));
+            return this.MeditorDic.set(meditorName,this.selectMeditor(meditorName));
             //console.log(this.MeditorDic);
             //console.log(this.MeditorDic.get(meditorName));        
         }

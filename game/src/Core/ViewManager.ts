@@ -27,10 +27,10 @@ class ViewManager{
                 this.viewsDic.set(GameData.SELECT_VIEW,new ui.SelectUI());            
                 break;           
             case GameData.SELECT_BOX_VIEW:
-                this.viewsDic.set(GameData.SELECT_BOX_VIEW,new ui.SelectBoxUI());                        
+                this.viewsDic.set(GameData.SELECT_BOX_VIEW,new ui.SelectBox.SelectBoxUI());                        
                 break;
             case GameData.SELECT_ROUND_VIEW:
-                this.viewsDic.set(GameData.SELECT_ROUND_VIEW,new ui.SelectRoundUI());                                    
+                this.viewsDic.set(GameData.SELECT_ROUND_VIEW,new ui.SelectRound.SelectRoundUI());                                    
                 break;
             case GameData.GAME_VIEW:
                 //游戏

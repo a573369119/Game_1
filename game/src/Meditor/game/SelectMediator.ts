@@ -19,12 +19,12 @@ class SelectMeditor extends BaseMeditor{
     /**事件绑定 */
     protected addEvents() : void
     {
-        this.view.btn_First.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[1]);
-        this.view.btn_Second.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[2]);
-        this.view.btn_Third.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[3]);
-        this.view.btn_First_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[1]);
-        this.view.btn_Second_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[2]);
-        this.view.btn_Third_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[3]);
+        this.view.btn_First.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[0]);
+        this.view.btn_Second.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[1]);
+        this.view.btn_Third.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[2]);
+        this.view.btn_First_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[0]);
+        this.view.btn_Second_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[1]);
+        this.view.btn_Third_.on(Laya.Event.CLICK,this,this.onSelectBoxStart,[2]);
         
         this.view.btn_Exit.on(Laya.Event.CLICK,this,this.onExit);
 

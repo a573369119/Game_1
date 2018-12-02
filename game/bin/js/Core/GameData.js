@@ -41,6 +41,8 @@ var GameData = /** @class */ (function () {
     GameData.SELECT_MEDIATOR = 2;
     /**盒子选择 调度器 */
     GameData.SELECT_BOX_MEDIATOR = 3;
+    /**关卡选择 调度器 */
+    GameData.SELECT_ROUND_MEDIATOR = 4;
     GameData.ins_ = new GameData();
     return GameData;
 }());

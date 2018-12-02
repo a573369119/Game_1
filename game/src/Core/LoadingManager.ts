@@ -14,6 +14,7 @@ class LoadingManager{
         {url:"res/atlas/publicAssets.atlas"},
         {url:"res/atlas/selectBox.atlas"},
         {url:"res/atlas/selectRound.atlas"},
+        {url:"res/atlas/select.atlas"},
         //大图加载
         {url:"unpackage/startGameBg.jpg"},
         {url:"unpackage/cutRope.png"},
@@ -39,7 +40,8 @@ class LoadingManager{
         {
             this.callBackDic.set(caller,callBack);
         }
-        Laya.loader.load(this.arr_LoadingUi,Laya.Handler.create(this,this.onLoadingUi,[caller]));     
+        Laya.loader.load(this.arr_LoadingUi,Laya.Handler.create(this,this.onLoadingUi,[caller])); 
+        this.loadConfig();//配置文件加载    
     }
 
     /**资源加载完成 */
@@ -115,5 +117,49 @@ class LoadingManager{
 
     }
 
+    ////------------------------配置文件加载-----------------------------
+    private loadConfig() : void
+    {
+        let arr = [
+            {url:"config/selectConfig.json"},
+            {url:"config/playerDataTest.json"}
+        ];
+        Laya.loader.load(arr,Laya.Handler.create(this,this.configLoadOver),null,Laya.Loader.JSON);
+    }
+
+    private configLoadOver() : void
+    {
+        //数据保存
+       let object = Laya.loader.getRes("config/selectConfig.json");
+       this.keepLimit(object.limitList);
+
+       let userData = Laya.loader.getRes("config/playerDataTest.json");
+       this.keepUserData(userData);
+       //--------------------------
+       Laya.loader.clearRes("config/selectConfig.json");
+       Laya.loader.clearRes("config/playerDataTest.json");
+    }
+
+    /**保存 关卡限制信息*/
+    private keepLimit(object) : void
+    {
+        for(let i=0; i<object.length; i++)
+        {
+            PlayerData.ins.arr_LimitSelect.push(object[i].selectLimit);
+            PlayerData.ins.boxLimtDic.set(i,object[i].boxLimit);
+        }
+    }
+
+    /**保存用户信息 */
+    private keepUserData(userData) : void
+    {
+        let playerData = PlayerData.ins;
+        playerData.starNum = userData.playerStars;
+        for(let i=0; i<userData.playerCard.length; i++)
+        {
+            playerData.round_Star.set(userData.playerCard[i].card,userData.playerCard[i].stars);
+        }
+        console.log(playerData.round_Star);
+    }
 
 }

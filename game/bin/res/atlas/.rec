@@ -37,6 +37,16 @@ D loadingView
 P AB50B856 loading1.png
 P E6D87ED2 loading2.png
 D publicAssets
+P EB460D49 0.png
+P E0B7948B 1.png
+P B2036E57 2.png
+P 04BC3593 3.png
+P 20251805 4.png
+P 897B5F7F 5.png
+P 33E796B8 6.png
+P 93F84C2E 7.png
+P F39D3AF2 8.png
+P AFA5920F 9.png
 P F69CB89E black.jpg
 P 731159EC boom.png
 P 219F4157 btn1_1.png
@@ -49,7 +59,25 @@ P 6DAFF6E2 moster.png
 P 39BF12AD mouse.png
 P 3F536C7C start1.png
 P 653091E6 start2.png
+D select
+P 4131F35B bottom.png
+P FFF77971 s1black.png
+P 199870A1 s1goods.png
+P 603A0FA1 s1l.png
+P 34092B8C s1r.png
+P 965CAB74 s1s2sure.png
+P D5F49CB2 s2black.png
+P 6820A684 s2goods.png
+P A6EA3015 s2l.png
+P 46965FE7 s2r.png
+P 0A2CE2DE s3black.png
+P 40ED4842 s3goods.png
+P DCBFCF64 s3l.png
+P A4CF9E7B s3r.png
+P 06982CF1 s3sure.png
+P B001D4B5 sure.png
 D selectBox
+P 5696F135 allThree.png
 P BB6B84F5 Box (1).png
 P 49064248 Box (10).png
 P 742D1484 Box (11).png
@@ -71,6 +99,7 @@ P A0415C1C box2.png
 P 4D92AB31 box3.png
 P 5D6B6111 box4.png
 P 8D653B00 boxLock.png
+P 445D6D19 lockStar.png
 P 2CAD9145 point.png
 P 2118ED1D point1.png
 P 2118ED1D point2.png
@@ -79,10 +108,13 @@ P 8C681CE0 selectPoint.png
 P F76973CF shop.png
 P D32C9DEE super.png
 D selectRound
+P DAF08912 lock.png
+P 437ADDCE star.png
 P 3E41A961 star0.png
 P 3E8245E9 star1.png
 P 22D4863D star2.png
 P 8AD5CCAB star3.png
+P 0BBBCA79 unlock.png
 D unpackage
 R 1637DB99 cutRope.png
 R 59B2E47F lamp.png

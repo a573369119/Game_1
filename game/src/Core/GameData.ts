@@ -38,6 +38,8 @@ class GameData{
     public static SELECT_MEDIATOR : number = 2;
     /**盒子选择 调度器 */
     public static SELECT_BOX_MEDIATOR : number = 3;
+    /**关卡选择 调度器 */
+    public static SELECT_ROUND_MEDIATOR : number = 4;
     //---------------------------Mediator----------------
 
     constructor(){

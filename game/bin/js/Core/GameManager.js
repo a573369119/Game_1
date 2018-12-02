@@ -14,6 +14,8 @@ var GameManager = /** @class */ (function () {
                 return new SelectMeditor(meditorName, GameData.SELECT_VIEW);
             case GameData.SELECT_BOX_MEDIATOR:
                 return new SelectBoxMeditor(meditorName, GameData.SELECT_BOX_VIEW);
+            case GameData.SELECT_ROUND_MEDIATOR:
+                return new SelectRoundMediator(meditorName, GameData.SELECT_ROUND_VIEW);
             default:
                 console.log("没有该  mediator");
                 break;
@@ -26,7 +28,7 @@ var GameManager = /** @class */ (function () {
             console.log("调度器已有");
         }
         else {
-            this.MeditorDic.set(meditorName, this.selectMeditor(meditorName));
+            return this.MeditorDic.set(meditorName, this.selectMeditor(meditorName));
             //console.log(this.MeditorDic);
             //console.log(this.MeditorDic.get(meditorName));        
         }
