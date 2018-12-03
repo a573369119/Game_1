@@ -131,4 +131,76 @@ var ui;
     }(View));
     ui.StartGameUI = StartGameUI;
 })(ui || (ui = {}));
+(function (ui) {
+    var Vo;
+    (function (Vo) {
+        var CandyUI = /** @class */ (function (_super) {
+            __extends(CandyUI, _super);
+            function CandyUI() {
+                return _super.call(this) || this;
+            }
+            CandyUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.createView(ui.Vo.CandyUI.uiView);
+            };
+            CandyUI.uiView = { "type": "View", "props": { "width": 300, "height": 400 } };
+            return CandyUI;
+        }(View));
+        Vo.CandyUI = CandyUI;
+    })(Vo = ui.Vo || (ui.Vo = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var Vo;
+    (function (Vo) {
+        var MonsterUI = /** @class */ (function (_super) {
+            __extends(MonsterUI, _super);
+            function MonsterUI() {
+                return _super.call(this) || this;
+            }
+            MonsterUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.createView(ui.Vo.MonsterUI.uiView);
+            };
+            MonsterUI.uiView = { "type": "View", "props": { "width": 80, "height": 100 }, "child": [{ "type": "Image", "props": { "y": 1, "x": 0, "width": 162, "skin": "gameView/no1.png", "height": 90 } }] };
+            return MonsterUI;
+        }(View));
+        Vo.MonsterUI = MonsterUI;
+    })(Vo = ui.Vo || (ui.Vo = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var Vo;
+    (function (Vo) {
+        var PointUI = /** @class */ (function (_super) {
+            __extends(PointUI, _super);
+            function PointUI() {
+                return _super.call(this) || this;
+            }
+            PointUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.createView(ui.Vo.PointUI.uiView);
+            };
+            PointUI.uiView = { "type": "View", "props": { "width": 300, "height": 400 } };
+            return PointUI;
+        }(View));
+        Vo.PointUI = PointUI;
+    })(Vo = ui.Vo || (ui.Vo = {}));
+})(ui || (ui = {}));
+(function (ui) {
+    var Vo;
+    (function (Vo) {
+        var StarUI = /** @class */ (function (_super) {
+            __extends(StarUI, _super);
+            function StarUI() {
+                return _super.call(this) || this;
+            }
+            StarUI.prototype.createChildren = function () {
+                _super.prototype.createChildren.call(this);
+                this.createView(ui.Vo.StarUI.uiView);
+            };
+            StarUI.uiView = { "type": "View", "props": { "width": 40, "height": 40 } };
+            return StarUI;
+        }(View));
+        Vo.StarUI = StarUI;
+    })(Vo = ui.Vo || (ui.Vo = {}));
+})(ui || (ui = {}));
 //# sourceMappingURL=layaUI.max.all.js.map

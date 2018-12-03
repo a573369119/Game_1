@@ -23,6 +23,8 @@ class GameManager{
                 return new SelectBoxMeditor(meditorName,GameData.SELECT_BOX_VIEW); 
             case GameData.SELECT_ROUND_MEDIATOR:
                 return new SelectRoundMediator(meditorName,GameData.SELECT_ROUND_VIEW);
+            case GameData.GAME_MEDIATOR:
+                return 
             default : 
                 console.log("没有该  mediator");
                 break;

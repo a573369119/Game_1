@@ -30,6 +30,8 @@ class GameData{
     public static SELECT_ROUND_VIEW : number = 4;
     /**游戏界面 */
     public static GAME_VIEW : number = 5;
+    /**进入游戏界面 开箱子界面 封箱子界面*/
+    public static OPEN_VIEW : number = 6;
     //---------------------------view---------------------
     //---------------------------Mediator----------------
     /**开始游戏 调度器*/
@@ -40,7 +42,27 @@ class GameData{
     public static SELECT_BOX_MEDIATOR : number = 3;
     /**关卡选择 调度器 */
     public static SELECT_ROUND_MEDIATOR : number = 4;
+    /**游戏 调度器 */
+    public static GAME_MEDIATOR : number = 5;
     //---------------------------Mediator----------------
+    //-------------------------动画名称-------------------
+    /**[monster]糖果丢失， 伤心 15*/
+    public static ANI_MONSTER_SAD : string = "no"; 
+    /**[monster]糖果吃到，咀嚼 9 LOOP*/
+    public static ANI_MONSTER_EAT : string = "eat";
+    /**[monster]吃到星星，开心 19*/
+    public static ANI_MONSTER_HAPPYE : string = "getStar";
+    /**[monster]糖果靠近 张嘴 13*/
+    public static ANI_MONSTER_OPEN : string = "open";
+    /**[monster]动作 给我吃 26*/
+    public static ANI_MONSTER_GIVE_ME : string = "giveMe";
+    /**[monster]动作 随机 29*/
+    public static ANI_MONSTER_GIVE_ME2 : string = "giveMe2_";
+    /**[monster]站立 不动 17*/
+    public static ANI_MONSTER_STAND : string = "stand";
+    /**[monster]动作 翘脚 43*/
+    public static ANI_MONSTER_ACTION : string = "action";
+    //------------------------动画-------------------------
 
     constructor(){
         

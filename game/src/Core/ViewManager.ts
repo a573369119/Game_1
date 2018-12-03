@@ -33,11 +33,10 @@ class ViewManager{
                 this.viewsDic.set(GameData.SELECT_ROUND_VIEW,new ui.SelectRound.SelectRoundUI());                                    
                 break;
             case GameData.GAME_VIEW:
-                //游戏
+                this.viewsDic.set(GameData.GAME_VIEW,new ui.GameView.GameBackgroundUI());
                 break;
-            case 6:
-                
-                break;
+            case GameData.OPEN_VIEW:
+                this.viewsDic.set(GameData.OPEN_VIEW,new ui.GameView.GameViewDoorUI());//包含计分界面
             default:
                 console.log('没有该界面定义 - ViewManager');
                 break;

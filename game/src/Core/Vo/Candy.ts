@@ -6,8 +6,20 @@ class Candy{
     public x : number;
     /**纵坐标 */
     public y : number;
+    /**类型 */
+    public style : string;
+    /**糖果UI */
         
-    constructor(){
+    constructor(object){
+        this.init(object);
+    }
 
+    private init(object) : void
+    {
+        this.x = object.x;
+        this.y = object.y;
+        this.style = object.style;
+        
+        
     }
 }

@@ -2,7 +2,7 @@
  * 游戏数据定义
  */
 var GameData = /** @class */ (function () {
-    //---------------------------Mediator----------------
+    //------------------------动画-------------------------
     function GameData() {
     }
     //---------------------------stage--------------------
@@ -43,6 +43,22 @@ var GameData = /** @class */ (function () {
     GameData.SELECT_BOX_MEDIATOR = 3;
     /**关卡选择 调度器 */
     GameData.SELECT_ROUND_MEDIATOR = 4;
+    //---------------------------Mediator----------------
+    //-------------------------动画名称-------------------
+    /**[monster]糖果丢失， 伤心 */
+    GameData.ANI_MONSTER_SAD = 1;
+    /**[monster]糖果吃到，咀嚼 */
+    GameData.ANI_MONSTER_EAT = 2;
+    /**[monster]吃到星星，开心 */
+    GameData.ANI_MONSTER_HAPPYE = 3;
+    /**[monster]糖果靠近 张嘴 */
+    GameData.ANI_MONSTER_OPEN = 4;
+    /**[monster]动作 给我吃 */
+    GameData.ANI_MONSTER_GIVE_ME = 5;
+    /**[monster]动作 随机*/
+    GameData.ANI_MONSTER_ACTION = 6;
+    /**[monster]站立 不动 */
+    GameData.ANI_MONSTER_STAND = 7;
     GameData.ins_ = new GameData();
     return GameData;
 }());

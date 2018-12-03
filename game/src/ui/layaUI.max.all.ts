@@ -1,6 +1,41 @@
 
 import View=laya.ui.View;
 import Dialog=laya.ui.Dialog;
+module ui.GameView {
+    export class GameBackgroundUI extends View {
+
+        public static  uiView:any ={"type":"View","props":{"width":750,"height":1334}};
+        constructor(){ super()}
+        createChildren():void {
+        
+            super.createChildren();
+            this.createView(ui.GameView.GameBackgroundUI.uiView);
+
+        }
+
+    }
+}
+
+module ui.GameView {
+    export class GameViewDoorUI extends View {
+		public img_doorL:Laya.Image;
+		public img_jiaodaiL:Laya.Image;
+		public img_doorR:Laya.Image;
+		public img_jiaodaiR:Laya.Image;
+		public img_jiaodaiM:Laya.Image;
+
+        public static  uiView:any ={"type":"View","props":{"width":750,"height":1334},"child":[{"type":"Image","props":{"y":0,"x":0,"width":377,"var":"img_doorL","skin":"gameView/gameDoor/boxDoor_1.png","height":1331},"child":[{"type":"Image","props":{"y":119,"x":329,"width":44,"visible":false,"var":"img_jiaodaiL","skin":"gameView/gameDoor/jiaodao_l.png","height":1070}}]},{"type":"Image","props":{"y":0,"x":753,"width":381,"var":"img_doorR","skin":"gameView/gameDoor/boxDoor_1.png","scaleX":-1,"height":1331},"child":[{"type":"Image","props":{"y":121,"x":383,"width":50,"visible":false,"var":"img_jiaodaiR","skin":"gameView/gameDoor/jiaodai_r.png","height":1067}}]},{"type":"Image","props":{"y":118,"x":325,"width":101,"var":"img_jiaodaiM","skin":"gameView/gameDoor/jiaodai_m.png","height":1072}},{"type":"Image","props":{"y":1327,"x":40,"skin":"gameView/gameDoor/dao.png"}}]};
+        constructor(){ super()}
+        createChildren():void {
+        
+            super.createChildren();
+            this.createView(ui.GameView.GameViewDoorUI.uiView);
+
+        }
+
+    }
+}
+
 module ui {
     export class LoadingUI extends View {
 		public lab_Progress:Laya.Label;

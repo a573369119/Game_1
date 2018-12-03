@@ -58,10 +58,10 @@ class Box {
                     this.boxUI.img_Count1.visible = true;
                     this.boxUI.img_Count1.skin = "publicAssets/" + Math.floor(boxs[this.boxId]/100) + ".png";
                 }
-                if(boxs[this.boxId] >= 10 && boxs[this.boxId] <100)
+                if(boxs[this.boxId] >= 10)
                 {
                     this.boxUI.img_Count2.visible = true;
-                    this.boxUI.img_Count2.skin = "publicAssets/" + Math.floor(boxs[this.boxId]/10) + ".png";
+                    this.boxUI.img_Count2.skin = "publicAssets/" + Math.floor(boxs[this.boxId]%100/10) + ".png";
                 }             
                     this.boxUI.img_Count3.skin = "publicAssets/" + boxs[this.boxId]%10 + ".png";
 

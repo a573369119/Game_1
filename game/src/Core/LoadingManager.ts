@@ -15,6 +15,7 @@ class LoadingManager{
         {url:"res/atlas/selectBox.atlas"},
         {url:"res/atlas/selectRound.atlas"},
         {url:"res/atlas/select.atlas"},
+        {url:"res/atlas/gameView.atlas"},
         //大图加载
         {url:"unpackage/startGameBg.jpg"},
         {url:"unpackage/cutRope.png"},
@@ -122,7 +123,8 @@ class LoadingManager{
     {
         let arr = [
             {url:"config/selectConfig.json"},
-            {url:"config/playerDataTest.json"}
+            {url:"config/playerDataTest.json"},
+            {url:"config/mapConfig.json"}
         ];
         Laya.loader.load(arr,Laya.Handler.create(this,this.configLoadOver),null,Laya.Loader.JSON);
     }
@@ -161,5 +163,26 @@ class LoadingManager{
         }
         console.log(playerData.round_Star);
     }
+    //-------------------------获取配置--------------------
+    /**获取地图配置 */
+    public getMapConfig(mapId:number) : MapConfig
+    {
+        let object = Laya.loader.getRes("config/mapConfig.json");
+        let objectMapConfig ;
+        let mapConfig : MapConfig;
+        for(let i =0;i<object.length; i++)
+        {
+            if(mapId == object[i].mapId)
+            {
+                objectMapConfig = object[i];
+                mapConfig = new MapConfig(objectMapConfig);
+                return mapConfig;
+            }
+        }
+        console.log("没有此配置 mapId = " + mapId);
+        Laya.loader.clearRes("config/mapConfig.json");
+        return null;
+    }
+    //-----------------------加载动画-------------------------
 
 }
