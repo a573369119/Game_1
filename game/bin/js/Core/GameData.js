@@ -33,6 +33,8 @@ var GameData = /** @class */ (function () {
     GameData.SELECT_ROUND_VIEW = 4;
     /**游戏界面 */
     GameData.GAME_VIEW = 5;
+    /**进入游戏界面 开箱子界面 封箱子界面*/
+    GameData.OPEN_VIEW = 6;
     //---------------------------view---------------------
     //---------------------------Mediator----------------
     /**开始游戏 调度器*/
@@ -43,22 +45,26 @@ var GameData = /** @class */ (function () {
     GameData.SELECT_BOX_MEDIATOR = 3;
     /**关卡选择 调度器 */
     GameData.SELECT_ROUND_MEDIATOR = 4;
+    /**游戏 调度器 */
+    GameData.GAME_MEDIATOR = 5;
     //---------------------------Mediator----------------
     //-------------------------动画名称-------------------
-    /**[monster]糖果丢失， 伤心 */
-    GameData.ANI_MONSTER_SAD = 1;
-    /**[monster]糖果吃到，咀嚼 */
-    GameData.ANI_MONSTER_EAT = 2;
-    /**[monster]吃到星星，开心 */
-    GameData.ANI_MONSTER_HAPPYE = 3;
-    /**[monster]糖果靠近 张嘴 */
-    GameData.ANI_MONSTER_OPEN = 4;
-    /**[monster]动作 给我吃 */
-    GameData.ANI_MONSTER_GIVE_ME = 5;
-    /**[monster]动作 随机*/
-    GameData.ANI_MONSTER_ACTION = 6;
-    /**[monster]站立 不动 */
-    GameData.ANI_MONSTER_STAND = 7;
+    /**[monster]糖果丢失， 伤心 15*/
+    GameData.ANI_MONSTER_SAD = "no";
+    /**[monster]糖果吃到，咀嚼 9 LOOP*/
+    GameData.ANI_MONSTER_EAT = "eat";
+    /**[monster]吃到星星，开心 19*/
+    GameData.ANI_MONSTER_HAPPYE = "getStar";
+    /**[monster]糖果靠近 张嘴 13*/
+    GameData.ANI_MONSTER_OPEN = "open";
+    /**[monster]动作 给我吃 26*/
+    GameData.ANI_MONSTER_GIVE_ME = "giveMe";
+    /**[monster]动作 随机 29*/
+    GameData.ANI_MONSTER_GIVE_ME2 = "giveMe2_";
+    /**[monster]站立 不动 17*/
+    GameData.ANI_MONSTER_STAND = "stand";
+    /**[monster]动作 翘脚 43*/
+    GameData.ANI_MONSTER_ACTION = "action";
     GameData.ins_ = new GameData();
     return GameData;
 }());

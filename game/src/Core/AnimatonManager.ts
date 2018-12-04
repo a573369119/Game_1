@@ -7,7 +7,6 @@ class AnimationManager {
 
     constructor(){
         this.animationDic = new Laya.Dictionary();
-        this.loadAnimation();
     }
     public static ins : AnimationManager = new AnimationManager();
 
@@ -36,12 +35,12 @@ class AnimationManager {
         for (var i=1; i <= length; i++) 
         {
             //动画资源路径要和动画图集打包前的资源命名对应起来
-            urls.push("publicAssests/" + aniName + i + ".png");
+            urls.push("gameView/" + aniName + i + ".png");
         }
         return urls;
     }
 
-    /**播放动画 动画名称  是否循环  锚点0.0*/
+    /**播放动画 动画名称  是否循环  坐标 x y  默认锚点0.0*/
     private playAnimation(aniName:string,isLoop:boolean,x:number,y:number) : void
     {
         let animation = this.animationDic.get(aniName);

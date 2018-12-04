@@ -110,6 +110,7 @@ var SelectRoundMediator = /** @class */ (function (_super) {
     };
     /**事件 点击关卡 */
     SelectRoundMediator.prototype.onClickRound = function (index) {
+        GameManager.ins_.runMediator(GameData.GAME_MEDIATOR);
         console.log("点击的试关卡" + index);
     };
     /**卡牌星星和数字 处理 */

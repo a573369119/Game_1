@@ -140,6 +140,7 @@ class SelectRoundMediator extends BaseMeditor{
     /**事件 点击关卡 */
     private onClickRound(index) : void
     {
+        GameManager.ins_.runMediator(GameData.GAME_MEDIATOR);
         console.log("点击的试关卡" + index);
     }
 

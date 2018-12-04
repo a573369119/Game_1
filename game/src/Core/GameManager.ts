@@ -24,7 +24,7 @@ class GameManager{
             case GameData.SELECT_ROUND_MEDIATOR:
                 return new SelectRoundMediator(meditorName,GameData.SELECT_ROUND_VIEW);
             case GameData.GAME_MEDIATOR:
-                return 
+                return new GameMediator(meditorName,GameData.GAME_VIEW);
             default : 
                 console.log("没有该  mediator");
                 break;

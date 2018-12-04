@@ -1,0 +1,326 @@
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-CN">
+
+
+<head>
+	<title>&nbsp;</title>
+	
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="Copyright" content="zfsoft" />	
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/logo/favicon.ico" type="image/x-icon" />
+<style type="text/css">	
+	.active{font-weight: bolder;}
+	#navbar-tabs li{ margin-top: 2px;}
+	#navbar-tabs li a{ border-top: 2px solid transparent;}
+	#navbar-tabs li.active a{border-top: 2px solid #0770cd;}
+</style>	
+<!--jQuery核心框架库 -->
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/other_jquery/jquery-1.12.4.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/jquery-migrate-1.4.1.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
+<!--jQuery浏览器检测 -->
+<script type="text/javascript" src="/js/browse/browse-judge.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
+<script type="text/javascript">
+	//浏览器版本验证
+	var broswer = broswer();
+	if(broswer.msie==true||broswer.safari==true||broswer.mozilla==true||broswer.chrome==true){
+		if(broswer.msie==true&&broswer.version<9){
+		   window.location.href = _path+"/xtgl/init_cxBrowser.html";
+		}
+	}else{
+		 window.location.href = _path+"/xtgl/init_cxBrowser.html";
+	}
+</script>
+<script type="text/javascript">
+var _path 				= "";
+var _systemPath 		= "";
+var _stylePath 			= "http://61.139.105.139/zftal-ui-v5-1.0.2";
+var _reportPath 		= "http://61.139.105.139/WebReport";
+var _refreshInterval	= "10";
+var _localeKey 			= "zh_CN";
+</script>
+<!--
+jquery.ui 需要在bootstrap之前加载，解决冲突问题
+http://blog.csdn.net/remote_roamer/article/details/14105999
+-->
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/jquery-ui-custom.contact-1.0.0.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
+<!--Bootstrap布局框架-->
+<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootstrap/css/bootstrap.min.css?ver=20181127" />
+<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/css/error.css?ver=20181127" />
+<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/css/zftal-ui.css?ver=20181127" />
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootstrap/js/bootstrap.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<!--jQuery常用工具扩展库：基础工具,资源加载工具,元素尺寸相关工具 -->
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.utils.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<!--jQuery基础工具库：$.browser,$.cookie,$.actual等 -->
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.plugins.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<!--jQuery自定义event事件库 -->
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.events.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<!--JavaScript对象扩展库：Array,Date,Number,String -->
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.extends.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<!--Bootbox弹窗插件-->
+<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootbox/css/bootbox.css?ver=20181127" />
+<script src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootbox/bootbox.concat-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" type="text/javascript" charset="utf-8"></script>
+<script src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootbox/lang/zh_CN.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" type="text/javascript" charset="utf-8"></script>
+
+<!--jQuery模拟滚动条库-->
+<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/customscrollbar/css/jquery.mCustomScrollbar.min.css?ver=20181127" />
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/customscrollbar/js/jquery.mCustomScrollbar.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<!--jQuery.chosen美化插件-->
+<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/chosen/css/chosen-min.css?ver=20181127" />
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/chosen/jquery.choosen.concat-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/chosen/lang/zh_CN-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/utils/jquery.utils.pinyin.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/html5shiv.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/respond.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<![endif]-->
+<!--业务框架jQuery全局设置和通用函数库-->
+<script type="text/javascript" src="/js/jquery.zftal.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
+<!--国际化js库 -->
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/i18n/jquery.i18n-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<!--全局国际化js. -->
+<script type="text/javascript" src="/js/globalweb/i18n-global_zh_CN.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<!--业务框架前端脚本国际化库-->
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/lang/jquery.zftal_zh_CN-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
+<!--密码强弱判断-->
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/utils/jquery.utils.strength.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
+
+	
+	
+
+
+
+
+	
+<script type="text/javascript">
+
+	var _path 		= "";
+	var _systemPath = "";
+	var _stylePath  = "http://61.139.105.139/zftal-ui-v5-1.0.2";
+	var _reportPath = "http://61.139.105.139/WebReport";
+	var _localeKey 			= "zh_CN";
+	
+	jQuery(function($){
+		$('[data-toggle*="validation"]').trigger("validation");
+		$('[data-toggle*="fixed"]').trigger("fixed");
+		if($.fn.tooltip){
+			$('[data-toggle*="tooltip"]').tooltip({container:'body'});
+		}
+	});
+	
+</script>
+<!--教务系统通用业务js引用:比如学年，学期等公共的信息会放在这里-->
+<script type="text/javascript" src="/js/globalweb/comp/i18n/jwglxt-common_zh_CN.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
+<!--业务模块的properties初始化-->
+<!--国际化js库 -->
+
+	<style type="text/css">
+		td.td_wrap {word-wrap: break-word; word-break: break-all;}
+	</style>
+	
+</head>
+<body>
+<input type="hidden" id="pkey" name="pkey" value="" />
+	<!-- 头部 开始 -->
+	<header class="navbar-inverse top2">
+		<div class="container" id="navbar_container">
+					<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+					<span class="sr-only"> 实验课表查询</span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#" id="topButton" class="navbar-brand" onclick="onClickMenu('/xssygl/sykbcx_cxSykbcxIndex.html','N703510')">
+					实验课表查询
+				</a>
+				<script type="text/javascript">
+					document.title="实验课表查询";
+				</script>
+			</div>
+		</div>
+<!-- navbar-end  -->
+		</div>
+	</header>
+	
+	<!--头部 结束 -->
+	<div style="width: 100%; padding: 0px; margin: 0px;" id="bodyContainer">
+		<!-- requestMap中的参数为系统级别控制参数，请勿删除 -->
+		<form id="requestMap">
+			 <input type="hidden" id="sessionUserKey" value="15041040313" /> 
+			 
+			 	<input type="hidden" id="gnmkdmKey" value="N703510" />
+			 
+			 
+		</form>
+		<div class="container container-func sl_all_bg" id="yhgnPage">
+			<div id="innerContainer">
+				<!-- 放置页面显示内容 -->
+				
+        
+<form id="ajaxForm" name="form" onsubmit="return false;" action="/xssygl/sykbcx_cxSykbcxIndex.html" method="post" class="form-horizontal sl_all_form sl_all_bg" style="margin-bottom:12px" role="form" data-toggle="validation">
+<div class="row">
+	<div class="col-md-4 col-sm-5">
+		<div class="form-group">
+			<label for="" class="col-sm-4 control-label"><span style="color:red;">*</span>学年</label>
+			<div class="col-sm-6">
+				<select name="xnm" id="xnm" class="form-control chosen-select" validate="{required:true}">
+    <option value=""
+    >--请选择--</option>
+    <option value="2022">2022-2023</option>
+    <option value="2021">2021-2022</option>
+    <option value="2020">2020-2021</option>
+    <option value="2019">2019-2020</option>
+    <option value="2018" selected="selected">2018-2019</option>
+    <option value="2017">2017-2018</option>
+    <option value="2016">2016-2017</option>
+    <option value="2015">2015-2016</option>
+    <option value="2014">2014-2015</option>
+    <option value="2013">2013-2014</option>
+    <option value="2012">2012-2013</option>
+    <option value="2011">2011-2012</option>
+    <option value="2010">2010-2011</option>
+    <option value="2009">2009-2010</option>
+    <option value="2008">2008-2009</option>
+    <option value="2007">2007-2008</option>
+    <option value="2006">2006-2007</option>
+    <option value="2005">2005-2006</option>
+    <option value="2004">2004-2005</option>
+
+
+</select>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-5">
+		<div class="form-group">
+			<label for="" class="col-sm-4 control-label"><span style="color:red;">*</span>学期</label>
+			<div class="col-sm-6">
+				<select name="xqm" id="xqm" class="form-control chosen-select" validate="{required:true}">
+    <option value=""
+    >--请选择--</option>
+    <option value="3">1</option>
+    <option value="12" selected="selected">2</option>
+    <option value="16">3</option>
+
+
+</select>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-2"><div class="form-group"><div class="col-sm-12">
+		<button type="button" class="btn btn-primary btn-sm pull-right" id="search_go"	onclick="searchResult()"><span class="bigger-120 glyphicon glyphicon-search"></span> 查询</button>
+	</div></div></div>
+</div>
+<script type="text/javascript">
+	$('.chosen-select').trigger("chosen");
+</script>
+</form>
+
+
+
+<div class="row sl_add_btn">
+	<div class="col-sm-12">
+		<!-- <div class="pull-left" style="margin-left: 10px; margin-top: 10px;">
+			<i class="blue bigger-150 glyphicon glyphicon-cog" style="cursor:pointer" id="kbcong"></i>
+		</div>
+		 -->
+		<div class="btn-toolbar pull-right" role="toolbar">
+			<!-- <button type="button" class="btn btn-default" id="shcPDF" data-type="table"><span class='bigger-120 glyphicon glyphicon-print'/> 输出PDF</button>  -->
+			<button type="button" class="btn btn-default btn-primary" href="#table1" role="tab" data-toggle="tab" data-type="table"><span class="bigger-120 glyphicon glyphicon-th-large"></span> 表格</button>
+			<button type="button" class="btn btn-default" href="#table2" role="tab" data-toggle="tab" data-type="list"><span class="bigger-120 glyphicon glyphicon-align-justify"></span> 列表</button>
+		</div>
+	</div>
+</div>
+<div class="tab-content" id="ylkbTable">
+	<div class="tab-pane fade active in" id="table1"></div>
+	<div class="tab-pane fade" id="table2"></div>
+</div>
+
+				
+	
+
+<!--jQuery.jqGrid -->
+<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/jqGrid/css/jquery.jqgrid.css?ver=20181127" />
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/jqGrid/jquery.jqgrid.src-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/jqGrid/jquery.jqgrid.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/jqGrid/lang/zh_CN.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="/js/plugins/jqGrid4.6/jquery.jqgrid.settings.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="/js/plugins/jqGrid4.6/jquery.jqGrid-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<!--jQuery.validation -->
+<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/validation/css/jquery.validate-min.css?ver=20181127" />
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/validation/js/jquery.validate-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/validation/js/jquery.validate.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/validation/js/jquery.validate.methods.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/validation/lang/zh_CN-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript">
+	jQuery(function($){
+		$('[data-toggle*="validation"]').trigger("validation");
+	});
+</script>
+
+<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/backdrop/css/jquery.backdrop-1.0.0.css?ver=20181127" />
+<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/backdrop/jquery.backdrop-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
+<script type="text/javascript" src="/js/comp/jwglxt/sygl/xs/cxSykbcx.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
+
+			</div>
+		</div>
+	</div>
+	<!-- footer -->
+	
+
+<!-- footer --> 
+<div id="footerID" class="footer">
+	<p>版权所有&copy; Copyright 1999-2017  正方软件股份有限公司　　中国·杭州西湖区紫霞街176号 互联网创新创业园2号301</p>
+</div>
+<!-- footer-end -->
+	<!-- footer-end -->
+</body>
+<script type="text/javascript">
+	jQuery(function($) {	
+		if ($("#navbar-tabs").length > 0) {
+			$("#navbar-tabs li:eq(0) a").tab('show');
+		}
+		
+		setMinheight();
+		
+		$('#yhgnPage').resize(function(){
+			var minHeight  = $(this).data('min-height');
+			var innerHeight =  $('#innerContainer').outerHeight(true);
+			//console.log("minHeight:" + minHeight + ",innerHeight:" + innerHeight);
+			$(this).css('min-height', Math.max(minHeight,innerHeight));
+		});
+		
+		function setMinheight(){
+			//计算grid页面高度
+			var docuemntHeight = $(document).height();
+			var topHeight = $('header').height();
+			var footerHeight = $('.footer').height();
+			var containerHeight = docuemntHeight-topHeight-footerHeight-60;
+			$('#yhgnPage').css('min-height',containerHeight).data('min-height',containerHeight);
+		}
+	});
+	//加载title名称，根据系统内置表设置，取菜单名称或者系统名称
+	jQuery(document).attr("title",'实验课表查询');
+</script>
+
+</html>

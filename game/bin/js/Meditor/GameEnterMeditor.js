@@ -22,7 +22,8 @@ var GameEnterMeditor = /** @class */ (function () {
     };
     /**3 数据读取完成 ， 进入游戏 */
     GameEnterMeditor.prototype.enterGame = function () {
-        console.log("进入游戏");
+        /**加载动画 */
+        AnimationManager.ins.loadAnimation();
         GameManager.ins_.runMediator(GameData.START_GAME_MEDIATOR);
     };
     return GameEnterMeditor;

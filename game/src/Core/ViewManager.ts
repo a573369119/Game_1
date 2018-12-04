@@ -37,6 +37,7 @@ class ViewManager{
                 break;
             case GameData.OPEN_VIEW:
                 this.viewsDic.set(GameData.OPEN_VIEW,new ui.GameView.GameViewDoorUI());//包含计分界面
+                break;
             default:
                 console.log('没有该界面定义 - ViewManager');
                 break;
@@ -110,7 +111,7 @@ class ViewManager{
         {
             view.removeSelf();
             this.viewsDic.remove(ui);
-            this.currentView -=1;
+            this.currentView -= 1;
             console.log(this.viewsDic);
         }
         else

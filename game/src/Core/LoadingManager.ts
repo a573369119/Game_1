@@ -16,6 +16,10 @@ class LoadingManager{
         {url:"res/atlas/selectRound.atlas"},
         {url:"res/atlas/select.atlas"},
         {url:"res/atlas/gameView.atlas"},
+        {url:"res/atlas/gameView/gameBg.atlas"},
+        {url:"res/atlas/gameView/gameDoor.atlas"},
+        {url:"res/atlas/gameView/gamePos.atlas"},
+        {url:"res/atlas/gameView/gameBtn.atlas"},
         //大图加载
         {url:"unpackage/startGameBg.jpg"},
         {url:"unpackage/cutRope.png"},
