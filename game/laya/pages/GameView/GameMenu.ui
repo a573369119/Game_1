@@ -2,8 +2,8 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":8,
-    "props":{"width":750,"sceneColor":"#000000","height":1334},
+    "selecteID":9,
+    "props":{"width":750,"sceneColor":"#000000","hitTestPrior":true,"height":1334},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -12,6 +12,19 @@
     "hasChild":true,
     "compId":1,
     "child":[
+        {
+            "x":15,
+            "type":"Image",
+            "props":{"y":0,"x":0,"width":752,"skin":"publicAssets/black.jpg","height":1333,"alpha":0.6},
+            "nodeParent":1,
+            "label":"Image",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":9,
+            "child":[
+                ]
+        },
         {
             "x":15,
             "type":"Label",
@@ -41,9 +54,9 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"y":399,"x":158,"width":440,"stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#000000","labelStroke":2,"labelSize":40,"labelPadding":"0,0,010","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"继续","height":131},
+            "props":{"y":399,"x":158,"width":440,"var":"btn_Continue","stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#000000","labelStroke":2,"labelSize":40,"labelPadding":"0,0,010","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"继续","height":131},
             "nodeParent":1,
-            "label":"Button",
+            "label":"Button(btn_Continue)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -54,9 +67,9 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"y":555,"x":162,"width":440,"stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#000000","labelStroke":2,"labelSize":40,"labelPadding":"0,0,010","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"选择关卡","height":131},
+            "props":{"y":555,"x":162,"width":440,"var":"btn_SelectRound","stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#000000","labelStroke":2,"labelSize":40,"labelPadding":"0,0,010","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"选择关卡","height":131},
             "nodeParent":1,
-            "label":"Button",
+            "label":"Button(btn_SelectRound)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -67,9 +80,9 @@
         {
             "x":15,
             "type":"Button",
-            "props":{"y":704,"x":165,"width":440,"stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#000000","labelStroke":2,"labelSize":40,"labelPadding":"0,0,010","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"主菜单","height":131},
+            "props":{"y":704,"x":165,"width":440,"var":"btn_MainMenu","stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#000000","labelStroke":2,"labelSize":40,"labelPadding":"0,0,010","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"主菜单","height":131},
             "nodeParent":1,
-            "label":"Button",
+            "label":"Button(btn_MainMenu)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -80,9 +93,9 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":867,"x":319,"width":124,"skin":"publicAssets/aniu1.png","height":122},
+            "props":{"y":867,"x":319,"width":124,"var":"btn_Super","skin":"publicAssets/aniu1.png","height":122},
             "nodeParent":1,
-            "label":"Image",
+            "label":"Image(btn_Super)",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,

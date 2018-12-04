@@ -141,7 +141,10 @@ class SelectRoundMediator extends BaseMeditor{
     private onClickRound(index) : void
     {
         GameManager.ins_.runMediator(GameData.GAME_MEDIATOR);
-        console.log("点击的试关卡" + index);
+        //设置关卡 这里默认 0-0-0 第一个季度的第一盒子的第一个关卡
+        console.log("点击的是关卡" + index);
+        GameManager.ins_.getMediator(GameData.GAME_MEDIATOR).setData(this.selectIndex,this.selectBoxIndex,index);
+
     }
 
     /**卡牌星星和数字 处理 */

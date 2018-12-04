@@ -58,15 +58,18 @@ var ViewManager = /** @class */ (function () {
             callBack.call(caller);
     };
     ///////////////////////-------------------外部方法----------------------
-    /**返回页面  ui:指定返回Ui*/
-    ViewManager.prototype.returnView = function (ui) {
+    /**返回页面  mediator:指定返回的调节器  ui:指定返回Ui*/
+    ViewManager.prototype.returnView = function (mediator, ui) {
+        while (GameManager.ins_.getMediator(++mediator)) {
+            GameManager.ins_.getMediator(mediator).dispose();
+        }
+        this.currentView = ui;
         while (this.viewsDic.get(++ui)) {
             console.log("删除界面 :" + ui); //需要测试
             this.viewsDic.remove(ui);
         }
         /**需要测试 */
-        this.currentView = ui;
-        this.viewsDic.get(ui).destroyChildren();
+        // this.viewsDic.get(this.currentView).destroyChildren();
     };
     /**获取视图 */
     ViewManager.prototype.getView = function (ui) {

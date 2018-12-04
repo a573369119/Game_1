@@ -1,335 +1,0 @@
-
-
-<!doctype html>
-<html lang="zh-CN">
-<head>
-	<title>四川理工学院教学综合信息服务平台</title>
-	
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="Copyright" content="zfsoft" />	
-<link rel="icon" href="/logo/favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="/logo/favicon.ico" type="image/x-icon" />
-<style type="text/css">	
-	.active{font-weight: bolder;}
-	#navbar-tabs li{ margin-top: 2px;}
-	#navbar-tabs li a{ border-top: 2px solid transparent;}
-	#navbar-tabs li.active a{border-top: 2px solid #0770cd;}
-</style>	
-<!--jQuery核心框架库 -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/other_jquery/jquery-1.12.4.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/jquery-migrate-1.4.1.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<!--jQuery浏览器检测 -->
-<script type="text/javascript" src="/js/browse/browse-judge.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<script type="text/javascript">
-	//浏览器版本验证
-	var broswer = broswer();
-	if(broswer.msie==true||broswer.safari==true||broswer.mozilla==true||broswer.chrome==true){
-		if(broswer.msie==true&&broswer.version<9){
-		   window.location.href = _path+"/xtgl/init_cxBrowser.html";
-		}
-	}else{
-		 window.location.href = _path+"/xtgl/init_cxBrowser.html";
-	}
-</script>
-<script type="text/javascript">
-var _path 				= "";
-var _systemPath 		= "";
-var _stylePath 			= "http://61.139.105.139/zftal-ui-v5-1.0.2";
-var _reportPath 		= "http://61.139.105.139/WebReport";
-var _refreshInterval	= "10";
-var _localeKey 			= "zh_CN";
-</script>
-<!--
-jquery.ui 需要在bootstrap之前加载，解决冲突问题
-http://blog.csdn.net/remote_roamer/article/details/14105999
--->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/jquery-ui-custom.contact-1.0.0.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<!--Bootstrap布局框架-->
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootstrap/css/bootstrap.min.css?ver=20181127" />
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/css/error.css?ver=20181127" />
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/css/zftal-ui.css?ver=20181127" />
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootstrap/js/bootstrap.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--jQuery常用工具扩展库：基础工具,资源加载工具,元素尺寸相关工具 -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.utils.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--jQuery基础工具库：$.browser,$.cookie,$.actual等 -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.plugins.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--jQuery自定义event事件库 -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.events.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--JavaScript对象扩展库：Array,Date,Number,String -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.extends.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--Bootbox弹窗插件-->
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootbox/css/bootbox.css?ver=20181127" />
-<script src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootbox/bootbox.concat-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" type="text/javascript" charset="utf-8"></script>
-<script src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootbox/lang/zh_CN.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" type="text/javascript" charset="utf-8"></script>
-
-<!--jQuery模拟滚动条库-->
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/customscrollbar/css/jquery.mCustomScrollbar.min.css?ver=20181127" />
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/customscrollbar/js/jquery.mCustomScrollbar.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--jQuery.chosen美化插件-->
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/chosen/css/chosen-min.css?ver=20181127" />
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/chosen/jquery.choosen.concat-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/chosen/lang/zh_CN-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/utils/jquery.utils.pinyin.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--[if lt IE 9]>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/html5shiv.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/respond.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<![endif]-->
-<!--业务框架jQuery全局设置和通用函数库-->
-<script type="text/javascript" src="/js/jquery.zftal.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<!--国际化js库 -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/i18n/jquery.i18n-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--全局国际化js. -->
-<script type="text/javascript" src="/js/globalweb/i18n-global_zh_CN.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--业务框架前端脚本国际化库-->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/lang/jquery.zftal_zh_CN-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<!--密码强弱判断-->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/utils/jquery.utils.strength.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-
-	
-	
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="Copyright" content="zfsoft" />	
-<link rel="icon" href="/logo/favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="/logo/favicon.ico" type="image/x-icon" />
-<style type="text/css">	
-	.active{font-weight: bolder;}
-	#navbar-tabs li{ margin-top: 2px;}
-	#navbar-tabs li a{ border-top: 2px solid transparent;}
-	#navbar-tabs li.active a{border-top: 2px solid #0770cd;}
-</style>	
-<!--jQuery核心框架库 -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/other_jquery/jquery-1.12.4.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/jquery-migrate-1.4.1.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<!--jQuery浏览器检测 -->
-<script type="text/javascript" src="/js/browse/browse-judge.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<script type="text/javascript">
-	//浏览器版本验证
-	var broswer = broswer();
-	if(broswer.msie==true||broswer.safari==true||broswer.mozilla==true||broswer.chrome==true){
-		if(broswer.msie==true&&broswer.version<9){
-		   window.location.href = _path+"/xtgl/init_cxBrowser.html";
-		}
-	}else{
-		 window.location.href = _path+"/xtgl/init_cxBrowser.html";
-	}
-</script>
-<script type="text/javascript">
-var _path 				= "";
-var _systemPath 		= "";
-var _stylePath 			= "http://61.139.105.139/zftal-ui-v5-1.0.2";
-var _reportPath 		= "http://61.139.105.139/WebReport";
-var _refreshInterval	= "10";
-var _localeKey 			= "zh_CN";
-</script>
-<!--
-jquery.ui 需要在bootstrap之前加载，解决冲突问题
-http://blog.csdn.net/remote_roamer/article/details/14105999
--->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/jquery-ui-custom.contact-1.0.0.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<!--Bootstrap布局框架-->
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootstrap/css/bootstrap.min.css?ver=20181127" />
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/css/error.css?ver=20181127" />
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/css/zftal-ui.css?ver=20181127" />
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootstrap/js/bootstrap.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--jQuery常用工具扩展库：基础工具,资源加载工具,元素尺寸相关工具 -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.utils.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--jQuery基础工具库：$.browser,$.cookie,$.actual等 -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.plugins.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--jQuery自定义event事件库 -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.events.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--JavaScript对象扩展库：Array,Date,Number,String -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/jquery.extends.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--Bootbox弹窗插件-->
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootbox/css/bootbox.css?ver=20181127" />
-<script src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootbox/bootbox.concat-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" type="text/javascript" charset="utf-8"></script>
-<script src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/bootbox/lang/zh_CN.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" type="text/javascript" charset="utf-8"></script>
-
-<!--jQuery模拟滚动条库-->
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/customscrollbar/css/jquery.mCustomScrollbar.min.css?ver=20181127" />
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/customscrollbar/js/jquery.mCustomScrollbar.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--jQuery.chosen美化插件-->
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/chosen/css/chosen-min.css?ver=20181127" />
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/chosen/jquery.choosen.concat-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/chosen/lang/zh_CN-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/utils/jquery.utils.pinyin.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--[if lt IE 9]>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/html5shiv.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/respond.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<![endif]-->
-<!--业务框架jQuery全局设置和通用函数库-->
-<script type="text/javascript" src="/js/jquery.zftal.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<!--国际化js库 -->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/i18n/jquery.i18n-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--全局国际化js. -->
-<script type="text/javascript" src="/js/globalweb/i18n-global_zh_CN.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<!--业务框架前端脚本国际化库-->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/zftal/lang/jquery.zftal_zh_CN-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-<!--密码强弱判断-->
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/js/utils/jquery.utils.strength.min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ"></script>
-
-	<!--jQuery.jqGrid -->
-<link rel="stylesheet" type="text/css" href="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/jqGrid/css/jquery.jqgrid.css?ver=20181127" />
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/jqGrid/jquery.jqgrid.src-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/jqGrid/jquery.jqgrid.contact-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<script type="text/javascript" src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/plugins/jqGrid/lang/zh_CN.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<script type="text/javascript" src="/js/plugins/jqGrid4.6/jquery.jqgrid.settings.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-<script type="text/javascript" src="/js/plugins/jqGrid4.6/jquery.jqGrid-min.js?ver=20181127#æ¯å¦å¼å¯æ¡æ¶åç¼å­æ¯æ" charset="utf-8"></script>
-	<script type="text/javascript">
-		jQuery(function($){
-			//绑定退出按钮
-			$("#exit").click(function(){
-				document.location.href =  _systemPath + "/xtgl/login_logout.html";
-			});
-			//绑定修改密码
-			$("#updatePassword").click(function(){
-				$.showDialog(_path+"/xtgl/mmgl_xgMm.html",'修改密码',addConfig);
-			});
-			//Ajax动态加载新闻内容
-			$("#newsnotice").load("index_cxNews.html", {limit: 5});
-			//Ajax动态加载用户首页显示信息
-			$("#yhxxIndex").load("index_cxYhxxIndex.html?xt=jw");
-
-			//兼容菜单超出窗口显示问题
-			$('li.dropdown-submenu').on('mouseenter', function () {
-			  // do something…
-			  	var dropdown_menu = $(this).find("ul.dropdown-menu");
-			  	if(($(dropdown_menu).offset().left + $(dropdown_menu).outerWidth()) > $(window).width()){
-			  		$(dropdown_menu).css("left","-100%");
-				}
-			});
-				
-		});
-	</script>
-	<style type="text/css">
-		.navbar-right .dropdown-menu label i.glyphicon{
-		    background-image: none;
-		    background-position: 0 0;
-		    background-repeat: repeat;
-		    display: inline;
-		    height: auto !important;
-		    line-height: 1;
-		    margin-top: 0 !important;
-		    top: 2px !important;
-		    vertical-align: baseline;
-		    width: auto !important;
-		}
-		.container.sl_all_bg.x {
-   			 padding-bottom: 0px;
-		}
-	</style>	
-
-</head>
-<body class="body-container">
-	<!-- 放置页面显示内容 -->
-	
-<!-- top -->
-<div class="navbar navbar-default navbar-static-top top1" style="margin-bottom: 15px;">
-	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand logo_2" href="#"><img src="http://61.139.105.139/zftal-ui-v5-1.0.2/assets/images/logo/logo_jw_w.png" style="margin-top:-3px" />四川理工学院教学综合信息服务平台</a>
-		</div>
-	</div>
-</div>
-
-	
-	
-	
-
-
-
-<!-- top-end --> 
-<div style="width: 100%;padding: 0px;margin: 0px;" id="bodyContainer">
-	<input type="hidden" id="sessionUserKey" value="" />
-	<input type="hidden" id="gnmkdmKey" value="" />
-	<input type="hidden" id="xyyjtxb_id" value="" />
-	
-	<div class="container sl_all_bg" id="yhgnPage" style="min-height: 615px !important;">
-		
-		
-		
-			<div class="form-horizontal sl_all_form" style="padding-bottom: 15px;">
-				<div class="row clearfix"  style="height: 450px;padding-bottom: 30px;overflow-y: auto;">
-					<div class="col-md-12 col-sm-12">
-					系统升级后，学生初始密码为888888，请务必修改。
-					</div>
-				</div>
-				<div class="row" style="border-top: 1px solid #e6e6e6;padding-top: 15px;">
-					<div class="col-md-12 col-sm-12 align-center">
-						<button id="btn_yd" type="button" class="btn btn-default" style="width: 140px;" disabled="disabled">
-					      	已阅读 <span class="badge" id="badge_text">5</span>
-					    </button>
-				  	</div>
-				</div>
-		  </div>
-		  
-		  
-		<script type="text/javascript">
-		function ckXsyjtjXqLink() {
-			var xyyjjg_id = $("#xyyjjg_id").val();
-			$.showDialog(_path +"/xyyjjk/xyyjtjcl_cxXsyjtjXq.html?cxly=1&xyyjjg_id=" + xyyjjg_id,'成绩详情', $.extend({},viewConfig,{			
-				width : ($("#yhgnPage").innerWidth()-100)+"px"
-			}));
-		}
-		jQuery(function($){
-			var count 	= 5;
-			var timer 	= window.setInterval(function(){
-				//限制时间已到
-				if(count == 0){
-					//移除定时器
-					window.clearInterval(timer);
-					//绑定已阅读点击事件
-					$("#btn_yd").prop("disabled",false).addClass("btn-primary").unbind().click(function(){
-						
-						//更新学业预警确认状态为已确认
-						jQuery.ajax({
-							url		:_path+'/xtgl/login_cxGxqrzt.html',
-							data	: {"xyyjtxb_id":$("#xyyjtxb_id").val()},
-							async	: false,
-							type	: "post",
-							datatype: "json",
-							success	: function(data){
-							}
-						}); 
-						
-						//全局文档添加参数
-						//加载功能主页：且添加不再进入提示信息页面的标记字段
-						window.location.href = _path+'/xtgl/login_loginIndex.html';
-						
-					});
-				}else{
-					count -= 1;
-				}
-				$("#badge_text").text(count);
-			}, 1000);
-		});
-		</script>
-	</div>
-</div>
-<!-- footer --> 
-
-
-<!-- footer --> 
-<div id="footerID" class="footer">
-	<p>版权所有&copy; Copyright 1999-2017  正方软件股份有限公司　　中国·杭州西湖区紫霞街176号 互联网创新创业园2号301</p>
-</div>
-<!-- footer-end -->
-<!-- footer-end -->
-
-</body>
-
-
-
-
-</html>

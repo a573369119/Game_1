@@ -50,9 +50,10 @@ var LoadingManager = /** @class */ (function () {
     };
     /**资源预加载中 */
     LoadingManager.prototype.onProgress = function (progress) {
+        console.log("加载中（" + Math.floor(progress * 100) + "%）");
         if (ViewManager.ins_.getView(GameData.LOADING_VIEW)) {
             var view = ViewManager.ins_.getView(GameData.LOADING_VIEW);
-            view.lab_Progress.text = "加载中（" + Math.floor(progress) + "%）";
+            view.lab_Progress.text = "加载中（" + Math.floor(progress * 100) + "%）";
             view.img_Progress.width = 500 * progress;
         }
     };
@@ -125,16 +126,20 @@ var LoadingManager = /** @class */ (function () {
         console.log(playerData.round_Star);
     };
     //-------------------------获取配置--------------------
-    /**获取地图配置 */
-    LoadingManager.prototype.getMapConfig = function (mapId) {
+    /**获取地图配置 地图配置的所属mapWhere 格式"1-2"第2季的第3个盒子 下标从0 开始   mapId 第几个关卡*/
+    LoadingManager.prototype.getMapConfig = function (mapWhere, mapId) {
         var object = Laya.loader.getRes("config/mapConfig.json");
         var objectMapConfig;
         var mapConfig;
         for (var i = 0; i < object.length; i++) {
-            if (mapId == object[i].mapId) {
-                objectMapConfig = object[i];
-                mapConfig = new MapConfig(objectMapConfig);
-                return mapConfig;
+            if (object[i].mapWhere = mapWhere) {
+                for (var h = 0; h < object[i].mapList.length; h++) {
+                    if (mapId == object[i].mapList[h].mapId)
+                        objectMapConfig = object[i].mapList[h];
+                    mapConfig = new MapConfig(objectMapConfig);
+                    return mapConfig;
+                }
+                break;
             }
         }
         console.log("没有此配置 mapId = " + mapId);
