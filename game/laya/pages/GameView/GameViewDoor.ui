@@ -1,7 +1,8 @@
 {
+    "x":0,
     "type":"View",
-    "selectedBox":1,
-    "selecteID":3,
+    "selectedBox":25,
+    "selecteID":33,
     "props":{"width":750,"sceneColor":"#000000","height":1334},
     "nodeParent":-1,
     "label":"View",
@@ -12,6 +13,7 @@
     "compId":1,
     "child":[
         {
+            "x":15,
             "type":"Image",
             "props":{"y":0,"x":0,"width":378,"var":"img_doorL","skin":"gameView/gameDoor/boxDoor_1.png","height":1334},
             "nodeParent":1,
@@ -37,6 +39,7 @@
                 }]
         },
         {
+            "x":15,
             "type":"Image",
             "props":{"y":0,"x":750,"width":377,"visible":true,"var":"img_doorR","skin":"gameView/gameDoor/boxDoor_1.png","scaleX":-1,"height":1334},
             "nodeParent":1,
@@ -62,6 +65,7 @@
                 }]
         },
         {
+            "x":15,
             "type":"Image",
             "props":{"y":-339,"x":31,"visible":true,"var":"img_xiaodao","skin":"gameView/gameDoor/dao.png"},
             "nodeParent":1,
@@ -74,6 +78,7 @@
                 ]
         },
         {
+            "x":15,
             "type":"Image",
             "props":{"y":1342,"x":268,"width":160,"visible":true,"var":"img_jiaodai","skin":"gameView/gameDoor/jiaodai.png","height":215},
             "nodeParent":1,
@@ -86,57 +91,23 @@
                 ]
         },
         {
-            "type":"Image",
-            "props":{"y":118,"x":325,"width":101,"visible":false,"var":"img_jiaodaiM","skin":"unpackage/jiaodai_m.png","height":1072},
-            "nodeParent":1,
-            "label":"Image(img_jiaodaiM)",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":4,
-            "child":[
-                {
-                    "type":"Sprite",
-                    "props":{"y":-121,"x":-9,"width":105,"renderType":"mask","height":1195},
-                    "nodeParent":4,
-                    "label":"Sprite",
-                    "isOpen":true,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":9,
-                    "child":[
-                        {
-                            "type":"Rect",
-                            "props":{"y":50,"x":7,"width":100,"lineWidth":1,"height":1196,"fillColor":"#ff0000"},
-                            "nodeParent":9,
-                            "label":"Rect",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":19,
-                            "child":[
-                                ]
-                        }]
-                }]
-        },
-        {
+            "x":15,
             "type":"Sprite",
             "props":{"y":0,"x":-12,"width":763,"visible":false,"height":1314,"alpha":1},
             "nodeParent":1,
             "label":"Sprite",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":25,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
-                    "props":{"y":419,"x":144,"width":163,"skin":"gameView/gameDoor/getStar.png","height":163},
+                    "props":{"y":419,"x":144,"width":163,"var":"img_star1","skin":"gameView/gameDoor/getStar.png","height":163},
                     "nodeParent":25,
-                    "label":"Image",
+                    "label":"Image(img_star1)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
@@ -145,10 +116,11 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
-                    "props":{"y":421,"x":450,"width":163,"skin":"gameView/gameDoor/getStar.png","height":163},
+                    "props":{"y":421,"x":450,"width":163,"var":"img_star2","skin":"gameView/gameDoor/getStar.png","height":163},
                     "nodeParent":25,
-                    "label":"Image",
+                    "label":"Image(img_star2)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
@@ -157,10 +129,11 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
-                    "props":{"y":421,"x":299,"width":163,"skin":"gameView/gameDoor/getStar.png","height":163},
+                    "props":{"y":421,"x":299,"width":163,"var":"img_star3","skin":"gameView/gameDoor/getStar.png","height":163},
                     "nodeParent":25,
-                    "label":"Image",
+                    "label":"Image(img_star3)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
@@ -169,6 +142,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "props":{"y":305,"x":191,"width":405,"text":"真棒","height":103,"fontSize":80,"font":"Microsoft YaHei","color":"#ffffff","bold":true,"align":"center"},
                     "nodeParent":25,
@@ -181,10 +155,11 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Button",
-                    "props":{"y":710,"x":91,"width":295,"stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#1b1b1b","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"重玩","height":88},
+                    "props":{"y":710,"x":91,"width":295,"var":"btn_Replay","stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#1b1b1b","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"重玩","height":88},
                     "nodeParent":25,
-                    "label":"Button",
+                    "label":"Button(btn_Replay)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
@@ -193,10 +168,11 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Button",
-                    "props":{"y":841,"x":248,"width":295,"stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"菜单","height":88},
+                    "props":{"y":841,"x":248,"width":295,"var":"btn_ReturnRound","stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"菜单","height":88},
                     "nodeParent":25,
-                    "label":"Button",
+                    "label":"Button(btn_ReturnRound)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
@@ -205,14 +181,41 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Button",
-                    "props":{"y":710,"x":396,"width":295,"stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"下一关","height":88},
+                    "props":{"y":710,"x":396,"width":295,"var":"btn_Next","stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"下一关","height":88},
                     "nodeParent":25,
-                    "label":"Button",
+                    "label":"Button(btn_Next)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":46,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Panel",
+            "props":{"y":97,"x":300,"width":145,"height":1121},
+            "nodeParent":1,
+            "label":"Panel",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":47,
+            "child":[
+                {
+                    "type":"Image",
+                    "props":{"y":10,"x":22,"width":101,"visible":false,"var":"img_jiaodaiM","skin":"unpackage/jiaodai_m.png","height":1072},
+                    "nodeParent":47,
+                    "label":"Image(img_jiaodaiM)",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":4,
                     "child":[
                         ]
                 }]
@@ -905,20 +908,6 @@
                                 "index":30
                             }]
                     }
-                },
-                {
-                    "target":19,
-                    "keyframes":{
-                        "height":[
-                            {
-                                "value":1168,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":19,
-                                "key":"height",
-                                "index":0
-                            }]
-                    }
                 }],
             "name":"ani1",
             "id":1,
@@ -959,7 +948,7 @@
                                 "tween":true,
                                 "target":3,
                                 "key":"y",
-                                "index":25
+                                "index":20
                             },
                             {
                                 "value":0,
@@ -967,7 +956,7 @@
                                 "tween":true,
                                 "target":3,
                                 "key":"y",
-                                "index":57
+                                "index":51
                             }],
                         "x":[
                             {
@@ -984,7 +973,7 @@
                                 "tween":true,
                                 "target":3,
                                 "key":"x",
-                                "index":25
+                                "index":20
                             }],
                         "width":[
                             {
@@ -996,20 +985,20 @@
                                 "index":0
                             },
                             {
-                                "value":375,
+                                "value":380,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"width",
-                                "index":25
+                                "index":20
                             },
                             {
-                                "value":377,
+                                "value":380,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"width",
-                                "index":57
+                                "index":51
                             }],
                         "height":[
                             {
@@ -1026,7 +1015,7 @@
                                 "tween":true,
                                 "target":3,
                                 "key":"height",
-                                "index":25
+                                "index":20
                             },
                             {
                                 "value":1333,
@@ -1034,7 +1023,7 @@
                                 "tween":true,
                                 "target":3,
                                 "key":"height",
-                                "index":57
+                                "index":51
                             }]
                     }
                 },
@@ -1056,7 +1045,7 @@
                                 "tween":true,
                                 "target":2,
                                 "key":"y",
-                                "index":25
+                                "index":20
                             },
                             {
                                 "value":0,
@@ -1064,7 +1053,7 @@
                                 "tween":true,
                                 "target":2,
                                 "key":"y",
-                                "index":57
+                                "index":51
                             }],
                         "x":[
                             {
@@ -1081,7 +1070,7 @@
                                 "tween":true,
                                 "target":2,
                                 "key":"x",
-                                "index":25
+                                "index":20
                             }],
                         "width":[
                             {
@@ -1093,20 +1082,20 @@
                                 "index":0
                             },
                             {
-                                "value":375,
+                                "value":380,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":2,
                                 "key":"width",
-                                "index":25
+                                "index":20
                             },
                             {
-                                "value":377,
+                                "value":380,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":2,
                                 "key":"width",
-                                "index":57
+                                "index":51
                             }],
                         "height":[
                             {
@@ -1123,7 +1112,7 @@
                                 "tween":true,
                                 "target":2,
                                 "key":"height",
-                                "index":25
+                                "index":20
                             },
                             {
                                 "value":1334,
@@ -1131,7 +1120,7 @@
                                 "tween":true,
                                 "target":2,
                                 "key":"height",
-                                "index":57
+                                "index":51
                             }]
                     }
                 },
@@ -1148,12 +1137,12 @@
                                 "index":0
                             },
                             {
-                                "value":true,
+                                "value":false,
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
                                 "key":"visible",
-                                "index":25
+                                "index":20
                             },
                             {
                                 "value":true,
@@ -1161,7 +1150,15 @@
                                 "tween":false,
                                 "target":4,
                                 "key":"visible",
-                                "index":27
+                                "index":24
+                            },
+                            {
+                                "value":true,
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":4,
+                                "key":"visible",
+                                "index":25
                             }]
                     }
                 },
@@ -1184,7 +1181,7 @@
                                 "target":8,
                                 "label":null,
                                 "key":"y",
-                                "index":25
+                                "index":20
                             },
                             {
                                 "value":128,
@@ -1192,7 +1189,7 @@
                                 "tween":true,
                                 "target":8,
                                 "key":"y",
-                                "index":33
+                                "index":31
                             },
                             {
                                 "value":574,
@@ -1200,15 +1197,15 @@
                                 "tween":true,
                                 "target":8,
                                 "key":"y",
-                                "index":49
+                                "index":37
                             },
                             {
-                                "value":1176,
+                                "value":931,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,
                                 "key":"y",
-                                "index":55
+                                "index":49
                             },
                             {
                                 "value":1342,
@@ -1216,7 +1213,7 @@
                                 "tween":true,
                                 "target":8,
                                 "key":"y",
-                                "index":57
+                                "index":51
                             }],
                         "x":[
                             {
@@ -1234,7 +1231,7 @@
                                 "target":8,
                                 "label":null,
                                 "key":"x",
-                                "index":25
+                                "index":20
                             },
                             {
                                 "value":276,
@@ -1242,7 +1239,7 @@
                                 "tween":true,
                                 "target":8,
                                 "key":"x",
-                                "index":27
+                                "index":25
                             },
                             {
                                 "value":275,
@@ -1250,7 +1247,7 @@
                                 "tween":true,
                                 "target":8,
                                 "key":"x",
-                                "index":33
+                                "index":31
                             },
                             {
                                 "value":274,
@@ -1258,15 +1255,15 @@
                                 "tween":true,
                                 "target":8,
                                 "key":"x",
-                                "index":49
+                                "index":37
                             },
                             {
-                                "value":268,
+                                "value":275,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":8,
                                 "key":"x",
-                                "index":55
+                                "index":49
                             }],
                         "visible":[
                             {
@@ -1283,7 +1280,7 @@
                                 "tween":false,
                                 "target":8,
                                 "key":"visible",
-                                "index":25
+                                "index":20
                             },
                             {
                                 "value":true,
@@ -1291,62 +1288,78 @@
                                 "tween":false,
                                 "target":8,
                                 "key":"visible",
-                                "index":27
+                                "index":25
                             }]
                     }
                 },
                 {
-                    "target":19,
+                    "target":47,
                     "keyframes":{
+                        "visible":[
+                            {
+                                "value":false,
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":47,
+                                "key":"visible",
+                                "index":0
+                            },
+                            {
+                                "value":true,
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":47,
+                                "key":"visible",
+                                "index":24
+                            }],
                         "height":[
                             {
-                                "value":1,
+                                "value":1121,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":19,
+                                "target":47,
                                 "key":"height",
                                 "index":0
                             },
                             {
-                                "value":1,
+                                "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":19,
-                                "label":null,
+                                "target":47,
+                                "key":"height",
+                                "index":24
+                            },
+                            {
+                                "value":10,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":47,
                                 "key":"height",
                                 "index":25
                             },
                             {
-                                "value":80,
+                                "value":45,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":19,
+                                "target":47,
                                 "key":"height",
-                                "index":32
+                                "index":31
                             },
                             {
-                                "value":554,
+                                "value":530,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":19,
+                                "target":47,
+                                "key":"height",
+                                "index":37
+                            },
+                            {
+                                "value":1095,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":47,
                                 "key":"height",
                                 "index":49
-                            },
-                            {
-                                "value":1128,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":19,
-                                "key":"height",
-                                "index":55
-                            },
-                            {
-                                "value":1196,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":19,
-                                "key":"height",
-                                "index":57
                             }]
                     }
                 }],
@@ -1387,7 +1400,7 @@
                                 "index":0
                             },
                             {
-                                "value":381,
+                                "value":380,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":2,
@@ -1443,7 +1456,7 @@
                                 "index":0
                             },
                             {
-                                "value":378,
+                                "value":380,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -1569,6 +1582,164 @@
                 }],
             "name":"ani3",
             "id":3,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":25,
+                    "keyframes":{
+                        "visible":[
+                            {
+                                "value":true,
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":25,
+                                "key":"visible",
+                                "index":0
+                            },
+                            {
+                                "value":false,
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":25,
+                                "key":"visible",
+                                "index":12
+                            }],
+                        "alpha":[
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":25,
+                                "key":"alpha",
+                                "index":0
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":25,
+                                "key":"alpha",
+                                "index":12
+                            }]
+                    }
+                },
+                {
+                    "target":2,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":-120,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"y",
+                                "index":24
+                            }],
+                        "width":[
+                            {
+                                "value":378,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"width",
+                                "index":0
+                            },
+                            {
+                                "value":5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"width",
+                                "index":24
+                            }],
+                        "height":[
+                            {
+                                "value":1334,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"height",
+                                "index":0
+                            },
+                            {
+                                "value":1585,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"height",
+                                "index":24
+                            }]
+                    }
+                },
+                {
+                    "target":3,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":-108,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":24
+                            }],
+                        "width":[
+                            {
+                                "value":377,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"width",
+                                "index":0
+                            },
+                            {
+                                "value":5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"width",
+                                "index":24
+                            }],
+                        "height":[
+                            {
+                                "value":1334,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"height",
+                                "index":0
+                            },
+                            {
+                                "value":1571,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"height",
+                                "index":24
+                            }]
+                    }
+                }],
+            "name":"ani4",
+            "id":4,
             "frameRate":24,
             "action":0
         }]

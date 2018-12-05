@@ -13,30 +13,7 @@ class Monster{
         this.arr_animation = new Array<Laya.Animation>();
         this.x = data.x;
         this.y = data.y;
-        this.playAnimation(GameData.ANI_MONSTER_STAND);
+        AnimationManager.ins.playAnimation(GameData.ANI_MONSTER_STAND,false,this.x,this.y);
     }
 
-    public loadAnimation
-
-    /**动画播放 */
-    public playAnimation(animationName : number) : void
-    {
-        switch(animationName)
-        {
-            case GameData.ANI_MONSTER_SAD:
-                break;
-            case GameData.ANI_MONSTER_EAT:
-                break;
-            case GameData.ANI_MONSTER_HAPPYE:
-                break;
-            case GameData.ANI_MONSTER_OPEN:
-                break;
-            case GameData.ANI_MONSTER_GIVE_ME:
-                break;
-            case GameData.ANI_MONSTER_ACTION:
-                break;
-            case GameData.ANI_MONSTER_STAND:
-                break;
-        }
-    }
 }

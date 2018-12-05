@@ -1,5 +1,11 @@
 /**
  * 游戏主逻辑
+ * @游戏中的配置，使用 mapCoinfig ，包括需要的星星，怪物，糖果位置,所有需要的信息，如果信息不够自己添加，配置信息是 bin/config/mapConfig.json，
+ * @玩家的信息 PlayerData.ins 调用
+ * @逻辑中动画播放结束来触发时间。ani 是用刀划开盒子 ani2是用胶带封住盒子  ani3是//吃到糖果显示计分板 ani4//重新开始 或者 下一关。关闭计分板 打开箱子操作  动画完成结果返回到doorAniEvent();
+ * @如果要写入 就直接写入PlayerData， //不能刷新 ，用户数据是测试。以后他们用数据库存储 ，和后台连接，所以每次刷新，都会重置。如果想手动设置 去 bin/config/playerDataTest.json，
+ * @播放动画  AnimationManager.ins
+ *
  */
 class GameMediator extends BaseMeditor{
     /**加载 */
@@ -44,7 +50,10 @@ class GameMediator extends BaseMeditor{
         this.menu.btn_SelectRound.on(Laya.Event.CLICK,this,this.onSelectRound);
         this.menu.btn_Super.on(Laya.Event.CLICK,this,this.onShopSuper);
         this.menu.btn_MainMenu.on(Laya.Event.CLICK,this,this.onMainMenu);
-        
+
+        this.doorOpen.btn_Next.on(Laya.Event.CLICK,this,this.onNextRound);
+        this.doorOpen.btn_Replay.on(Laya.Event.CLICK,this,this.onReplay);   
+        this.doorOpen.btn_ReturnRound.on(Laya.Event.CLICK,this,this.onSelectRound); 
         this.addAnimationOver();
     }
 
@@ -56,10 +65,14 @@ class GameMediator extends BaseMeditor{
         this.view.btn_ReGame.off(Laya.Event.CLICK,this,this.onReGame);
         this.view.btn_Menu.off(Laya.Event.CLICK,this,this.onMenu);
 
-        this.menu.btn_Continue.on(Laya.Event.CLICK,this,this.onContinue);
-        this.menu.btn_SelectRound.on(Laya.Event.CLICK,this,this.onSelectRound);
-        this.menu.btn_Super.on(Laya.Event.CLICK,this,this.onShopSuper);
-        this.menu.btn_MainMenu.on(Laya.Event.CLICK,this,this.onMainMenu);
+        this.menu.btn_Continue.off(Laya.Event.CLICK,this,this.onContinue);
+        this.menu.btn_SelectRound.off(Laya.Event.CLICK,this,this.onSelectRound);
+        this.menu.btn_Super.off(Laya.Event.CLICK,this,this.onShopSuper);
+        this.menu.btn_MainMenu.off(Laya.Event.CLICK,this,this.onMainMenu);
+
+        this.doorOpen.btn_Next.off(Laya.Event.CLICK,this,this.onNextRound);
+        this.doorOpen.btn_Replay.off(Laya.Event.CLICK,this,this.onReplay);   
+        this.doorOpen.btn_ReturnRound.off(Laya.Event.CLICK,this,this.onSelectRound); 
 
         this.removeAnimationOver();
     }
@@ -67,6 +80,7 @@ class GameMediator extends BaseMeditor{
     /**绑定动画完成 */
     private addAnimationOver() : void
     {
+        this.doorOpen.ani4.on(Laya.Event.COMPLETE,this,this.doorAniEvent,[4]);  
         this.doorOpen.ani3.on(Laya.Event.COMPLETE,this,this.doorAniEvent,[3]);        
         this.doorOpen.ani2.on(Laya.Event.COMPLETE,this,this.doorAniEvent,[2]);
         this.doorOpen.ani1.on(Laya.Event.COMPLETE,this,this.doorAniEvent,[1]);
@@ -78,6 +92,7 @@ class GameMediator extends BaseMeditor{
         this.doorOpen.ani1.off(Laya.Event.COMPLETE,this,this.doorAniEvent);
         this.doorOpen.ani2.off(Laya.Event.COMPLETE,this,this.doorAniEvent);
         this.doorOpen.ani3.off(Laya.Event.COMPLETE,this,this.doorAniEvent);        
+        this.doorOpen.ani4.off(Laya.Event.COMPLETE,this,this.doorAniEvent);        
     }
 
     /**开门动画完成处理时间 */
@@ -85,10 +100,10 @@ class GameMediator extends BaseMeditor{
     {
         switch(index)
         {
-            case 1:
+            case 1://用刀划开盒子
                 this.doorOpen.visible = false;//关闭动画层
                 break;
-            case 2:
+            case 2://用胶带封住盒子
                 if(this.isMain)
                 {
                     ViewManager.ins_.returnView(GameData.START_GAME_MEDIATOR,GameData.START_VIEW);
@@ -96,10 +111,12 @@ class GameMediator extends BaseMeditor{
                 else
                 {
                     this.dispose();
+                    GameManager.ins_.getMediator(this.mediator-1).showStyle();//需测试
                 }
                 break
-            case 3:
+            case 3://吃到糖果显示计分板
                 break;
+            case 4://重新开始 或者 下一关。关闭计分板 打开箱子操作
         }
     }
 
@@ -117,10 +134,11 @@ class GameMediator extends BaseMeditor{
 
     }
 
-    /**事件 重玩 */
+    /**事件 重玩 效果闪白光 ，重开*/
     private onReGame() : void
     {
         console.log("重玩");
+        
     }
 
     /**事件 菜单 */
@@ -130,11 +148,24 @@ class GameMediator extends BaseMeditor{
         this.menu.visible = true;
     }
 
+    /**事件 吃到糖果->下一关*/
+    private onNextRound() : void
+    {
+        console.log("吃到糖果->下一关");
+
+    }
+
+    /**事件 吃到糖果->重玩  效果开门重开 */
+    private onReplay() : void
+    {
+        console.log("重玩  效果开门重开");
+
+    }
+
     /**游戏初始 */
     private setInit() : void
     {
         this.menu.visible = false;
-        this.doorOpen.ani1.play(0,false);
     }
 
     /**设置游戏初始数据 包括 关卡 盒子 季度 */
@@ -143,6 +174,7 @@ class GameMediator extends BaseMeditor{
         this.select = select;
         this.box = box;
         this.round = round;
+        this.doorOpen.ani1.play(0,false);
         this.setInit();
     }
 
@@ -158,7 +190,7 @@ class GameMediator extends BaseMeditor{
     private onSelectRound() : void
     {
         //选择关卡
-        this.isMain = false;
+        this.isMain = false;       
         this.doorOpen.visible = true;
         this.doorOpen.ani2.play(0,false);
     }
@@ -166,7 +198,7 @@ class GameMediator extends BaseMeditor{
     /**事件 主界面 */
     private onMainMenu() : void
     {
-        //跳到主界面
+        //跳到主界面    
         this.isMain = true;        
         this.doorOpen.visible = true;        
         this.doorOpen.ani2.play(0,false);

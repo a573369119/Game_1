@@ -83,7 +83,7 @@ class SelectRoundMediator extends BaseMeditor{
     }
 
     /**卡片状态 */
-    private showStyle() : void
+    public showStyle() : void
     {
         let thisCard = PlayerData.ins.round_Star.get(this.selectIndex+"-"+this.selectBoxIndex);
         if(thisCard)

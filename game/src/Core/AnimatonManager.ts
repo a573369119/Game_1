@@ -41,7 +41,7 @@ class AnimationManager {
     }
 
     /**播放动画 动画名称  是否循环  坐标 x y  默认锚点0.0*/
-    private playAnimation(aniName:string,isLoop:boolean,x:number,y:number) : void
+    public playAnimation(aniName:string,isLoop:boolean,x:number,y:number) : void
     {
         let animation = this.animationDic.get(aniName);
         if(animation)
