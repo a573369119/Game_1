@@ -20,6 +20,10 @@ var DistanceTool = /** @class */ (function () {
             return false;
         }
     };
+    DistanceTool.Distance = function (x1, x2, y1, y2) {
+        var dis = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+        return dis;
+    };
     return DistanceTool;
 }());
 //# sourceMappingURL=DistanceTool.js.map

@@ -9,9 +9,17 @@ class Candy{
     /**类型 */
     public style : string;
     /**糖果UI */
-        
-    constructor(object){
-        this.init(object);
+    /**精灵 */
+    private candy:Laya.Sprite;       
+    constructor(/*object*/){
+        this.candy=new Laya.Sprite();
+        this.candy.loadImage("gameView/candy.png");
+        Laya.stage.addChild(this.candy);
+        this.candy.pivot(this.candy.width/2,this.candy.height/2);
+        this.candy.zOrder=1;
+        this.x=this.candy.x;
+        this.y=this.candy.y;
+        //this.init(object);
     }
 
     private init(object) : void
@@ -21,5 +29,9 @@ class Candy{
         this.style = object.style;
         
         
+    }
+
+    public pos(x,y):void{
+        this.candy.pos(x,y);
     }
 }

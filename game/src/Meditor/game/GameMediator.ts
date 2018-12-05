@@ -7,6 +7,8 @@
  * @播放动画  AnimationManager.ins.playAnimation();
  *
  */
+var Matter: any;
+var LayaRender: any;
 class GameMediator extends BaseMeditor{
     /**加载 */
     private doorOpen : ui.GameView.GameViewDoorUI;
@@ -15,14 +17,33 @@ class GameMediator extends BaseMeditor{
     /**是否返回 主页面 否则返回选择关卡 */
     private isMain : boolean;
     /**mapConfig 根据传入的id获取地图配置 。示例      获取  LoadingManager.ins_.getMapConfig("2-1",3) 第2季，第1个盒子，第三个关卡  返回mapConfig里面又所有东西  */
-    private mapConfig : MapConfig;
+    //private mapConfig : MapConfig;
     /**关卡 Function setData*/
     private round : number;
     /**盒子 setData*/
     private box : number;
     /**季度 setData*/
     private select : number;
-
+     /**钩子数组*/
+    public  hooksArray:Array<Point>;					
+    /**钩子位置*/	
+	public  hooksPosArray:Array<Array<number>>;			
+    /**绳子数组*/
+	public  ropes:Array<any>;							
+    /**绳子长度数组*/
+	public  ropesLengthArray:Array<number>;				
+    /**限制数组个数*/
+	public  constraintsCountArray:Array<Array<any>>;	
+    /**气泡数组*/
+	public  balloonArray:Array<any>;						
+    /**连接数组*/
+	public  contactConstraintsArray:Array<any>;			
+    /**matter引擎*/
+	public  static engine:any;							
+    /**糖果*/
+	private candy:Candy;								
+	/**糖果刚体*/	
+    private candyBody:any;	
     /**用 this.view 来调用 UI视图 */
     constructor(mediatorName:number,view?:number,assate?:any){
         super(mediatorName,view,assate);
@@ -36,6 +57,20 @@ class GameMediator extends BaseMeditor{
         super.init();//init之后 才会有 this.view
         this.view.addChild(this.menu);
         this.view.addChild(this.doorOpen);
+
+        this.hooksArray=new Array<Point>();
+		this.ropes=new Array<any>();	
+		this.contactConstraintsArray=new Array<any>();
+		this.hooksPosArray=[[150,350],[300,350],[450,350]];
+		this.ropesLengthArray=[9,15,21];
+		this.candy=new Candy();
+		this.initMatter();
+		this.initWorld();
+        Laya.timer.frameLoop(1,this,this.checkCandyPos);
+        Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.onMouseDown);		
+		Laya.stage.on(Laya.Event.MOUSE_UP,this,this.onMouseUp);
+		Laya.timer.frameLoop(1,this.ropes[1],this.ropes[1].check2,[this.ropesLengthArray[1]*23]);
+		Laya.timer.frameLoop(1,this.ropes[2],this.ropes[2].check2,[this.ropesLengthArray[2]*23]);
     }
 
     /**添加事件 */
@@ -212,6 +247,169 @@ class GameMediator extends BaseMeditor{
         console.log("获得超能力");
     }
 
+//-------------------------------------------------------------------------------------------------
+
+//----------------------------------------游戏逻辑-------------------------------------------------------
+    /**初始化物理引擎 */
+	private initMatter(): void {
+		var gameWorld: Laya.Sprite = new Laya.Sprite();
+		Laya.stage.addChild(gameWorld);		
+		GameMediator.engine = Matter.Engine.create({ enableSleeping: true });
+		Matter.Engine.run(GameMediator.engine);
+		var render = LayaRender.create({ engine: GameMediator.engine,
+                                         container: gameWorld, 
+										 width:  GameData.STAGE_WIDTH, 
+										 height: GameData.STAGE_HEIGHT,
+										 options: { showAngleIndicator: 	true,
+            			   						  	showCollisions: 		true,
+            			   							showVelocity: 			true }});
+		LayaRender.run(render);
+    }
+    
+    /**创建物理世界 */
+	private	initWorld(): void {
+			this.createHook();
+			this.CreateRope();
+			this.createCandy();
+			this.contactHook();	    	   
+			this.contactCandy(this.ropes[0].rope.bodies[this.ropes[0].rope.bodies.length-1]);
+			this.contactCandy(this.ropes[1].rope.bodies[this.ropes[1].rope.bodies.length-1]);
+			this.contactCandy(this.ropes[2].rope.bodies[this.ropes[2].rope.bodies.length-1]);
+	}
+
+	/**创建钩子 */
+	private	createHook():void{		
+		for(let i=0;i<this.hooksPosArray.length;i++){
+			let hook=new Point(this.hooksPosArray[i][0],this.hooksPosArray[i][1]);				
+			this.hooksArray.push(hook);		
+		}
+	}
+
+	/**创建绳子 */
+	private	CreateRope():void{
+		for(let i=0;i<this.ropesLengthArray.length;i++){
+			let rope=new Rope(this.hooksArray[i].x,this.hooksArray[i].y,this.ropesLengthArray[i]);
+			this.ropes.push(rope);
+		}
+	}
+
+	/**连接钩子 */
+	private contactHook():void{
+		for(let i=0;i<this.hooksArray.length;i++){
+			var constraint=Matter.Constraint.create({ 
+        	 	bodyA:this.ropes[i].rope.bodies[0],
+        	 	pointB:{x:this.hooksArray[i].x,y:this.hooksArray[i].y},
+       		 	stiffness:1.2
+  			  });
+			this.contactConstraintsArray.push(constraint);
+		
+		}			
+			Matter.World.add(GameMediator.engine.world,this.contactConstraintsArray);
+	}
+	/**创建糖果 */
+	private createCandy():void{
+		this.candyBody=Matter.Bodies.circle(this.ropes[0].rope.bodies[this.ropes[0].rope.bodies.length-1].position.x,
+		this.ropes[0].rope.bodies[this.ropes[0].rope.bodies.length-1].position.y, 1,{frictionAir:0.0001,timeScale:1.25,collisionFilter: { group: -1 }});
+		Matter.World.add(GameMediator.engine.world,this.candyBody);
+	}
+	/**连接糖果 */
+	private contactCandy(body):void{
+			var constraint=Matter.Constraint.create({ 
+        	 	bodyA:body,
+        	 	bodyB:this.candyBody,
+       		 	stiffness:1.2,
+				length:20,
+				render:{lineWidth:6}
+  			  });
+			this.contactConstraintsArray.push(constraint);
+			Matter.World.add(GameMediator.engine.world,constraint);
+	}
+
+	/**鼠标事件 点击*/
+	private	onMouseDown():void{			
+			Laya.stage.on(Laya.Event.MOUSE_MOVE,this,this.onMouseMove);			
+	}
+	/**鼠标事件 拖拽 */
+	private	onMouseMove():void{			
+			//斜率算法
+			/*for(let i=0;i<this.constraints.length-1;i++){
+				if((this.bodys[i+1].position.x-this.bodys[i].position.x)!=0&&(Laya.stage.mouseX-this.bodys[i].position.x)){
+					let k1=(this.bodys[i+1].position.y-this.bodys[i].position.y)/(this.bodys[i+1].position.x-this.bodys[i].position.x);
+				let k2=(Laya.stage.mouseY-this.bodys[i].position.y)/(Laya.stage.mouseX-this.bodys[i].position.x);
+				if((Laya.stage.mouseY<=this.bodys[i+1].position.y&&Laya.stage.mouseY>=this.bodys[i].position.y&&k1==k2)){
+					Matter.World.remove(GameMeditor.engine.world,this.constraints[i]);
+					console.log(i);
+					//Laya.stage.off(Laya.Event.MOUSE_MOVE,this,this.onMouseMove);
+					break;
+				}
+				}
+				
+			}*/
+			//点到直线距离算法
+			for(let j=0;j<this.ropes.length;j++){
+				for(let i=0;i<this.ropes[j].constraints.length-1;i++){
+				let realH=this.calDistance(this.ropes[j].rope.bodies[i].position.x,this.ropes[j].rope.bodies[i+1].position.x,
+				this.ropes[j].rope.bodies[i].position.y,this.ropes[j].rope.bodies[i+1].position.y,Laya.stage.mouseX,Laya.stage.mouseY);
+				if(this.ropes[j].rope.bodies[i+1].position.x==this.ropes[j].rope.bodies[i].position.x){
+					if(Laya.stage.mouseX>=(this.ropes[j].rope.bodies[i].position.x-8)&&Laya.stage.mouseX<=(this.ropes[j].rope.bodies[i].position.x+8)
+					&&(Laya.stage.mouseY<=this.ropes[j].rope.bodies[i+1].position.y&&Laya.stage.mouseY>=this.ropes[j].rope.bodies[i].position.y)){
+						Matter.World.remove(GameMediator.engine.world,this.ropes[j].constraints[i]);
+					}
+				}
+				else{
+					if(realH<=15&&(Laya.stage.mouseY<=this.ropes[j].rope.bodies[i+1].position.y&&Laya.stage.mouseY>=this.ropes[j].rope.bodies[i].position.y)){
+					Matter.World.remove(GameMediator.engine.world,this.ropes[j].constraints[i]);
+					//Matter.World.remove(GameMeditor.engine.world,this.ropeConstraints[j]);
+					if(j==1){
+					Matter.World.remove(GameMediator.engine.world,this.ropes[1].constraint1);
+					}else if(j==2){
+					Matter.World.remove(GameMediator.engine.world,this.ropes[2].constraint1);
+				
+					
+					break;
+				}
+				}
+				
+			}
+			}		
+		}
+	}
+	
+	/**鼠标事件 抬起 */
+	private	onMouseUp():void{
+			Laya.stage.off(Laya.Event.MOUSE_MOVE,this,this.onMouseMove);		
+		}
+	/**点到直线的距离 */
+	private	calDistance(x1,x2,y1,y2,x3,y3):number{
+			let k=(y1-y2)/(x1-x2);										//斜率
+			let b=y1-k*x1;		  										//y轴交点
+			let h=Math.abs((k*x3-y3+b)/(Math.sqrt(k*k+1)));
+			return h;
+		}
+		/*collisionCheck():void{
+				let currDis1=this.Distance(this.candy.position.x,Game.demo.star1.x,this.candy.position.y,Game.demo.star1.y);			
+				if(currDis1<45){
+					Game.demo.star1.visible=false;
+				}			
+				let currDis2=this.Distance(this.candy.position.x,Game.demo.star2.x,this.candy.position.y,Game.demo.star2.y);			
+				if(currDis2<45){
+					Game.demo.star2.visible=false;
+				}	
+				let currDis3=this.Distance(this.candy.position.x,Game.demo.star3.x,this.candy.position.y,Game.demo.star3.y);			
+				if(currDis3<45){
+					Game.demo.star3.visible=false;
+				}	
+				let currDis4=this.Distance(this.candy.position.x,Game.demo.frog.x,this.candy.position.y,Game.demo.frog.y);			
+				if(currDis4<50){
+					Game.demo.frog.visible=false;
+				}	
+		}*/
+
+		
+
+		private checkCandyPos():void{
+			this.candy.pos(this.candyBody.position.x,this.candyBody.position.y);
+		}
 //-------------------------------------------------------------------------------------------------
 
     /**退出游戏界面 */

@@ -14,8 +14,8 @@ var MapConfig = /** @class */ (function () {
         this.mapWidth = objectMapConfig.width;
         this.mapHeight = objectMapConfig.height;
         //**载入糖果 */
-        var cd = new Candy(objectMapConfig.candy);
-        this.candy = cd;
+        /* let cd = new Candy(objectMapConfig.candy);
+         this.candy = cd;*/
         //**载入星星 */
         var stars;
         for (var i = 0; i < objectMapConfig.stars.pos.length; i++) {
@@ -29,7 +29,7 @@ var MapConfig = /** @class */ (function () {
         //**载入钉子 */
         var point;
         for (var i = 0; i < objectMapConfig.point.length; i++) {
-            point = new Point(objectMapConfig.point[i]);
+            //point= new Point(objectMapConfig.point[i]); 
             this.arr_Point.push(point);
         }
     };

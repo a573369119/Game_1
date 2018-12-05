@@ -36,8 +36,8 @@ class MapConfig{
         this.mapWidth = objectMapConfig.width;
         this.mapHeight = objectMapConfig.height;
         //**载入糖果 */
-        let cd = new Candy(objectMapConfig.candy);
-        this.candy = cd;
+       /* let cd = new Candy(objectMapConfig.candy);
+        this.candy = cd;*/
         //**载入星星 */
         let stars : Star; 
         for(let i=0; i<objectMapConfig.stars.pos.length ;i++)
@@ -53,7 +53,7 @@ class MapConfig{
         let point : Point; 
         for(let i=0;i<objectMapConfig.point.length;i++)
         {
-            point= new Point(objectMapConfig.point[i]); 
+            //point= new Point(objectMapConfig.point[i]); 
             this.arr_Point.push(point);
         }
     }

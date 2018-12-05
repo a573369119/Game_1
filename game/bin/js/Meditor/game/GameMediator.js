@@ -20,6 +20,8 @@ var __extends = (this && this.__extends) || (function () {
  * @播放动画  AnimationManager.ins.playAnimation();
  *
  */
+var Matter;
+var LayaRender;
 var GameMediator = /** @class */ (function (_super) {
     __extends(GameMediator, _super);
     /**用 this.view 来调用 UI视图 */
@@ -33,6 +35,19 @@ var GameMediator = /** @class */ (function (_super) {
         _super.prototype.init.call(this); //init之后 才会有 this.view
         this.view.addChild(this.menu);
         this.view.addChild(this.doorOpen);
+        this.hooksArray = new Array();
+        this.ropes = new Array();
+        this.contactConstraintsArray = new Array();
+        this.hooksPosArray = [[150, 350], [300, 350], [450, 350]];
+        this.ropesLengthArray = [9, 15, 21];
+        this.candy = new Candy();
+        this.initMatter();
+        this.initWorld();
+        Laya.timer.frameLoop(1, this, this.checkCandyPos);
+        Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.onMouseDown);
+        Laya.stage.on(Laya.Event.MOUSE_UP, this, this.onMouseUp);
+        Laya.timer.frameLoop(1, this.ropes[1], this.ropes[1].check2, [this.ropesLengthArray[1] * 23]);
+        Laya.timer.frameLoop(1, this.ropes[2], this.ropes[2].check2, [this.ropesLengthArray[2] * 23]);
     };
     /**添加事件 */
     GameMediator.prototype.addEvents = function () {
@@ -160,6 +175,154 @@ var GameMediator = /** @class */ (function (_super) {
     /**事件 超能力获取 */
     GameMediator.prototype.onShopSuper = function () {
         console.log("获得超能力");
+    };
+    //-------------------------------------------------------------------------------------------------
+    //----------------------------------------游戏逻辑-------------------------------------------------------
+    /**初始化物理引擎 */
+    GameMediator.prototype.initMatter = function () {
+        var gameWorld = new Laya.Sprite();
+        Laya.stage.addChild(gameWorld);
+        GameMediator.engine = Matter.Engine.create({ enableSleeping: true });
+        Matter.Engine.run(GameMediator.engine);
+        var render = LayaRender.create({ engine: GameMediator.engine,
+            container: gameWorld,
+            width: GameData.STAGE_WIDTH,
+            height: GameData.STAGE_HEIGHT,
+            options: { showAngleIndicator: true,
+                showCollisions: true,
+                showVelocity: true } });
+        LayaRender.run(render);
+    };
+    /**创建物理世界 */
+    GameMediator.prototype.initWorld = function () {
+        this.createHook();
+        this.CreateRope();
+        this.createCandy();
+        this.contactHook();
+        this.contactCandy(this.ropes[0].rope.bodies[this.ropes[0].rope.bodies.length - 1]);
+        this.contactCandy(this.ropes[1].rope.bodies[this.ropes[1].rope.bodies.length - 1]);
+        this.contactCandy(this.ropes[2].rope.bodies[this.ropes[2].rope.bodies.length - 1]);
+    };
+    /**创建钩子 */
+    GameMediator.prototype.createHook = function () {
+        for (var i = 0; i < this.hooksPosArray.length; i++) {
+            var hook = new Point(this.hooksPosArray[i][0], this.hooksPosArray[i][1]);
+            this.hooksArray.push(hook);
+        }
+    };
+    /**创建绳子 */
+    GameMediator.prototype.CreateRope = function () {
+        for (var i = 0; i < this.ropesLengthArray.length; i++) {
+            var rope = new Rope(this.hooksArray[i].x, this.hooksArray[i].y, this.ropesLengthArray[i]);
+            this.ropes.push(rope);
+        }
+    };
+    /**连接钩子 */
+    GameMediator.prototype.contactHook = function () {
+        for (var i = 0; i < this.hooksArray.length; i++) {
+            var constraint = Matter.Constraint.create({
+                bodyA: this.ropes[i].rope.bodies[0],
+                pointB: { x: this.hooksArray[i].x, y: this.hooksArray[i].y },
+                stiffness: 1.2
+            });
+            this.contactConstraintsArray.push(constraint);
+        }
+        Matter.World.add(GameMediator.engine.world, this.contactConstraintsArray);
+    };
+    /**创建糖果 */
+    GameMediator.prototype.createCandy = function () {
+        this.candyBody = Matter.Bodies.circle(this.ropes[0].rope.bodies[this.ropes[0].rope.bodies.length - 1].position.x, this.ropes[0].rope.bodies[this.ropes[0].rope.bodies.length - 1].position.y, 1, { frictionAir: 0.0001, timeScale: 1.25, collisionFilter: { group: -1 } });
+        Matter.World.add(GameMediator.engine.world, this.candyBody);
+    };
+    /**连接糖果 */
+    GameMediator.prototype.contactCandy = function (body) {
+        var constraint = Matter.Constraint.create({
+            bodyA: body,
+            bodyB: this.candyBody,
+            stiffness: 1.2,
+            length: 20,
+            render: { lineWidth: 6 }
+        });
+        this.contactConstraintsArray.push(constraint);
+        Matter.World.add(GameMediator.engine.world, constraint);
+    };
+    /**鼠标事件 点击*/
+    GameMediator.prototype.onMouseDown = function () {
+        Laya.stage.on(Laya.Event.MOUSE_MOVE, this, this.onMouseMove);
+    };
+    /**鼠标事件 拖拽 */
+    GameMediator.prototype.onMouseMove = function () {
+        //斜率算法
+        /*for(let i=0;i<this.constraints.length-1;i++){
+            if((this.bodys[i+1].position.x-this.bodys[i].position.x)!=0&&(Laya.stage.mouseX-this.bodys[i].position.x)){
+                let k1=(this.bodys[i+1].position.y-this.bodys[i].position.y)/(this.bodys[i+1].position.x-this.bodys[i].position.x);
+            let k2=(Laya.stage.mouseY-this.bodys[i].position.y)/(Laya.stage.mouseX-this.bodys[i].position.x);
+            if((Laya.stage.mouseY<=this.bodys[i+1].position.y&&Laya.stage.mouseY>=this.bodys[i].position.y&&k1==k2)){
+                Matter.World.remove(GameMeditor.engine.world,this.constraints[i]);
+                console.log(i);
+                //Laya.stage.off(Laya.Event.MOUSE_MOVE,this,this.onMouseMove);
+                break;
+            }
+            }
+            
+        }*/
+        //点到直线距离算法
+        for (var j = 0; j < this.ropes.length; j++) {
+            for (var i = 0; i < this.ropes[j].constraints.length - 1; i++) {
+                var realH = this.calDistance(this.ropes[j].rope.bodies[i].position.x, this.ropes[j].rope.bodies[i + 1].position.x, this.ropes[j].rope.bodies[i].position.y, this.ropes[j].rope.bodies[i + 1].position.y, Laya.stage.mouseX, Laya.stage.mouseY);
+                if (this.ropes[j].rope.bodies[i + 1].position.x == this.ropes[j].rope.bodies[i].position.x) {
+                    if (Laya.stage.mouseX >= (this.ropes[j].rope.bodies[i].position.x - 8) && Laya.stage.mouseX <= (this.ropes[j].rope.bodies[i].position.x + 8)
+                        && (Laya.stage.mouseY <= this.ropes[j].rope.bodies[i + 1].position.y && Laya.stage.mouseY >= this.ropes[j].rope.bodies[i].position.y)) {
+                        Matter.World.remove(GameMediator.engine.world, this.ropes[j].constraints[i]);
+                    }
+                }
+                else {
+                    if (realH <= 15 && (Laya.stage.mouseY <= this.ropes[j].rope.bodies[i + 1].position.y && Laya.stage.mouseY >= this.ropes[j].rope.bodies[i].position.y)) {
+                        Matter.World.remove(GameMediator.engine.world, this.ropes[j].constraints[i]);
+                        //Matter.World.remove(GameMeditor.engine.world,this.ropeConstraints[j]);
+                        if (j == 1) {
+                            Matter.World.remove(GameMediator.engine.world, this.ropes[1].constraint1);
+                        }
+                        else if (j == 2) {
+                            Matter.World.remove(GameMediator.engine.world, this.ropes[2].constraint1);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    };
+    /**鼠标事件 抬起 */
+    GameMediator.prototype.onMouseUp = function () {
+        Laya.stage.off(Laya.Event.MOUSE_MOVE, this, this.onMouseMove);
+    };
+    /**点到直线的距离 */
+    GameMediator.prototype.calDistance = function (x1, x2, y1, y2, x3, y3) {
+        var k = (y1 - y2) / (x1 - x2); //斜率
+        var b = y1 - k * x1; //y轴交点
+        var h = Math.abs((k * x3 - y3 + b) / (Math.sqrt(k * k + 1)));
+        return h;
+    };
+    /*collisionCheck():void{
+            let currDis1=this.Distance(this.candy.position.x,Game.demo.star1.x,this.candy.position.y,Game.demo.star1.y);
+            if(currDis1<45){
+                Game.demo.star1.visible=false;
+            }
+            let currDis2=this.Distance(this.candy.position.x,Game.demo.star2.x,this.candy.position.y,Game.demo.star2.y);
+            if(currDis2<45){
+                Game.demo.star2.visible=false;
+            }
+            let currDis3=this.Distance(this.candy.position.x,Game.demo.star3.x,this.candy.position.y,Game.demo.star3.y);
+            if(currDis3<45){
+                Game.demo.star3.visible=false;
+            }
+            let currDis4=this.Distance(this.candy.position.x,Game.demo.frog.x,this.candy.position.y,Game.demo.frog.y);
+            if(currDis4<50){
+                Game.demo.frog.visible=false;
+            }
+    }*/
+    GameMediator.prototype.checkCandyPos = function () {
+        this.candy.pos(this.candyBody.position.x, this.candyBody.position.y);
     };
     //-------------------------------------------------------------------------------------------------
     /**退出游戏界面 */
