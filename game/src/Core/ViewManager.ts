@@ -70,8 +70,13 @@ class ViewManager{
             }
             else
             {
-                this.viewsDic.get(this.currentView).addChild(ui);
+                // this.viewsDic.get(this.currentView).addChild(ui);
+                Laya.stage.addChild(ui);
             }
+            // if(this.viewsDic.get(this.currentView) && this.currentView<=1)
+            // {
+            //     this.viewsDic.get(this.currentView).visible = false;
+            // }
             if(caller && callBack)
                 callBack.call(caller);
     }
@@ -116,7 +121,7 @@ class ViewManager{
             view.removeSelf();
             this.viewsDic.remove(ui);
             this.currentView -= 1;
-            console.log(this.viewsDic);
+            //console.log(this.viewsDic);
         }
         else
         {
@@ -135,5 +140,10 @@ class ViewManager{
                 Laya.loader.clearRes(url);
             }
         }
+        let lastView = this.viewsDic.get(ui-1);
+        // if(lastView)
+        // {
+        //     lastView.visible = true;
+        // }
     }
 }

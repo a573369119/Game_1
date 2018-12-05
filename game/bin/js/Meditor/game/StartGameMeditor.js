@@ -23,7 +23,7 @@ var StartGameMeditor = /** @class */ (function (_super) {
     /**初始化 */
     StartGameMeditor.prototype.init = function () {
         _super.prototype.init.call(this);
-        Laya.timer.loop(50, this, this.roundLamp);
+        this.runRound();
     };
     /**事件绑定 */
     StartGameMeditor.prototype.addEvents = function () {
@@ -52,6 +52,14 @@ var StartGameMeditor = /** @class */ (function (_super) {
     /**旋转 */
     StartGameMeditor.prototype.roundLamp = function () {
         this.view.round_Lamp.rotation += 0.2;
+    };
+    /**停用旋转 */
+    StartGameMeditor.prototype.stopRound = function () {
+        Laya.timer.clear(this, this.roundLamp);
+    };
+    /**启用旋转 */
+    StartGameMeditor.prototype.runRound = function () {
+        Laya.timer.loop(50, this, this.roundLamp);
     };
     return StartGameMeditor;
 }(BaseMeditor));

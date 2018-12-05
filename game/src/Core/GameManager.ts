@@ -42,6 +42,7 @@ class GameManager{
         }
         else
         {   
+            this.autoWork(meditorName);
             return this.MeditorDic.set(meditorName,this.selectMeditor(meditorName));
             //console.log(this.MeditorDic);
             //console.log(this.MeditorDic.get(meditorName));        
@@ -76,6 +77,17 @@ class GameManager{
         else
         {
             console.log("没有该Meidiator - GameManager");
+        }
+    }
+
+    /**自动 扫尾工作 */
+    private autoWork(meditorName:number)　: void
+    {
+        var mediator = this.MeditorDic.get(meditorName-1);
+        if(mediator && mediator.stopRound)
+        {
+            mediator.stopRound();
+            console.log("清除");
         }
     }
 }

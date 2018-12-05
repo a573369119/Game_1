@@ -26,6 +26,9 @@ var BaseMeditor = /** @class */ (function () {
     /**数据初始化*/
     BaseMeditor.prototype.init = function () {
         this.view = ViewManager.ins_.getView(this.viewName);
+        var viewLast = ViewManager.ins_.getView(this.viewName - 1);
+        if (viewLast)
+            viewLast.visible = false;
         this.addEvents();
     };
     /**添加事件 */
@@ -41,6 +44,7 @@ var BaseMeditor = /** @class */ (function () {
             ViewManager.ins_.returnView(toMediator, toView);
         }
         else {
+            ViewManager.ins_.getView(this.viewName - 1).visible = true;
             ViewManager.ins_.destroView(this.viewName, this.arr_url);
         }
         this.view = null;

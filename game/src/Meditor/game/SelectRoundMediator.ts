@@ -182,11 +182,24 @@ class SelectRoundMediator extends BaseMeditor{
     private onExit() : void
     {
         this.dispose();
+        GameManager.ins_.getMediator(GameData.SELECT_BOX_MEDIATOR).runRound();
     }
 
     /**旋转 */
     private roundLamp() : void
     {
         this.view.round_Lamp.rotation += 0.2;
+    }
+
+    /**停用旋转 */
+    public stopRound() : void
+    {
+        Laya.timer.clear(this,this.roundLamp);
+    }
+
+    /**启用旋转 */ 
+    public runRound() : void
+    {
+        Laya.timer.loop(50,this,this.roundLamp);
     }
 }

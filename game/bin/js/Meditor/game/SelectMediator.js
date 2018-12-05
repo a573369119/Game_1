@@ -56,10 +56,19 @@ var SelectMeditor = /** @class */ (function (_super) {
     /**按钮事件 退出 */
     SelectMeditor.prototype.onExit = function () {
         this.dispose();
+        GameManager.ins_.getMediator(GameData.START_GAME_MEDIATOR).runRound();
     };
     /**旋转 */
     SelectMeditor.prototype.roundLamp = function () {
         this.view.round_Lamp.rotation += 0.2;
+    };
+    /**停用旋转 */
+    SelectMeditor.prototype.stopRound = function () {
+        Laya.timer.clear(this, this.roundLamp);
+    };
+    /**启用旋转 */
+    SelectMeditor.prototype.runRound = function () {
+        Laya.timer.loop(50, this, this.roundLamp);
     };
     return SelectMeditor;
 }(BaseMeditor));

@@ -56,6 +56,7 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
     /**事件 退出 */
     SelectBoxMeditor.prototype.onExit = function () {
         this.dispose();
+        GameManager.ins_.getMediator(GameData.SELECT_MEDIATOR).runRound();
     };
     //盒子 102,29   50 = 200
     /**创建盒子UI */
@@ -194,6 +195,14 @@ var SelectBoxMeditor = /** @class */ (function (_super) {
     /**旋转 */
     SelectBoxMeditor.prototype.roundLamp = function () {
         this.view.round_Lamp.rotation += 0.2;
+    };
+    /**停用旋转 */
+    SelectBoxMeditor.prototype.stopRound = function () {
+        Laya.timer.clear(this, this.roundLamp);
+    };
+    /**启用旋转 */
+    SelectBoxMeditor.prototype.runRound = function () {
+        Laya.timer.loop(50, this, this.roundLamp);
     };
     return SelectBoxMeditor;
 }(BaseMeditor));

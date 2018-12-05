@@ -52,8 +52,13 @@ var ViewManager = /** @class */ (function () {
             Laya.stage.addChild(ui);
         }
         else {
-            this.viewsDic.get(this.currentView).addChild(ui);
+            // this.viewsDic.get(this.currentView).addChild(ui);
+            Laya.stage.addChild(ui);
         }
+        // if(this.viewsDic.get(this.currentView) && this.currentView<=1)
+        // {
+        //     this.viewsDic.get(this.currentView).visible = false;
+        // }
         if (caller && callBack)
             callBack.call(caller);
     };
@@ -85,7 +90,7 @@ var ViewManager = /** @class */ (function () {
             view.removeSelf();
             this.viewsDic.remove(ui);
             this.currentView -= 1;
-            console.log(this.viewsDic);
+            //console.log(this.viewsDic);
         }
         else {
             console.log("未找到该视图 - viewManager");
@@ -100,6 +105,11 @@ var ViewManager = /** @class */ (function () {
                 Laya.loader.clearRes(url);
             }
         }
+        var lastView = this.viewsDic.get(ui - 1);
+        // if(lastView)
+        // {
+        //     lastView.visible = true;
+        // }
     };
     ViewManager.ins_ = new ViewManager();
     return ViewManager;

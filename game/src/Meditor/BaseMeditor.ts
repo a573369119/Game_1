@@ -42,6 +42,8 @@ class BaseMeditor {
     protected init() : void
     {
         this.view = ViewManager.ins_.getView(this.viewName);
+        let viewLast = ViewManager.ins_.getView(this.viewName-1);
+        if(viewLast) viewLast.visible = false;
         this.addEvents();
     }   
 
@@ -67,6 +69,7 @@ class BaseMeditor {
         }
         else
         {
+            ViewManager.ins_.getView(this.viewName-1).visible = true;
             ViewManager.ins_.destroView(this.viewName,this.arr_url);
         }
         this.view = null;

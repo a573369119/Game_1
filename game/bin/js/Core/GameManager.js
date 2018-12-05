@@ -30,6 +30,7 @@ var GameManager = /** @class */ (function () {
             console.log("调度器已有");
         }
         else {
+            this.autoWork(meditorName);
             return this.MeditorDic.set(meditorName, this.selectMeditor(meditorName));
             //console.log(this.MeditorDic);
             //console.log(this.MeditorDic.get(meditorName));        
@@ -55,6 +56,14 @@ var GameManager = /** @class */ (function () {
         }
         else {
             console.log("没有该Meidiator - GameManager");
+        }
+    };
+    /**自动 扫尾工作 */
+    GameManager.prototype.autoWork = function (meditorName) {
+        var mediator = this.MeditorDic.get(meditorName - 1);
+        if (mediator && mediator.stopRound) {
+            mediator.stopRound();
+            console.log("清除");
         }
     };
     GameManager.ins_ = new GameManager();

@@ -173,19 +173,19 @@ var ui;
 (function (ui) {
     var Shop;
     (function (Shop) {
-        var ShopViewUI = /** @class */ (function (_super) {
-            __extends(ShopViewUI, _super);
-            function ShopViewUI() {
+        var ShopDialogUI = /** @class */ (function (_super) {
+            __extends(ShopDialogUI, _super);
+            function ShopDialogUI() {
                 return _super.call(this) || this;
             }
-            ShopViewUI.prototype.createChildren = function () {
+            ShopDialogUI.prototype.createChildren = function () {
                 _super.prototype.createChildren.call(this);
-                this.createView(ui.Shop.ShopViewUI.uiView);
+                this.createView(ui.Shop.ShopDialogUI.uiView);
             };
-            ShopViewUI.uiView = { "type": "View", "props": { "width": 750, "height": 1334 }, "child": [{ "type": "Tab", "props": { "y": 300, "x": 70, "width": 586, "labels": "蜜蜂,超能力", "height": 698 } }] };
-            return ShopViewUI;
-        }(View));
-        Shop.ShopViewUI = ShopViewUI;
+            ShopDialogUI.uiView = { "type": "Dialog", "props": { "width": 750, "height": 1334 } };
+            return ShopDialogUI;
+        }(Dialog));
+        Shop.ShopDialogUI = ShopDialogUI;
     })(Shop = ui.Shop || (ui.Shop = {}));
 })(ui || (ui = {}));
 (function (ui) {
@@ -198,7 +198,7 @@ var ui;
             _super.prototype.createChildren.call(this);
             this.createView(ui.StartGameUI.uiView);
         };
-        StartGameUI.uiView = { "type": "View", "props": { "width": 750, "height": 1334 }, "child": [{ "type": "Image", "props": { "y": 1, "x": -704, "width": 2388, "skin": "unpackage/startGameBg.jpg", "height": 1343 } }, { "type": "Image", "props": { "y": 180, "x": 125, "width": 466, "skin": "unpackage/cutRope.png", "height": 414 } }, { "type": "Sprite", "props": { "y": 663, "x": 341, "width": 1600, "var": "round_Lamp", "pivotY": 800, "pivotX": 800, "height": 1600 }, "child": [{ "type": "Image", "props": { "y": 800, "x": 800, "width": 1600, "skin": "unpackage/lamp.png", "pivotY": 800, "pivotX": 800, "height": 1600 } }] }, { "type": "Image", "props": { "y": 654, "x": 169, "width": 414, "var": "btn_StartGame", "skin": "publicAssets/btn1_2.png", "sizeGrid": "0,52,0,48", "height": 119 } }, { "type": "Image", "props": { "y": 823, "x": 171, "width": 414, "var": "btn_Imgs", "skin": "publicAssets/btn1_2.png", "sizeGrid": "0,52,0,48", "height": 119 } }, { "type": "Image", "props": { "y": 981, "x": 170, "width": 414, "var": "btn_About", "skin": "publicAssets/btn1_2.png", "sizeGrid": "0,52,0,48", "height": 119 } }, { "type": "Label", "props": { "y": 677, "x": 200, "width": 357, "var": "lab_StartGame", "text": "开始游戏", "height": 58, "fontSize": 50, "font": "Microsoft YaHei", "bold": true, "align": "center" } }, { "type": "Label", "props": { "y": 1006, "x": 202, "width": 357, "text": "关于", "height": 58, "fontSize": 50, "font": "Microsoft YaHei", "align": "center" } }, { "type": "Label", "props": { "y": 846, "x": 202, "width": 357, "text": "图集", "height": 58, "fontSize": 50, "font": "Microsoft YaHei", "color": "#000000", "align": "center" } }] };
+        StartGameUI.uiView = { "type": "View", "props": { "width": 750, "height": 1334 }, "child": [{ "type": "Image", "props": { "y": 1, "x": -704, "width": 2388, "skin": "unpackage/startGameBg.jpg", "height": 1343 } }, { "type": "Image", "props": { "y": 113, "x": 61, "width": 583, "skin": "unpackage/cutRope.png", "height": 518 } }, { "type": "Sprite", "props": { "y": 666, "x": 365, "width": 1600, "var": "round_Lamp", "pivotY": 800, "pivotX": 800, "height": 1600 }, "child": [{ "type": "Image", "props": { "y": 800, "x": 800, "width": 1600, "skin": "unpackage/lamp.png", "pivotY": 800, "pivotX": 800, "height": 1600 } }] }, { "type": "Image", "props": { "y": 654, "x": 169, "width": 414, "var": "btn_StartGame", "skin": "publicAssets/btn1_2.png", "sizeGrid": "0,52,0,48", "height": 119 } }, { "type": "Image", "props": { "y": 823, "x": 171, "width": 414, "var": "btn_Imgs", "skin": "publicAssets/btn1_2.png", "sizeGrid": "0,52,0,48", "height": 119 } }, { "type": "Image", "props": { "y": 981, "x": 170, "width": 414, "var": "btn_About", "skin": "publicAssets/btn1_2.png", "sizeGrid": "0,52,0,48", "height": 119 } }, { "type": "Label", "props": { "y": 677, "x": 200, "width": 357, "var": "lab_StartGame", "text": "开始游戏", "height": 58, "fontSize": 50, "font": "Microsoft YaHei", "bold": true, "align": "center" } }, { "type": "Label", "props": { "y": 1006, "x": 202, "width": 357, "text": "关于", "height": 58, "fontSize": 50, "font": "Microsoft YaHei", "align": "center" } }, { "type": "Label", "props": { "y": 846, "x": 202, "width": 357, "text": "图集", "height": 58, "fontSize": 50, "font": "Microsoft YaHei", "color": "#000000", "align": "center" } }] };
         return StartGameUI;
     }(View));
     ui.StartGameUI = StartGameUI;

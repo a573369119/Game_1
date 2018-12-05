@@ -12,7 +12,7 @@ class StartGameMeditor extends BaseMeditor{
     protected init() : void
     {
         super.init();
-        Laya.timer.loop(50,this,this.roundLamp);
+        this.runRound();
     }
 
     /**事件绑定 */
@@ -56,5 +56,17 @@ class StartGameMeditor extends BaseMeditor{
     private roundLamp() : void
     {
         this.view.round_Lamp.rotation += 0.2;
+    }
+
+    /**停用旋转 */
+    public stopRound() : void
+    {
+        Laya.timer.clear(this,this.roundLamp);
+    }
+
+    /**启用旋转 */ 
+    public runRound() : void
+    {
+        Laya.timer.loop(50,this,this.roundLamp);
     }
 }

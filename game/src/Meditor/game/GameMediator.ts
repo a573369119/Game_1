@@ -4,7 +4,7 @@
  * @玩家的信息 PlayerData.ins 调用
  * @逻辑中动画播放结束来触发时间。ani 是用刀划开盒子 ani2是用胶带封住盒子  ani3是//吃到糖果显示计分板 ani4//重新开始 或者 下一关。关闭计分板 打开箱子操作  动画完成结果返回到doorAniEvent();
  * @如果要写入 就直接写入PlayerData， //不能刷新 ，用户数据是测试。以后他们用数据库存储 ，和后台连接，所以每次刷新，都会重置。如果想手动设置 去 bin/config/playerDataTest.json，
- * @播放动画  AnimationManager.ins
+ * @播放动画  AnimationManager.ins.playAnimation();
  *
  */
 class GameMediator extends BaseMeditor{
@@ -193,6 +193,7 @@ class GameMediator extends BaseMeditor{
         this.isMain = false;       
         this.doorOpen.visible = true;
         this.doorOpen.ani2.play(0,false);
+        GameManager.ins_.getMediator(GameData.SELECT_ROUND_MEDIATOR).runRound();
     }
 
     /**事件 主界面 */
@@ -202,6 +203,7 @@ class GameMediator extends BaseMeditor{
         this.isMain = true;        
         this.doorOpen.visible = true;        
         this.doorOpen.ani2.play(0,false);
+        GameManager.ins_.getMediator(GameData.START_GAME_MEDIATOR).runRound();        
     }
 
     /**事件 超能力获取 */

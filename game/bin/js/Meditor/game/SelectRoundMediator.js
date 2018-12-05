@@ -140,10 +140,19 @@ var SelectRoundMediator = /** @class */ (function (_super) {
     /**退出 */
     SelectRoundMediator.prototype.onExit = function () {
         this.dispose();
+        GameManager.ins_.getMediator(GameData.SELECT_BOX_MEDIATOR).runRound();
     };
     /**旋转 */
     SelectRoundMediator.prototype.roundLamp = function () {
         this.view.round_Lamp.rotation += 0.2;
+    };
+    /**停用旋转 */
+    SelectRoundMediator.prototype.stopRound = function () {
+        Laya.timer.clear(this, this.roundLamp);
+    };
+    /**启用旋转 */
+    SelectRoundMediator.prototype.runRound = function () {
+        Laya.timer.loop(50, this, this.roundLamp);
     };
     return SelectRoundMediator;
 }(BaseMeditor));
