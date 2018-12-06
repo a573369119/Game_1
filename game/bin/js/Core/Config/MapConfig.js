@@ -7,7 +7,17 @@ var MapConfig = /** @class */ (function () {
         this.arr_Point = new Array();
         this.init(objectMapConfig);
     }
-    /**初始化*/
+    /**初始化
+     *
+     * objectMaoconfig里面的东西 就是配置表的。可以对应看
+     *
+     * 新添加东西要新写 载入。
+     *
+     * 配置文件在bin\config里面
+     *
+     * 可以 console.log(objectMapConfig) ，看看里面有什么
+     *
+    */
     MapConfig.prototype.init = function (objectMapConfig) {
         //**mapId、 */
         this.mapId = objectMapConfig.mapId;
