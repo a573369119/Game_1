@@ -1,8 +1,6 @@
 {
-    "x":0,
     "type":"View",
-    "selectedBox":25,
-    "selecteID":33,
+    "selectedBox":1,
     "props":{"width":750,"sceneColor":"#000000","height":1334},
     "nodeParent":-1,
     "label":"View",
@@ -13,7 +11,6 @@
     "compId":1,
     "child":[
         {
-            "x":15,
             "type":"Image",
             "props":{"y":0,"x":0,"width":378,"var":"img_doorL","skin":"gameView/gameDoor/boxDoor_1.png","height":1334},
             "nodeParent":1,
@@ -39,7 +36,6 @@
                 }]
         },
         {
-            "x":15,
             "type":"Image",
             "props":{"y":0,"x":750,"width":377,"visible":true,"var":"img_doorR","skin":"gameView/gameDoor/boxDoor_1.png","scaleX":-1,"height":1334},
             "nodeParent":1,
@@ -65,7 +61,6 @@
                 }]
         },
         {
-            "x":15,
             "type":"Image",
             "props":{"y":-339,"x":31,"visible":true,"var":"img_xiaodao","skin":"gameView/gameDoor/dao.png"},
             "nodeParent":1,
@@ -78,7 +73,6 @@
                 ]
         },
         {
-            "x":15,
             "type":"Image",
             "props":{"y":1342,"x":268,"width":160,"visible":true,"var":"img_jiaodai","skin":"gameView/gameDoor/jiaodai.png","height":215},
             "nodeParent":1,
@@ -91,7 +85,6 @@
                 ]
         },
         {
-            "x":15,
             "type":"Sprite",
             "props":{"y":0,"x":-12,"width":763,"visible":false,"height":1314,"alpha":1},
             "nodeParent":1,
@@ -103,7 +96,6 @@
             "compId":25,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":419,"x":144,"width":163,"var":"img_star1","skin":"gameView/gameDoor/getStar.png","height":163},
                     "nodeParent":25,
@@ -116,7 +108,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":421,"x":450,"width":163,"var":"img_star2","skin":"gameView/gameDoor/getStar.png","height":163},
                     "nodeParent":25,
@@ -129,7 +120,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "props":{"y":421,"x":299,"width":163,"var":"img_star3","skin":"gameView/gameDoor/getStar.png","height":163},
                     "nodeParent":25,
@@ -142,7 +132,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "props":{"y":305,"x":191,"width":405,"text":"真棒","height":103,"fontSize":80,"font":"Microsoft YaHei","color":"#ffffff","bold":true,"align":"center"},
                     "nodeParent":25,
@@ -155,7 +144,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "props":{"y":710,"x":91,"width":295,"var":"btn_Replay","stateNum":"1","skin":"publicAssets/btn_1.png","labelStrokeColor":"#1b1b1b","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"重玩","height":88},
                     "nodeParent":25,
@@ -168,7 +156,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "props":{"y":841,"x":248,"width":295,"var":"btn_ReturnRound","stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"菜单","height":88},
                     "nodeParent":25,
@@ -181,7 +168,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "props":{"y":710,"x":396,"width":295,"var":"btn_Next","stateNum":"1","skin":"publicAssets/btn_1.png","labelStroke":2,"labelSize":40,"labelPadding":"0,0,10","labelFont":"Microsoft YaHei","labelColors":"#fff","labelBold":true,"label":"下一关","height":88},
                     "nodeParent":25,
@@ -195,7 +181,6 @@
                 }]
         },
         {
-            "x":15,
             "type":"Panel",
             "props":{"y":97,"x":300,"width":145,"height":1121},
             "nodeParent":1,
@@ -1739,6 +1724,125 @@
                     }
                 }],
             "name":"ani4",
+            "id":4,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":2,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":-120,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"y",
+                                "index":24
+                            }],
+                        "width":[
+                            {
+                                "value":378,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"width",
+                                "index":0
+                            },
+                            {
+                                "value":5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"width",
+                                "index":24
+                            }],
+                        "height":[
+                            {
+                                "value":1334,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"height",
+                                "index":0
+                            },
+                            {
+                                "value":1585,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":2,
+                                "key":"height",
+                                "index":24
+                            }]
+                    }
+                },
+                {
+                    "target":3,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":-108,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":24
+                            }],
+                        "width":[
+                            {
+                                "value":377,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"width",
+                                "index":0
+                            },
+                            {
+                                "value":5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"width",
+                                "index":24
+                            }],
+                        "height":[
+                            {
+                                "value":1334,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"height",
+                                "index":0
+                            },
+                            {
+                                "value":1571,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"height",
+                                "index":24
+                            }]
+                    }
+                }],
+            "name":"ani5",
             "id":4,
             "frameRate":24,
             "action":0

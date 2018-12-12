@@ -24,7 +24,7 @@ class Rope{
 		this.countlength=datacountlength;
 		this.ropeAlpha=1;
 		this.isRopeMax=false;
-		Laya.timer.frameLoop(1,this,this.checkMaxRope,[datacountlength*25])
+		Laya.timer.frameLoop(1,this,this.checkMaxRope,[datacountlength*24])
     }
     
     /**创建绳子节点*/	
@@ -60,7 +60,7 @@ class Rope{
         	 		bodyB:this.rope.bodies[this.rope.bodies.length-1],
        		 		stiffness:1.2,
 					length:limitDis,
-					render:{lineWidth:6,strokeStyle:this.ropecolors[0],visible:true}
+					render:{lineWidth:6,strokeStyle:this.ropecolors[0],visible:false}
   			 	 });
 					
 			Laya.timer.clear(this,this.checkMaxRope);

@@ -127,7 +127,7 @@ var LoadingManager = /** @class */ (function () {
     };
     //-------------------------获取配置--------------------
     /**获取地图配置 地图配置的所属mapWhere 格式"1-2"第2季的第3个盒子 下标从0 开始   mapId 第几个关卡 是否是新获取 参数mapConfig （只有从关卡点击哪里才回是新创建）*/
-    LoadingManager.prototype.getMapConfig = function (mapWhere, mapId, updateMapConfig) {
+    LoadingManager.prototype.getMapConfig = function (mapWhere, mapId, view, updateMapConfig) {
         var object = Laya.loader.getRes("config/mapConfig.json");
         var objectMapConfig;
         var mapConfig;
@@ -137,12 +137,12 @@ var LoadingManager = /** @class */ (function () {
                     if (mapId == object[i].mapList[h].mapId)
                         objectMapConfig = object[i].mapList[h];
                     if (!updateMapConfig) {
-                        mapConfig = new MapConfig(objectMapConfig);
+                        mapConfig = new MapConfig(objectMapConfig, view);
                         return mapConfig;
                     }
                     else {
                         if (objectMapConfig) {
-                            updateMapConfig.update(objectMapConfig);
+                            updateMapConfig.update(objectMapConfig, view);
                             return;
                         }
                     }

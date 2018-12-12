@@ -6,8 +6,7 @@ var DistanceTool = /** @class */ (function () {
     }
     /**碰撞检测 dicNum ：预设距离   */
     DistanceTool.collisionCheck = function (object1, object2, width1, width2, height1, height2) {
-        if (object1.x < object2.x + width2 && object1.x + width1 > object2.x && object1.y < object2.y + height2 &&
-            object1.y + height1 > object2.y) {
+        if (Math.abs(object1.x - object2.x) < width1 / 2 + width2 / 2 && Math.abs(object1.y - object2.y) < height1 / 2 + height2 / 2) {
             return true;
         }
         else {

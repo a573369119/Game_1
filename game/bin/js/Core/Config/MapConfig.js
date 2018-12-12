@@ -2,11 +2,11 @@
  * 地图配置
  */
 var MapConfig = /** @class */ (function () {
-    function MapConfig(objectMapConfig) {
+    function MapConfig(objectMapConfig, view) {
         this.arr_Stars = new Array();
         this.arr_Points = new Array();
         this.arr_Ropes = new Array();
-        this.init(objectMapConfig);
+        this.init(objectMapConfig, view);
     }
     /**初始化
      *
@@ -19,7 +19,7 @@ var MapConfig = /** @class */ (function () {
      * 可以 console.log(objectMapConfig) ，看看里面有什么
      *
     */
-    MapConfig.prototype.init = function (objectMapConfig) {
+    MapConfig.prototype.init = function (objectMapConfig, view) {
         //**mapId、 */
         this.mapId = objectMapConfig.mapId;
         this.mapWidth = objectMapConfig.width;
@@ -27,10 +27,12 @@ var MapConfig = /** @class */ (function () {
         //**载入糖果 */
         var candy = new Candy(objectMapConfig.candy);
         this.candy = candy;
+        view.addChild(this.candy.candy);
         //**载入星星 */ 
         for (var i = 0; i < objectMapConfig.star.pos.length; i++) {
             var star = new Star(objectMapConfig.star.pos[i], objectMapConfig.star.style);
             this.arr_Stars.push(star);
+            view.addChild(star.star);
         }
         //**载入怪物 */
         var moster = new Monster(objectMapConfig.moster);
@@ -39,6 +41,7 @@ var MapConfig = /** @class */ (function () {
         for (var i = 0; i < objectMapConfig.point.pos.length; i++) {
             var point = new Point(objectMapConfig.point.pos[i]);
             this.arr_Points.push(point);
+            view.addChild(point.point);
         }
         //**载入绳子 */
         for (var i = 0; i < objectMapConfig.rope.pos.length; i++) {
@@ -47,7 +50,7 @@ var MapConfig = /** @class */ (function () {
         }
     };
     /**下一关卡更新数据 */
-    MapConfig.prototype.update = function (objectMapConfig) {
+    MapConfig.prototype.update = function (objectMapConfig, view) {
         //**mapId、 */
         this.mapId = objectMapConfig.mapId;
         this.mapWidth = objectMapConfig.width;
@@ -70,6 +73,7 @@ var MapConfig = /** @class */ (function () {
             else {
                 var point = new Point(objectMapConfig.point.pos[i]);
                 this.arr_Points.push(point);
+                view.addChild(point.point);
             }
         }
         //**更新绳子 */

@@ -22,11 +22,11 @@ class MapConfig{
     public arr_Points : Array<Point>;
     /**绳子数组 */
     public arr_Ropes : Array<Rope>;
-    constructor(objectMapConfig){  
+    constructor(objectMapConfig,view){  
         this.arr_Stars = new Array<Star>();
         this.arr_Points = new Array<Point>();
         this.arr_Ropes = new Array<Rope>();
-        this.init(objectMapConfig);
+        this.init(objectMapConfig,view);
     }
 
     /**初始化
@@ -40,7 +40,7 @@ class MapConfig{
      * 可以 console.log(objectMapConfig) ，看看里面有什么
      * 
     */
-    private init(objectMapConfig) : void
+    private init(objectMapConfig,view) : void
     {
         //**mapId、 */
         this.mapId = objectMapConfig.mapId;
@@ -49,11 +49,13 @@ class MapConfig{
         //**载入糖果 */
         let candy = new Candy(objectMapConfig.candy);
         this.candy = candy;
+        view.addChild(this.candy.candy);
         //**载入星星 */ 
         for(let i=0; i<objectMapConfig.star.pos.length ;i++)
         {
             let star = new Star(objectMapConfig.star.pos[i],objectMapConfig.star.style);    
             this.arr_Stars.push(star);
+            view.addChild(star.star);
         }
         //**载入怪物 */
         let moster = new Monster(objectMapConfig.moster);
@@ -63,6 +65,7 @@ class MapConfig{
         {
             let point= new Point(objectMapConfig.point.pos[i]); 
             this.arr_Points.push(point);
+            view.addChild(point.point);
         }
         //**载入绳子 */
         for(let i=0;i<objectMapConfig.rope.pos.length;i++)
@@ -70,10 +73,11 @@ class MapConfig{
             let rope= new Rope(objectMapConfig.rope.pos[i],objectMapConfig.rope.countlength[i]); 
             this.arr_Ropes.push(rope);
         }
+        
     }
 
     /**下一关卡更新数据 */
-    public update(objectMapConfig) : void
+    public update(objectMapConfig,view) : void
     {
         //**mapId、 */
         this.mapId = objectMapConfig.mapId;
@@ -102,6 +106,7 @@ class MapConfig{
             {
                 let point= new Point(objectMapConfig.point.pos[i]); 
                 this.arr_Points.push(point);
+                view.addChild(point.point);
             }
         }
         //**更新绳子 */

@@ -14,7 +14,7 @@ var AnimationManager = /** @class */ (function () {
         ani = new Laya.Animation();
         this.animationDic.set(GameData.ANI_MONSTER_HAPPYE, ani.loadImages(this.aniUrls(GameData.ANI_MONSTER_HAPPYE, 19)));
         ani = new Laya.Animation();
-        this.animationDic.set(GameData.ANI_MONSTER_OPEN, ani.loadImages(this.aniUrls(GameData.ANI_MONSTER_OPEN, 13)));
+        this.animationDic.set(GameData.ANI_MONSTER_OPEN, ani.loadImages(this.aniUrls(GameData.ANI_MONSTER_OPEN, 10)));
         ani = new Laya.Animation();
         this.animationDic.set(GameData.ANI_MONSTER_GIVE_ME, ani.loadImages(this.aniUrls(GameData.ANI_MONSTER_GIVE_ME, 26)));
         ani = new Laya.Animation();
@@ -45,6 +45,7 @@ var AnimationManager = /** @class */ (function () {
             animation.y = y;
             animation.play(0, isLoop);
             animation.visible = true;
+            animation.pivot(42, 42);
             view.addChild(animation);
         }
         else {

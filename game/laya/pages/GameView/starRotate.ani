@@ -1,5 +1,4 @@
 {
-    "x":0,
     "type":"View",
     "selectedBox":1,
     "props":{"sceneWidth":600,"sceneHeight":400,"sceneColor":"#000000"},
@@ -44,6 +43,15 @@
                                 "tween":true,
                                 "target":5,
                                 "key":"x",
+                                "index":0
+                            }],
+                        "width":[
+                            {
+                                "value":100,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":5,
+                                "key":"width",
                                 "index":0
                             }],
                         "skin":[
@@ -190,6 +198,15 @@
                                 "target":5,
                                 "key":"skin",
                                 "index":17
+                            }],
+                        "height":[
+                            {
+                                "value":100,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":5,
+                                "key":"height",
+                                "index":0
                             }],
                         "anchorY":[
                             {

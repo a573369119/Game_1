@@ -21,8 +21,10 @@ class Monster{
     private initMonster(data){
         this.x = data.x;
         this.y = data.y;
-        this.eatWidth=60;
-        this.eatHeight=60;
+        this.eatWidth=84;
+        this.eatHeight=84;
+        this.openWidth=200;
+        this.openHeight=200;
     }
 
     public update(data) : void

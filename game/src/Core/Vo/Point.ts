@@ -26,8 +26,7 @@ class Point{
     public update(data) : void
     {
         this.x = data.x;
-        this.y = data.y
-        this.point.loadImage("gameView/point.png");       
+        this.y = data.y     
         this.point.pos(data.x,data.y);
         this.point.visible = true;
     }
