@@ -19,8 +19,6 @@ class Star{
     constructor(data,dataStyle){
         this.star=new Laya.Animation();
         this.star.loadAnimation("starRotate.ani");
-        this.star.play(0,true);
-        this.star.pos(data.x,data.y);
         this.init(data,dataStyle);
     }
 
@@ -33,13 +31,23 @@ class Star{
         this.y = data.y;
         this.width=35;
         this.height=35;
-        this.style = dataStyle;
-        this.setStyle();
+        this.star.visible = true;
+        this.star.play(0,true);
+        this.star.pos(data.x,data.y);
+        this.setStyle(dataStyle);
     }
 
     /**种类设置方法 */
-    private setStyle() : void
+    private setStyle(dataStyle) : void
     {
+        this.style = dataStyle;
+    }
 
+    /**更新星星 */
+    public updateStar(data,dataStyle) : void
+    {
+        this.init(data,dataStyle);
+        this.star.play(0,true);
+        this.star.pos(data.x,data.y);
     }
 }

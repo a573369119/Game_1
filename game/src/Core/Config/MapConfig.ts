@@ -71,4 +71,51 @@ class MapConfig{
             this.arr_Ropes.push(rope);
         }
     }
+
+    /**下一关卡更新数据 */
+    public update(objectMapConfig) : void
+    {
+        //**mapId、 */
+        this.mapId = objectMapConfig.mapId;
+        this.mapWidth = objectMapConfig.width;
+        this.mapHeight = objectMapConfig.height;
+        //**更新糖果 */
+        this.candy.candyUpdate(objectMapConfig.candy);
+        //**更新星星 */ 
+        for(let i=0; i<objectMapConfig.star.pos.length ;i++)
+        {
+            if(this.arr_Stars[i])
+            {
+                this.arr_Stars[i].updateStar(objectMapConfig.star.pos[i],objectMapConfig.star.style);
+            }
+        }
+        //**更新怪物 */
+        this.monster.update(objectMapConfig.moster);
+        //**更新钉子 */
+        for(let i=0;i<objectMapConfig.point.pos.length;i++)
+        {
+            if(this.arr_Points[i])
+            {
+                this.arr_Points[i].update(objectMapConfig.point.pos[i]);
+            }
+            else
+            {
+                let point= new Point(objectMapConfig.point.pos[i]); 
+                this.arr_Points.push(point);
+            }
+        }
+        //**更新绳子 */
+        for(let i=0;i<objectMapConfig.rope.pos.length;i++)
+        {
+            if(this.arr_Ropes[i])
+            {
+                this.arr_Ropes[i].updateRope(objectMapConfig.rope.pos[i],objectMapConfig.rope.countlength[i]);
+            }
+            else
+            {
+                let rope= new Rope(objectMapConfig.rope.pos[i],objectMapConfig.rope.countlength[i]); 
+                this.arr_Ropes.push(rope);
+            }
+        }
+    }
 }

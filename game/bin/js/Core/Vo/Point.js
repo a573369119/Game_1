@@ -13,6 +13,14 @@ var Point = /** @class */ (function () {
         this.x = data.x;
         this.y = data.y;
     };
+    /**更新方法 */
+    Point.prototype.update = function (data) {
+        this.x = data.x;
+        this.y = data.y;
+        this.point.loadImage("gameView/point.png");
+        this.point.pos(data.x, data.y);
+        this.point.visible = true;
+    };
     return Point;
 }());
 //# sourceMappingURL=Point.js.map

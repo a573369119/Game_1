@@ -21,5 +21,15 @@ class Point{
         this.x = data.x;
         this.y = data.y
     }
+
+    /**更新方法 */
+    public update(data) : void
+    {
+        this.x = data.x;
+        this.y = data.y
+        this.point.loadImage("gameView/point.png");       
+        this.point.pos(data.x,data.y);
+        this.point.visible = true;
+    }
     
 }

@@ -15,10 +15,19 @@ class Monster{
     /**张嘴高度 */
     public openHeight:number;
     constructor(data){
+        this.initMonster(data);
+    }
+
+    private initMonster(data){
         this.x = data.x;
         this.y = data.y;
         this.eatWidth=60;
         this.eatHeight=60;
+    }
+
+    public update(data) : void
+    {
+        this.initMonster(data);
     }
 
 }

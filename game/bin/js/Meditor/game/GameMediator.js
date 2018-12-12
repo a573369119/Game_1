@@ -32,6 +32,7 @@ var GameMediator = /** @class */ (function (_super) {
     GameMediator.prototype.init = function () {
         this.doorOpen = new ui.GameView.GameViewDoorUI();
         this.menu = new ui.GameView.GameMenuUI();
+        this.timerCount = 0;
         _super.prototype.init.call(this); //init之后 才会有 this.view
         this.view.addChild(this.menu);
         this.view.addChild(this.doorOpen);
@@ -104,7 +105,7 @@ var GameMediator = /** @class */ (function (_super) {
         switch (index) {
             case 1: //用刀划开盒子
                 this.doorOpen.visible = false; //关闭动画层                
-                this.UpdateData("0-0", 0);
+                this.UpdateData("0-0", 0, true);
                 this.addObjectToGame();
                 Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.onMouseDown);
                 Laya.stage.on(Laya.Event.MOUSE_UP, this, this.onMouseUp);
@@ -155,7 +156,7 @@ var GameMediator = /** @class */ (function (_super) {
             this.view.panel_GameWorld.removeChild(this.mapConfig.arr_Stars[i].star);
         }
         this.view.panel_GameWorld.removeChild(this.mapConfig.candy.candy);
-        this.UpdateData("0-0", 1);
+        this.UpdateData("0-0", 1, false);
         for (var i = 0; i < this.mapConfig.arr_Points.length; i++) {
             this.view.panel_GameWorld.addChild(this.mapConfig.arr_Points[i].point);
         }
@@ -181,9 +182,12 @@ var GameMediator = /** @class */ (function (_super) {
         this.doorOpen.ani1.play(0, false);
         this.setInit();
     };
-    /**更新每关数据 */
-    GameMediator.prototype.UpdateData = function (mapWhere, mapId) {
-        this.mapConfig = LoadingManager.ins_.getMapConfig(mapWhere, mapId);
+    /**更新每关数据  isNew：是否是第一次获取mapConfig*/
+    GameMediator.prototype.UpdateData = function (mapWhere, mapId, isNew) {
+        if (isNew)
+            this.mapConfig = LoadingManager.ins_.getMapConfig(mapWhere, mapId);
+        else
+            LoadingManager.ins_.getMapConfig(mapWhere, mapId, this.mapConfig); //更新mapconfig操作     
         this.getCandy();
         this.contactHook();
         this.contactCandy();
@@ -301,7 +305,9 @@ var GameMediator = /** @class */ (function (_super) {
                 }
                 else {
                     if (realH <= 15 && (Laya.stage.mouseY <= this.mapConfig.arr_Ropes[j].rope.bodies[i + 1].position.y && Laya.stage.mouseY >= this.mapConfig.arr_Ropes[j].rope.bodies[i].position.y)) {
+                        // console.log(this.mapConfig.arr_Ropes[j].constraints);
                         Matter.World.remove(GameMediator.engine.world, this.mapConfig.arr_Ropes[j].constraints[i]);
+                        // console.log(this.mapConfig.arr_Ropes[j].constraints);                                
                         Laya.timer.frameLoop(8, this.mapConfig.arr_Ropes[j], this.mapConfig.arr_Ropes[j].checkRopeColorMiss);
                         if (this.mapConfig.arr_Ropes[j].isRopeMax == true) {
                             Matter.World.remove(GameMediator.engine.world, this.mapConfig.arr_Ropes[j].ropeMax);
@@ -329,7 +335,13 @@ var GameMediator = /** @class */ (function (_super) {
     /**糖果图片追踪糖果刚体得位置，使其重合 */
     GameMediator.prototype.checkCandyPos = function () {
         this.mapConfig.candy.pos(this.candyBody.position.x, this.candyBody.position.y);
-        console.log(this.mapConfig.candy.y);
+        this.timerCount++;
+        console.log("run");
+        if (this.timerCount > 60) {
+            console.log(Math.floor(this.mapConfig.candy.candy.x) + "," + Math.floor(this.mapConfig.candy.candy.x) + "  visible : " + this.mapConfig.candy.candy.visible + "---对象");
+            console.log(this.mapConfig.candy);
+            this.timerCount = 0;
+        }
     };
     /**检测糖果与星星，怪兽得碰撞 */
     GameMediator.prototype.collisionChecks = function () {
@@ -346,6 +358,8 @@ var GameMediator = /** @class */ (function (_super) {
             Laya.timer.clear(this, this.checkCandyPos);
             Laya.timer.clear(this, this.collisionChecks);
             this.mapConfig.candy.candy.visible = false;
+            /**将糖果移走**/
+            this.mapConfig.candy.pos(-100, -100);
             this.isEat = true;
         }
         //检测糖果与怪兽接近时张嘴

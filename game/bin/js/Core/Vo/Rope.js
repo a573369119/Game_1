@@ -61,6 +61,13 @@ var Rope = /** @class */ (function () {
             }
         }
     };
+    /**更新绳子 */
+    Rope.prototype.updateRope = function (dataPos, datacountlength) {
+        //透明度回复
+        this.ropeAlpha = 1;
+        //绳子
+        this.constraints = [];
+    };
     return Rope;
 }());
 //# sourceMappingURL=Rope.js.map

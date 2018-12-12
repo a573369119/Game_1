@@ -7,6 +7,7 @@ var Candy = /** @class */ (function () {
         this.candy.loadImage("gameView/" + data.style + ".png");
         this.candy.pivot(this.candy.width / 2, this.candy.height / 2);
         this.candy.zOrder = 2;
+        this.style = data.style;
         this.init();
     }
     Candy.prototype.init = function () {
@@ -19,6 +20,13 @@ var Candy = /** @class */ (function () {
         this.candy.pos(x, y);
         this.x = x;
         this.y = y;
+    };
+    /**candy 更新 */
+    Candy.prototype.candyUpdate = function (data) {
+        this.style = data.style;
+        this.width = this.candy.width;
+        this.height = this.candy.height;
+        this.candy.visible = true;
     };
     return Candy;
 }());

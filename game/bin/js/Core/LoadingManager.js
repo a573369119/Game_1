@@ -126,18 +126,25 @@ var LoadingManager = /** @class */ (function () {
         console.log(playerData.round_Star);
     };
     //-------------------------获取配置--------------------
-    /**获取地图配置 地图配置的所属mapWhere 格式"1-2"第2季的第3个盒子 下标从0 开始   mapId 第几个关卡*/
-    LoadingManager.prototype.getMapConfig = function (mapWhere, mapId) {
+    /**获取地图配置 地图配置的所属mapWhere 格式"1-2"第2季的第3个盒子 下标从0 开始   mapId 第几个关卡 是否是新获取 参数mapConfig （只有从关卡点击哪里才回是新创建）*/
+    LoadingManager.prototype.getMapConfig = function (mapWhere, mapId, updateMapConfig) {
         var object = Laya.loader.getRes("config/mapConfig.json");
         var objectMapConfig;
         var mapConfig;
         for (var i = 0; i < object.length; i++) {
             if (object[i].mapWhere == mapWhere) {
                 for (var h = 0; h < object[i].mapList.length; h++) {
-                    if (mapId == object[i].mapList[h].mapId) {
+                    if (mapId == object[i].mapList[h].mapId)
                         objectMapConfig = object[i].mapList[h];
+                    if (!updateMapConfig) {
                         mapConfig = new MapConfig(objectMapConfig);
                         return mapConfig;
+                    }
+                    else {
+                        if (objectMapConfig) {
+                            updateMapConfig.update(objectMapConfig);
+                            return;
+                        }
                     }
                 }
                 break;

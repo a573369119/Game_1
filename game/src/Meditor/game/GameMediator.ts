@@ -38,6 +38,9 @@ class GameMediator extends BaseMeditor{
     private candyBody:any;	
     /**是否吃到糖果*/
     private isEat:boolean;
+    /**计时器 */
+    private timerCount : number ;
+
     /**用 this.view 来调用 UI视图 */
     constructor(mediatorName:number,view?:number,assate?:any){
         super(mediatorName,view,assate);
@@ -48,6 +51,7 @@ class GameMediator extends BaseMeditor{
     {
         this.doorOpen = new ui.GameView.GameViewDoorUI();
         this.menu = new ui.GameView.GameMenuUI();
+        this.timerCount = 0;
         super.init();//init之后 才会有 this.view
         this.view.addChild(this.menu);
         this.view.addChild(this.doorOpen);
@@ -136,7 +140,7 @@ class GameMediator extends BaseMeditor{
         {
             case 1://用刀划开盒子
                 this.doorOpen.visible = false;//关闭动画层                
-                this.UpdateData("0-0",0)
+                this.UpdateData("0-0",0,true)
                 this.addObjectToGame(); 
                 Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.onMouseDown);		
 		        Laya.stage.on(Laya.Event.MOUSE_UP,this,this.onMouseUp);       
@@ -201,17 +205,17 @@ class GameMediator extends BaseMeditor{
             this.view.panel_GameWorld.removeChild(this.mapConfig.arr_Points[i].point);
         }
         for(let i=0;i<this.mapConfig.arr_Stars.length;i++){
-            this.view.panel_GameWorld.removeChild(this.mapConfig.arr_Stars[i].star);
+             this.view.panel_GameWorld.removeChild(this.mapConfig.arr_Stars[i].star);
         }
         this.view.panel_GameWorld.removeChild(this.mapConfig.candy.candy);
-        this.UpdateData("0-0",1);
+        this.UpdateData("0-0",1,false);
         for(let i=0;i<this.mapConfig.arr_Points.length;i++){
-            this.view.panel_GameWorld.addChild(this.mapConfig.arr_Points[i].point);
-        }
-        for(let i=0;i<this.mapConfig.arr_Stars.length;i++){
-            this.view.panel_GameWorld.addChild(this.mapConfig.arr_Stars[i].star);
-        }
-        this.view.panel_GameWorld.addChild(this.mapConfig.candy.candy);
+             this.view.panel_GameWorld.addChild(this.mapConfig.arr_Points[i].point);
+         }
+         for(let i=0;i<this.mapConfig.arr_Stars.length;i++){
+             this.view.panel_GameWorld.addChild(this.mapConfig.arr_Stars[i].star);
+         }
+         this.view.panel_GameWorld.addChild(this.mapConfig.candy.candy);
         AnimationManager.ins.playAnimation(GameData.ANI_MONSTER_STAND,true,this.mapConfig.monster.x,this.mapConfig.monster.y,this.view.panel_GameWorld);
      }
 
@@ -238,9 +242,10 @@ class GameMediator extends BaseMeditor{
         this.setInit();
     }
 
-    /**更新每关数据 */
-    private UpdateData(mapWhere:string,mapId:number):void{
-        this.mapConfig=LoadingManager.ins_.getMapConfig(mapWhere,mapId);        
+    /**更新每关数据  isNew：是否是第一次获取mapConfig*/
+    private UpdateData(mapWhere:string,mapId:number,isNew:boolean):void{
+        if(isNew)   this.mapConfig=LoadingManager.ins_.getMapConfig(mapWhere,mapId,);  
+        else LoadingManager.ins_.getMapConfig(mapWhere,mapId,this.mapConfig); //更新mapconfig操作     
         this.getCandy();
         this.contactHook();     
         this.contactCandy();	
@@ -380,7 +385,9 @@ class GameMediator extends BaseMeditor{
 				}
 				else{
 					if(realH<=15&&(Laya.stage.mouseY<=this.mapConfig.arr_Ropes[j].rope.bodies[i+1].position.y&&Laya.stage.mouseY>=this.mapConfig.arr_Ropes[j].rope.bodies[i].position.y)){
-					    Matter.World.remove(GameMediator.engine.world,this.mapConfig.arr_Ropes[j].constraints[i]);                    
+					    // console.log(this.mapConfig.arr_Ropes[j].constraints);
+                        Matter.World.remove(GameMediator.engine.world,this.mapConfig.arr_Ropes[j].constraints[i]);      
+					    // console.log(this.mapConfig.arr_Ropes[j].constraints);                                
                         Laya.timer.frameLoop(8,this.mapConfig.arr_Ropes[j],this.mapConfig.arr_Ropes[j].checkRopeColorMiss);   
                     if(this.mapConfig.arr_Ropes[j].isRopeMax==true){
                         Matter.World.remove(GameMediator.engine.world,this.mapConfig.arr_Ropes[j].ropeMax);
@@ -413,8 +420,15 @@ class GameMediator extends BaseMeditor{
 		
     /**糖果图片追踪糖果刚体得位置，使其重合 */
 	private checkCandyPos():void{
-		this.mapConfig.candy.pos(this.candyBody.position.x,this.candyBody.position.y);
-        console.log(this.mapConfig.candy.y);
+		this.mapConfig.candy.pos(this.candyBody.position.x,this.candyBody.position.y)
+        this.timerCount++;
+        console.log("run");
+        if(this.timerCount >60)
+        {
+            console.log(Math.floor(this.mapConfig.candy.candy.x) + "," + Math.floor(this.mapConfig.candy.candy.x) + "  visible : " + this.mapConfig.candy.candy.visible + "---对象");
+            console.log(this.mapConfig.candy);
+            this.timerCount = 0;
+        }
 	}
     /**检测糖果与星星，怪兽得碰撞 */
     private collisionChecks():void{
@@ -432,7 +446,9 @@ class GameMediator extends BaseMeditor{
             AnimationManager.ins.playAnimation(GameData.ANI_MONSTER_EAT,true,this.mapConfig.monster.x,this.mapConfig.monster.y,this.view.panel_GameWorld);          
             Laya.timer.clear(this,this.checkCandyPos);
             Laya.timer.clear(this,this.collisionChecks);
-            this.mapConfig.candy.candy.visible=false;            
+            this.mapConfig.candy.candy.visible=false;    
+            /**将糖果移走**/  
+            this.mapConfig.candy.pos(-100,-100);  
             this.isEat=true;
                
         }

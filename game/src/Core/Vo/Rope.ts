@@ -81,4 +81,13 @@ class Rope{
             }
         }
 	}
+
+	/**更新绳子 */
+	public updateRope(dataPos,datacountlength) :void
+	{
+		//透明度回复
+		this.ropeAlpha = 1;
+		//绳子
+		this.constraints = [];
+	}
 }
