@@ -37,7 +37,6 @@ class StartGameMeditor extends BaseMeditor{
     {
         //进入选择季度
         GameManager.ins_.runMediator(GameData.SELECT_MEDIATOR);
-        
     }
 
     /**按钮事件 点击图集 */
