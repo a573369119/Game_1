@@ -2,23 +2,23 @@
  * 糖果
  */
 var Candy = /** @class */ (function () {
-    function Candy( /*object*/) {
+    function Candy(data) {
         this.candy = new Laya.Sprite();
-        this.candy.loadImage("gameView/candy.png");
-        Laya.stage.addChild(this.candy);
+        this.candy.loadImage("gameView/" + data.style + ".png");
         this.candy.pivot(this.candy.width / 2, this.candy.height / 2);
-        this.candy.zOrder = 1;
+        this.candy.zOrder = 2;
+        this.init();
+    }
+    Candy.prototype.init = function () {
         this.x = this.candy.x;
         this.y = this.candy.y;
-        //this.init(object);
-    }
-    Candy.prototype.init = function (object) {
-        this.x = object.x;
-        this.y = object.y;
-        this.style = object.style;
+        this.width = this.candy.width;
+        this.height = this.candy.height;
     };
     Candy.prototype.pos = function (x, y) {
         this.candy.pos(x, y);
+        this.x = x;
+        this.y = y;
     };
     return Candy;
 }());

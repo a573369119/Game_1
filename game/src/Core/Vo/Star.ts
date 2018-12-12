@@ -6,19 +6,34 @@ class Star{
     public x : number;
     /**纵坐标 */
     public y : number;
+    /**图片宽度 */
+    public width:number;
+    /**图片高度 */
+    public height:number;   
     /**星星类型 */
-    public style : number;
+    public style : string;   
+    /**旋转动画 */
+    public star:Laya.Animation;
+    /**碰撞精灵 */            
+    public starBg:Laya.Sprite;
+    constructor(data,dataStyle){
+        this.star=new Laya.Animation();
+        this.star.loadAnimation("starRotate.ani");
+        this.star.play(0,true);
+        this.star.pos(data.x,data.y);
+        this.init(data,dataStyle);
+    }
 
-    constructor(data){
-        this.init(data);
-    }    
+
 
     /**初始化 */
-    private init(data) : void
+    private init(data,dataStyle) : void
     {
         this.x = data.x;
         this.y = data.y;
-        this.style = data.style;
+        this.width=35;
+        this.height=35;
+        this.style = dataStyle;
         this.setStyle();
     }
 

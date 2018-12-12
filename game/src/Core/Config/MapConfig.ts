@@ -16,15 +16,16 @@ class MapConfig{
     public candy : Candy;
     /**怪物 */
     public monster : Monster;
-    /**星星 */
-    public arr_Star : Array<Star>;
-    /**钉子 */
-    public arr_Point : Array<Point>;
-
+    /**星星数组 */
+    public arr_Stars : Array<Star>;
+    /**钉子数组 */
+    public arr_Points : Array<Point>;
+    /**绳子数组 */
+    public arr_Ropes : Array<Rope>;
     constructor(objectMapConfig){  
-        this.arr_Star = new Array<Star>();
-        this.arr_Point = new Array<Point>();
-
+        this.arr_Stars = new Array<Star>();
+        this.arr_Points = new Array<Point>();
+        this.arr_Ropes = new Array<Rope>();
         this.init(objectMapConfig);
     }
 
@@ -46,25 +47,28 @@ class MapConfig{
         this.mapWidth = objectMapConfig.width;
         this.mapHeight = objectMapConfig.height;
         //**载入糖果 */
-       /* let cd = new Candy(objectMapConfig.candy);
-        this.candy = cd;*/
-        //**载入星星 */
-        let stars : Star; 
-        for(let i=0; i<objectMapConfig.stars.pos.length ;i++)
+        let candy = new Candy(objectMapConfig.candy);
+        this.candy = candy;
+        //**载入星星 */ 
+        for(let i=0; i<objectMapConfig.star.pos.length ;i++)
         {
-            stars = new Star(objectMapConfig.stars.pos[i]);    
-            stars.style = objectMapConfig.stars.style;        
-            this.arr_Star.push(stars);
+            let star = new Star(objectMapConfig.star.pos[i],objectMapConfig.star.style);    
+            this.arr_Stars.push(star);
         }
         //**载入怪物 */
         let moster = new Monster(objectMapConfig.moster);
         this.monster = moster;
         //**载入钉子 */
-        let point : Point; 
-        for(let i=0;i<objectMapConfig.point.length;i++)
+        for(let i=0;i<objectMapConfig.point.pos.length;i++)
         {
-            //point= new Point(objectMapConfig.point[i]); 
-            this.arr_Point.push(point);
+            let point= new Point(objectMapConfig.point.pos[i]); 
+            this.arr_Points.push(point);
+        }
+        //**载入绳子 */
+        for(let i=0;i<objectMapConfig.rope.pos.length;i++)
+        {
+            let rope= new Rope(objectMapConfig.rope.pos[i],objectMapConfig.rope.countlength[i]); 
+            this.arr_Ropes.push(rope);
         }
     }
 }

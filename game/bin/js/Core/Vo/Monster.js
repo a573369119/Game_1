@@ -3,10 +3,10 @@
  */
 var Monster = /** @class */ (function () {
     function Monster(data) {
-        this.arr_animation = new Array();
         this.x = data.x;
         this.y = data.y;
-        AnimationManager.ins.playAnimation(GameData.ANI_MONSTER_STAND, false, this.x, this.y);
+        this.eatWidth = 60;
+        this.eatHeight = 60;
     }
     return Monster;
 }());

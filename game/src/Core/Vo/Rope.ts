@@ -8,18 +8,28 @@ class Rope{
     public ropecolors:Array<string>;		
     /**组成绳子的每个节点*/	
     public rope:any;	
+	/**组成绳子的长度*/	
+	public countlength:number;
     /**绳子最大长度的限制*/
-    public constraint1:any;
-    constructor(hookX,hookY,count){
+    public ropeMax:any;
+	/**绳子透明度*/
+    public ropeAlpha:number;
+	/**绳子已达到最长*/
+	public isRopeMax:boolean;
+    constructor(dataPos,datacountlength){
         this.constraints=new Array<any>();
-        this.ropecolors=["#5C3317","#B87333"];
-        this.createRopeNode(hookX,hookY,count);
+        this.ropecolors=["rgba(139,69,19)","rgba(107,48,5)"];
+        this.createRopeNode(dataPos,datacountlength);
         this.createConstraint();
+		this.countlength=datacountlength;
+		this.ropeAlpha=1;
+		this.isRopeMax=false;
+		Laya.timer.frameLoop(1,this,this.checkMaxRope,[datacountlength*25])
     }
     
     /**创建绳子节点*/	
-	private	createRopeNode(hookX,hookY,count):void{		
-			this.rope = Matter.Composites.stack(hookX, hookY, count, 1, 0, 0, function(x, y) {
+	private	createRopeNode(dataPos,datacountlength):void{		
+			this.rope = Matter.Composites.stack(dataPos.x, dataPos.y, datacountlength, 1, 0, 0, function(x, y) {
         	return Matter.Bodies.circle(x, y, 1, { frictionAir:0.0001,timeScale:1.25,collisionFilter: { group: -1 }, render:{visible:false}},);
    			 });		
             Matter.World.add(GameMediator.engine.world,this.rope); 								
@@ -41,21 +51,34 @@ class Rope{
     }
 
     /**判断是否拉到最长*/
-    public check2(limitDis:number):void{
+    public checkMaxRope(limitDis:number):void{
 			let dis=DistanceTool.Distance(this.rope.bodies[this.rope.bodies.length-1].position.x,
             this.rope.bodies[0].position.x,this.rope.bodies[this.rope.bodies.length-1].position.y,this.rope.bodies[0].position.y);
 			if(dis>=limitDis){
-			this.constraint1=Matter.Constraint.create({ 
+			this.ropeMax=Matter.Constraint.create({ 
         	 		bodyA:this.rope.bodies[0],
         	 		bodyB:this.rope.bodies[this.rope.bodies.length-1],
        		 		stiffness:1.2,
 					length:limitDis,
-					render:{lineWidth:6,strokeStyle:this.ropecolors[0],visible:false}
+					render:{lineWidth:6,strokeStyle:this.ropecolors[0],visible:true}
   			 	 });
 					
-			Laya.timer.clear(this,this.check2);
-			Matter.World.add(GameMediator.engine.world,this.constraint1);
-			console.log(dis);
+			Laya.timer.clear(this,this.checkMaxRope);
+			this.isRopeMax=true;
+			Matter.World.add(GameMediator.engine.world,this.ropeMax);
 			}
+	}
+
+	/**检测绳子透明度逐渐消失*/
+	public checkRopeColorMiss():void{
+		this.ropeAlpha-=0.1;
+		for(let i=0;i<this.constraints.length;i++){
+            if(Math.floor(i/2)%2==0){
+                this.constraints[i].render.strokeStyle="rgba(139,69,19,"+this.ropeAlpha+")";
+            }
+            else{
+            	this.constraints[i].render.strokeStyle="rgba(107,48,5,"+this.ropeAlpha+")";
+            }
+        }
 	}
 }

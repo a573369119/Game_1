@@ -6,14 +6,19 @@ class Monster{
     public x : number;
     /**纵坐标 */
     public y : number;
-    /**怪物动画*/
-    public arr_animation : Array<Laya.Animation>; 
-
+    /**吃到糖果宽度 */
+    public eatWidth:number;
+    /**吃到糖果高度 */
+    public eatHeight:number;
+    /**张嘴宽度 */
+    public openWidth:number;
+    /**张嘴高度 */
+    public openHeight:number;
     constructor(data){
-        this.arr_animation = new Array<Laya.Animation>();
         this.x = data.x;
         this.y = data.y;
-        AnimationManager.ins.playAnimation(GameData.ANI_MONSTER_STAND,false,this.x,this.y);
+        this.eatWidth=60;
+        this.eatHeight=60;
     }
 
 }

@@ -18,7 +18,7 @@ class BaseMeditor {
      */
     constructor(mediatorName?:number,view?:number,assate?:any)
     {
-        this.viewName = view
+        this.viewName = view;
         if(mediatorName)
         {
             this.mediator = mediatorName;

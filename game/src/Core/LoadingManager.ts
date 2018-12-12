@@ -177,14 +177,15 @@ class LoadingManager{
         let mapConfig : MapConfig;
         for(let i =0;i<object.length; i++)
         {
-            if(object[i].mapWhere = mapWhere)
+            if(object[i].mapWhere == mapWhere)
             {
                 for(let h=0; h<object[i].mapList.length ;h++)
                 {
-                    if(mapId == object[i].mapList[h].mapId)
+                    if(mapId == object[i].mapList[h].mapId){
                     objectMapConfig =  object[i].mapList[h];
                     mapConfig = new MapConfig(objectMapConfig);
                     return mapConfig;
+                    }
                 }
                 break;
             }

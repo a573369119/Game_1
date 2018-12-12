@@ -3,35 +3,32 @@
  */
 class Candy{
     /**横坐标 */
-    public x : number;
+    public x:number;
     /**纵坐标 */
-    public y : number;
-    /**类型 */
-    public style : string;
-    /**糖果UI */
+    public y:number;
+    /**图片宽度 */
+    public width:number;
+    /**图片高度 */
+    public height:number;
     /**精灵 */
-    private candy:Laya.Sprite;       
-    constructor(/*object*/){
+    public candy:Laya.Sprite;  
+    constructor(data){
         this.candy=new Laya.Sprite();
-        this.candy.loadImage("gameView/candy.png");
-        Laya.stage.addChild(this.candy);
+        this.candy.loadImage("gameView/"+data.style+".png");
         this.candy.pivot(this.candy.width/2,this.candy.height/2);
-        this.candy.zOrder=1;
+        this.candy.zOrder=2;
+        this.init();
+    }
+
+    private init(){
         this.x=this.candy.x;
         this.y=this.candy.y;
-        //this.init(object);
+        this.width=this.candy.width;
+        this.height=this.candy.height;
     }
-
-    private init(object) : void
-    {
-        this.x = object.x;
-        this.y = object.y;
-        this.style = object.style;
-        
-        
-    }
-
     public pos(x,y):void{
         this.candy.pos(x,y);
+        this.x=x;
+        this.y=y;
     }
 }
