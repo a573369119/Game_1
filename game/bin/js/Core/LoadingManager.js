@@ -136,6 +136,8 @@ var LoadingManager = /** @class */ (function () {
                 for (var h = 0; h < object[i].mapList.length; h++) {
                     if (mapId == object[i].mapList[h].mapId)
                         objectMapConfig = object[i].mapList[h];
+                    if (objectMapConfig === undefined)
+                        continue;
                     if (!updateMapConfig) {
                         mapConfig = new MapConfig(objectMapConfig, view);
                         return mapConfig;

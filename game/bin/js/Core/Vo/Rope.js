@@ -11,6 +11,7 @@ var Rope = /** @class */ (function () {
         this.ropeAlpha = 1;
         this.isRopeMax = false;
         Laya.timer.frameLoop(1, this, this.checkMaxRope, [datacountlength * 24]);
+        Laya.timer.frameLoop(1, this, this.checkContact);
     }
     /**创建绳子节点*/
     Rope.prototype.createRopeNode = function (dataPos, datacountlength) {
@@ -26,6 +27,7 @@ var Rope = /** @class */ (function () {
                 bodyA: this.rope.bodies[k],
                 bodyB: this.rope.bodies[k + 1],
                 stiffness: 1,
+                damping: 0.1,
                 length: 20,
                 render: { lineWidth: 6, strokeStyle: this.ropecolors[Math.floor(k / 2) % 2] }
             });
@@ -47,6 +49,7 @@ var Rope = /** @class */ (function () {
             Laya.timer.clear(this, this.checkMaxRope);
             this.isRopeMax = true;
             Matter.World.add(GameMediator.engine.world, this.ropeMax);
+            this.contactCandy();
         }
     };
     /**检测绳子透明度逐渐消失*/
@@ -60,6 +63,23 @@ var Rope = /** @class */ (function () {
                 this.constraints[i].render.strokeStyle = "rgba(107,48,5," + this.ropeAlpha + ")";
             }
         }
+    };
+    /**检测绳子与糖果连接状态 */
+    Rope.prototype.checkContact = function () {
+        this.rope.bodies[this.rope.bodies.length - 1].position.x = GameMediator.candyBody.position.x;
+        this.rope.bodies[this.rope.bodies.length - 1].position.y = GameMediator.candyBody.position.y;
+    };
+    /**连接糖果 */
+    Rope.prototype.contactCandy = function () {
+        var constraint = Matter.Constraint.create({
+            bodyA: this.rope.bodies[this.rope.bodies.length - 1],
+            bodyB: GameMediator.candyBody,
+            stiffness: 1,
+            length: 0.01,
+            render: { lineWidth: 6, strokeStyle: "#5C3317" }
+        });
+        this.constraints.push(constraint);
+        Matter.World.add(GameMediator.engine.world, constraint);
     };
     /**更新绳子 */
     Rope.prototype.updateRope = function (dataPos, datacountlength) {

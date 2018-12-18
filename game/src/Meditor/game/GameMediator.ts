@@ -28,21 +28,21 @@ class GameMediator extends BaseMeditor{
     private select : number;
 															
     /**气泡数组*/
-	public  balloonArray:Array<any>;						
+	public  balloonArray:Array<any>;
+    public balloon:any;						
     /**连接数组*/
 	public  contactConstraintsArray:Array<any>;			
     /**matter引擎*/
 	public  static engine:any;							
-							
+	private constraint:any;						
 	/**糖果刚体*/	
-    private candyBody:any;	
+    public static candyBody:any;	
     /**是否吃到糖果*/
     private isEat:boolean;
     /**是否在张嘴范围内未播放张嘴动画*/
     private isNotPlayedOpen:boolean;
     /**计时器 */
     private timerCount : number ;
-
     /**用 this.view 来调用 UI视图 */
     constructor(mediatorName:number,view?:number,assate?:any){
         super(mediatorName,view,assate);
@@ -194,6 +194,7 @@ class GameMediator extends BaseMeditor{
         for(let i=0;i<this.mapConfig.arr_Points.length;i++){
             this.mapConfig.arr_Points[i].point.visible=false;
         }       
+  
         this.round++;
         this.UpdateData("0-0",this.round,false);
      }
@@ -226,11 +227,11 @@ class GameMediator extends BaseMeditor{
         if(isNew)   this.mapConfig=LoadingManager.ins_.getMapConfig(mapWhere,mapId,this.view.panel_GameWorld,);  
         else LoadingManager.ins_.getMapConfig(mapWhere,mapId,this.view.panel_GameWorld,this.mapConfig); //更新mapconfig操作     
         this.getCandy();
-        this.contactHook();     
-        this.contactCandy();	
+        this.contactHook();     	
         Laya.timer.frameLoop(1,this,this.checkCandyPos);
         Laya.timer.frameLoop(1,this,this.collisionCheckCandy);
         Laya.timer.frameLoop(1,this,this.collisionCheckMonster);
+        Laya.timer.frameLoop(1,this,this.collisionCheckBalloon);
         //怪兽
         AnimationManager.ins.playAnimation(GameData.ANI_MONSTER_STAND,true,this.mapConfig.monster.x,this.mapConfig.monster.y,this.view.panel_GameWorld);    
         
@@ -292,9 +293,9 @@ class GameMediator extends BaseMeditor{
     
     /**获取糖果刚体 */
 	private getCandy():void{
-		this.candyBody=Matter.Bodies.circle(this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length-1].position.x,
-		this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length-1].position.y, 1,{frictionAir:0.0001,timeScale:1.25,collisionFilter: { group: -1 }});
-		Matter.World.add(GameMediator.engine.world,this.candyBody);
+		GameMediator.candyBody=Matter.Bodies.circle(this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length-1].position.x,
+		this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length-1].position.y, 1,{mass:1000,frictionAir:0.0001,timeScale:1.25,collisionFilter: { group: -1 }});
+		Matter.World.add(GameMediator.engine.world,GameMediator.candyBody);
 	}
 	/**连接钩子 */
 	private contactHook():void{
@@ -310,20 +311,7 @@ class GameMediator extends BaseMeditor{
 			Matter.World.add(GameMediator.engine.world,this.contactConstraintsArray);
 	}
 	
-	/**连接糖果 */
-	private contactCandy():void{
-        for(let i=0;i<this.mapConfig.arr_Ropes.length;i++){
-			var constraint=Matter.Constraint.create({ 
-        	 	bodyA:this.mapConfig.arr_Ropes[i].rope.bodies[this.mapConfig.arr_Ropes[i].rope.bodies.length-1],
-        	 	bodyB:this.candyBody,
-       		 	stiffness:1,
-				length:20,
-				render:{lineWidth:6,strokeStyle:"#5C3317"}
-  			  });
-			this.contactConstraintsArray.push(constraint);
-			Matter.World.add(GameMediator.engine.world,constraint);
-        }
-	}
+	
 
 	/**鼠标事件 点击*/
 	private	onMouseDown():void{			
@@ -393,13 +381,13 @@ class GameMediator extends BaseMeditor{
 		
     /**糖果图片追踪糖果刚体得位置，使其重合 */
 	private checkCandyPos():void{
-		this.mapConfig.candy.pos(this.candyBody.position.x,this.candyBody.position.y);
+		this.mapConfig.candy.pos(GameMediator.candyBody.position.x,GameMediator.candyBody.position.y);
 	}
     /**检测糖果与星星碰撞 */
     private collisionCheckCandy():void{
         //检测糖果与星星
         for(let i=0;i<this.mapConfig.arr_Stars.length;i++){
-            if(DistanceTool.collisionCheck(this.mapConfig.arr_Stars[i],this.mapConfig.candy,this.mapConfig.candy.width,this.mapConfig.candy.width,
+            if(DistanceTool.collisionCheck(this.mapConfig.arr_Stars[i],this.mapConfig.candy,this.mapConfig.arr_Stars[i].width,this.mapConfig.candy.width,
             this.mapConfig.arr_Stars[i].height,this.mapConfig.candy.height)){
                 this.mapConfig.arr_Stars[i].star.visible=false;
             }
@@ -470,6 +458,18 @@ class GameMediator extends BaseMeditor{
             this.mapConfig.arr_Ropes.splice(j,1);
         }
         }
+    }
+
+    /**检测糖果与气泡碰撞 */
+    private collisionCheckBalloon():void{
+        for(let i=0;i<this.mapConfig.arr_Balloons.length;i++){
+            if(DistanceTool.collisionCheck(this.mapConfig.arr_Balloons[i],this.mapConfig.candy,this.mapConfig.arr_Balloons[i].width,this.mapConfig.candy.width,
+            this.mapConfig.arr_Balloons[i].height,this.mapConfig.candy.height)){
+                this.mapConfig.arr_Balloons[i].balloon.pos(GameMediator.candyBody.position.x,GameMediator.candyBody.position.y);
+                
+                GameMediator.engine.world.gravity.y=-1;
+            }
+        }   
     }
 //-------------------------------------------------------------------------------------------------
 

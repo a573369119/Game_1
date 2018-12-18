@@ -22,10 +22,13 @@ class MapConfig{
     public arr_Points : Array<Point>;
     /**绳子数组 */
     public arr_Ropes : Array<Rope>;
+    /**气泡数组 */
+    public arr_Balloons : Array<Balloon>;
     constructor(objectMapConfig,view){  
         this.arr_Stars = new Array<Star>();
         this.arr_Points = new Array<Point>();
         this.arr_Ropes = new Array<Rope>();
+        this.arr_Balloons=new Array<Balloon>();
         this.init(objectMapConfig,view);
     }
 
@@ -73,7 +76,15 @@ class MapConfig{
             let rope= new Rope(objectMapConfig.rope.pos[i],objectMapConfig.rope.countlength[i]); 
             this.arr_Ropes.push(rope);
         }
-        
+        //**载入气泡 */
+        if(objectMapConfig.balloon.exist==true){
+            for(let i=0;i<objectMapConfig.balloon.pos.length;i++)
+            {
+                let balloon= new Balloon(objectMapConfig.balloon.pos[i]); 
+                this.arr_Balloons.push(balloon);
+                view.addChild(balloon.balloon);
+            }
+        }
     }
 
     /**下一关卡更新数据 */
@@ -122,5 +133,22 @@ class MapConfig{
                 this.arr_Ropes.push(rope);
             }
         }
+        //**更新气泡 */
+        if(objectMapConfig.balloon.exist==true){
+            for(let i=0;i<objectMapConfig.balloon.pos.length;i++)
+            {
+                if(this.arr_Balloons[i])
+                {
+                    this.arr_Balloons[i].update(objectMapConfig.balloon.pos[i]);
+                }
+                else
+                {
+                    let balloon= new Balloon(objectMapConfig.balloon.pos[i]); 
+                    this.arr_Balloons.push(balloon);
+                    view.addChild(balloon.balloon);
+                }
+            }
+        }
+        
     }
 }

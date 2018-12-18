@@ -6,6 +6,7 @@ var MapConfig = /** @class */ (function () {
         this.arr_Stars = new Array();
         this.arr_Points = new Array();
         this.arr_Ropes = new Array();
+        this.arr_Balloons = new Array();
         this.init(objectMapConfig, view);
     }
     /**初始化
@@ -48,6 +49,14 @@ var MapConfig = /** @class */ (function () {
             var rope = new Rope(objectMapConfig.rope.pos[i], objectMapConfig.rope.countlength[i]);
             this.arr_Ropes.push(rope);
         }
+        //**载入气泡 */
+        if (objectMapConfig.balloon.exist == true) {
+            for (var i = 0; i < objectMapConfig.balloon.pos.length; i++) {
+                var balloon = new Balloon(objectMapConfig.balloon.pos[i]);
+                this.arr_Balloons.push(balloon);
+                view.addChild(balloon.balloon);
+            }
+        }
     };
     /**下一关卡更新数据 */
     MapConfig.prototype.update = function (objectMapConfig, view) {
@@ -84,6 +93,19 @@ var MapConfig = /** @class */ (function () {
             else {
                 var rope = new Rope(objectMapConfig.rope.pos[i], objectMapConfig.rope.countlength[i]);
                 this.arr_Ropes.push(rope);
+            }
+        }
+        //**更新气泡 */
+        if (objectMapConfig.balloon.exist == true) {
+            for (var i = 0; i < objectMapConfig.balloon.pos.length; i++) {
+                if (this.arr_Balloons[i]) {
+                    this.arr_Balloons[i].update(objectMapConfig.balloon.pos[i]);
+                }
+                else {
+                    var balloon = new Balloon(objectMapConfig.balloon.pos[i]);
+                    this.arr_Balloons.push(balloon);
+                    view.addChild(balloon.balloon);
+                }
             }
         }
     };

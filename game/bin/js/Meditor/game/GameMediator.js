@@ -91,8 +91,7 @@ var GameMediator = /** @class */ (function (_super) {
         switch (index) {
             case 1: //用刀划开盒子
                 this.doorOpen.visible = false; //关闭动画层                
-                //this.UpdateData("0-0",this.round,true)
-                console.log(this.round);
+                this.UpdateData("0-0", this.round, true);
                 Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.onMouseDown);
                 Laya.stage.on(Laya.Event.MOUSE_UP, this, this.onMouseUp);
                 break;
@@ -168,10 +167,10 @@ var GameMediator = /** @class */ (function (_super) {
             LoadingManager.ins_.getMapConfig(mapWhere, mapId, this.view.panel_GameWorld, this.mapConfig); //更新mapconfig操作     
         this.getCandy();
         this.contactHook();
-        this.contactCandy();
         Laya.timer.frameLoop(1, this, this.checkCandyPos);
         Laya.timer.frameLoop(1, this, this.collisionCheckCandy);
         Laya.timer.frameLoop(1, this, this.collisionCheckMonster);
+        Laya.timer.frameLoop(1, this, this.collisionCheckBalloon);
         //怪兽
         AnimationManager.ins.playAnimation(GameData.ANI_MONSTER_STAND, true, this.mapConfig.monster.x, this.mapConfig.monster.y, this.view.panel_GameWorld);
     };
@@ -221,8 +220,8 @@ var GameMediator = /** @class */ (function (_super) {
     };
     /**获取糖果刚体 */
     GameMediator.prototype.getCandy = function () {
-        this.candyBody = Matter.Bodies.circle(this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length - 1].position.x, this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length - 1].position.y, 1, { frictionAir: 0.0001, timeScale: 1.25, collisionFilter: { group: -1 } });
-        Matter.World.add(GameMediator.engine.world, this.candyBody);
+        GameMediator.candyBody = Matter.Bodies.circle(this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length - 1].position.x, this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length - 1].position.y, 1, { mass: 1000, frictionAir: 0.0001, timeScale: 1.25, collisionFilter: { group: -1 } });
+        Matter.World.add(GameMediator.engine.world, GameMediator.candyBody);
     };
     /**连接钩子 */
     GameMediator.prototype.contactHook = function () {
@@ -235,20 +234,6 @@ var GameMediator = /** @class */ (function (_super) {
             this.contactConstraintsArray.push(constraint);
         }
         Matter.World.add(GameMediator.engine.world, this.contactConstraintsArray);
-    };
-    /**连接糖果 */
-    GameMediator.prototype.contactCandy = function () {
-        for (var i = 0; i < this.mapConfig.arr_Ropes.length; i++) {
-            var constraint = Matter.Constraint.create({
-                bodyA: this.mapConfig.arr_Ropes[i].rope.bodies[this.mapConfig.arr_Ropes[i].rope.bodies.length - 1],
-                bodyB: this.candyBody,
-                stiffness: 1,
-                length: 20,
-                render: { lineWidth: 6, strokeStyle: "#5C3317" }
-            });
-            this.contactConstraintsArray.push(constraint);
-            Matter.World.add(GameMediator.engine.world, constraint);
-        }
     };
     /**鼠标事件 点击*/
     GameMediator.prototype.onMouseDown = function () {
@@ -311,13 +296,13 @@ var GameMediator = /** @class */ (function (_super) {
     };
     /**糖果图片追踪糖果刚体得位置，使其重合 */
     GameMediator.prototype.checkCandyPos = function () {
-        this.mapConfig.candy.pos(this.candyBody.position.x, this.candyBody.position.y);
+        this.mapConfig.candy.pos(GameMediator.candyBody.position.x, GameMediator.candyBody.position.y);
     };
     /**检测糖果与星星碰撞 */
     GameMediator.prototype.collisionCheckCandy = function () {
         //检测糖果与星星
         for (var i = 0; i < this.mapConfig.arr_Stars.length; i++) {
-            if (DistanceTool.collisionCheck(this.mapConfig.arr_Stars[i], this.mapConfig.candy, this.mapConfig.candy.width, this.mapConfig.candy.width, this.mapConfig.arr_Stars[i].height, this.mapConfig.candy.height)) {
+            if (DistanceTool.collisionCheck(this.mapConfig.arr_Stars[i], this.mapConfig.candy, this.mapConfig.arr_Stars[i].width, this.mapConfig.candy.width, this.mapConfig.arr_Stars[i].height, this.mapConfig.candy.height)) {
                 this.mapConfig.arr_Stars[i].star.visible = false;
             }
         }
@@ -378,6 +363,15 @@ var GameMediator = /** @class */ (function (_super) {
                     }
                 }
                 this.mapConfig.arr_Ropes.splice(j, 1);
+            }
+        }
+    };
+    /**检测糖果与气泡碰撞 */
+    GameMediator.prototype.collisionCheckBalloon = function () {
+        for (var i = 0; i < this.mapConfig.arr_Balloons.length; i++) {
+            if (DistanceTool.collisionCheck(this.mapConfig.arr_Balloons[i], this.mapConfig.candy, this.mapConfig.arr_Balloons[i].width, this.mapConfig.candy.width, this.mapConfig.arr_Balloons[i].height, this.mapConfig.candy.height)) {
+                this.mapConfig.arr_Balloons[i].balloon.pos(GameMediator.candyBody.position.x, GameMediator.candyBody.position.y);
+                GameMediator.engine.world.gravity.y = -1;
             }
         }
     };

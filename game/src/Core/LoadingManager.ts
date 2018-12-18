@@ -183,6 +183,7 @@ class LoadingManager{
                 {
                     if(mapId == object[i].mapList[h].mapId)
                     objectMapConfig =  object[i].mapList[h];
+                    if(objectMapConfig === undefined )  continue;
                     if(!updateMapConfig)
                     {
                         mapConfig = new MapConfig(objectMapConfig,view);

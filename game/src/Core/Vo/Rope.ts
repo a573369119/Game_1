@@ -7,7 +7,9 @@ class Rope{
     /**绳子颜色数组*/
     public ropecolors:Array<string>;		
     /**组成绳子的每个节点*/	
-    public rope:any;	
+    public rope:any;
+	/**刚体*/	
+	public candyBody:any;	
 	/**组成绳子的长度*/	
 	public countlength:number;
     /**绳子最大长度的限制*/
@@ -24,7 +26,8 @@ class Rope{
 		this.countlength=datacountlength;
 		this.ropeAlpha=1;
 		this.isRopeMax=false;
-		Laya.timer.frameLoop(1,this,this.checkMaxRope,[datacountlength*24])
+		Laya.timer.frameLoop(1,this,this.checkMaxRope,[datacountlength*24]);
+		Laya.timer.frameLoop(1,this,this.checkContact);
     }
     
     /**创建绳子节点*/	
@@ -42,12 +45,14 @@ class Rope{
         	 		bodyA:this.rope.bodies[k],
         	 		bodyB:this.rope.bodies[k+1],
        		 		stiffness:1,
+					damping:0.1,
 					length:20,
 					render:{lineWidth:6,strokeStyle:this.ropecolors[Math.floor(k/2)%2]}
   			 	 });
 				this.constraints.push(constraint1);
 			}	
-            Matter.World.add(GameMediator.engine.world,this.constraints); 		
+            Matter.World.add(GameMediator.engine.world,this.constraints); 
+					
     }
 
     /**判断是否拉到最长*/
@@ -66,6 +71,7 @@ class Rope{
 			Laya.timer.clear(this,this.checkMaxRope);
 			this.isRopeMax=true;
 			Matter.World.add(GameMediator.engine.world,this.ropeMax);
+			this.contactCandy();
 			}
 	}
 
@@ -82,6 +88,25 @@ class Rope{
         }
 	}
 
+	/**检测绳子与糖果连接状态 */
+	public checkContact():void{
+		this.rope.bodies[this.rope.bodies.length-1].position.x=GameMediator.candyBody.position.x;
+		this.rope.bodies[this.rope.bodies.length-1].position.y=GameMediator.candyBody.position.y;
+	}
+
+	/**连接糖果 */
+	private contactCandy():void{
+			let constraint=Matter.Constraint.create({ 
+        	 	bodyA:this.rope.bodies[this.rope.bodies.length-1],
+        	 	bodyB:GameMediator.candyBody,
+       		 	stiffness:1,
+				length:0.01,  
+				render:{lineWidth:6,strokeStyle:"#5C3317"}
+  			  });
+			this.constraints.push(constraint);
+			Matter.World.add(GameMediator.engine.world,constraint);
+        
+	}
 	/**更新绳子 */
 	public updateRope(dataPos,datacountlength) :void
 	{
