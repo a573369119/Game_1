@@ -220,7 +220,7 @@ var GameMediator = /** @class */ (function (_super) {
     };
     /**获取糖果刚体 */
     GameMediator.prototype.getCandy = function () {
-        GameMediator.candyBody = Matter.Bodies.circle(this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length - 1].position.x, this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length - 1].position.y, 1, { mass: 1000, frictionAir: 0.0001, timeScale: 1.25, collisionFilter: { group: -1 } });
+        GameMediator.candyBody = Matter.Bodies.circle(this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length - 1].position.x, this.mapConfig.arr_Ropes[0].rope.bodies[this.mapConfig.arr_Ropes[0].rope.bodies.length - 1].position.y, 1, { frictionAir: 0.0001, timeScale: 1, collisionFilter: { group: -1 } });
         Matter.World.add(GameMediator.engine.world, GameMediator.candyBody);
     };
     /**连接钩子 */
@@ -229,6 +229,7 @@ var GameMediator = /** @class */ (function (_super) {
             var constraint = Matter.Constraint.create({
                 bodyA: this.mapConfig.arr_Ropes[i].rope.bodies[0],
                 pointB: { x: this.mapConfig.arr_Points[i].x, y: this.mapConfig.arr_Points[i].y },
+                length: 0.1,
                 stiffness: 1
             });
             this.contactConstraintsArray.push(constraint);
@@ -238,7 +239,6 @@ var GameMediator = /** @class */ (function (_super) {
     /**鼠标事件 点击*/
     GameMediator.prototype.onMouseDown = function () {
         Laya.stage.on(Laya.Event.MOUSE_MOVE, this, this.onMouseMove);
-        Laya.timer.frameLoop(1, this, this.colorMiss);
     };
     /**鼠标事件 拖拽 */
     GameMediator.prototype.onMouseMove = function () {
@@ -267,10 +267,9 @@ var GameMediator = /** @class */ (function (_super) {
                 }
                 else {
                     if (realH <= 15 && (Laya.stage.mouseY <= this.mapConfig.arr_Ropes[j].rope.bodies[i + 1].position.y && Laya.stage.mouseY >= this.mapConfig.arr_Ropes[j].rope.bodies[i].position.y)) {
-                        // console.log(this.mapConfig.arr_Ropes[j].constraints);
                         Matter.World.remove(GameMediator.engine.world, this.mapConfig.arr_Ropes[j].constraints[i]);
-                        // console.log(this.mapConfig.arr_Ropes[j].constraints);                                
                         Laya.timer.frameLoop(8, this.mapConfig.arr_Ropes[j], this.mapConfig.arr_Ropes[j].checkRopeColorMiss);
+                        this.mapConfig.arr_Ropes[j].isCheck = true;
                         if (this.mapConfig.arr_Ropes[j].isRopeMax == true) {
                             Matter.World.remove(GameMediator.engine.world, this.mapConfig.arr_Ropes[j].ropeMax);
                             this.mapConfig.arr_Ropes[j].isRopeMax == false;
@@ -315,7 +314,6 @@ var GameMediator = /** @class */ (function (_super) {
                 AnimationManager.ins.stopAnimation(GameData.ANI_MONSTER_STAND);
                 AnimationManager.ins.playAnimation(GameData.ANI_MONSTER_OPEN, false, this.mapConfig.monster.x, this.mapConfig.monster.y, this.view.panel_GameWorld);
                 this.isNotPlayedOpen = false;
-                console.log("成功");
             }
             //检测糖果是否到达吃到的范围
             if (DistanceTool.collisionCheck(this.mapConfig.monster, this.mapConfig.candy, this.mapConfig.monster.eatWidth, this.mapConfig.candy.width, this.mapConfig.monster.eatHeight, this.mapConfig.candy.height)) {
@@ -324,6 +322,19 @@ var GameMediator = /** @class */ (function (_super) {
                 Laya.timer.clear(this, this.checkCandyPos);
                 Laya.timer.clear(this, this.collisionCheckCandy);
                 Laya.timer.clear(this, this.collisionCheckMonster);
+                for (var i = 0; i < this.mapConfig.arr_Ropes.length; i++) {
+                    if (this.mapConfig.arr_Ropes[i].ropeAlpha == 1) {
+                        Laya.timer.frameLoop(8, this.mapConfig.arr_Ropes[i], this.mapConfig.arr_Ropes[i].checkRopeColorMiss);
+                        if (this.mapConfig.arr_Ropes[i].isRopeMax == true) {
+                            Matter.World.remove(GameMediator.engine.world, this.mapConfig.arr_Ropes[i].ropeMax);
+                            this.mapConfig.arr_Ropes[i].isRopeMax == false;
+                        }
+                        else {
+                            Laya.timer.clear(this.mapConfig.arr_Ropes[i], this.mapConfig.arr_Ropes[i].checkMaxRope);
+                        }
+                    }
+                }
+                Laya.timer.frameLoop(1, this, this.colorMiss);
                 this.mapConfig.candy.candy.visible = false;
                 this.isEat = true;
                 this.isNotPlayedOpen = true;
@@ -337,32 +348,28 @@ var GameMediator = /** @class */ (function (_super) {
             }
         }
     };
-    /**检测最后一根绳子alpha是否为0 */
+    /**检测最剩下的绳子的alpha是否为0 */
     GameMediator.prototype.colorMiss = function () {
-        for (var j = 0; j < this.mapConfig.arr_Ropes.length; j++) {
-            if (this.mapConfig.arr_Ropes[j].ropeAlpha <= 0) {
-                Laya.timer.clear(this.mapConfig.arr_Ropes[j], this.mapConfig.arr_Ropes[j].checkRopeColorMiss);
-                for (var i = 0; i < this.mapConfig.arr_Ropes[j].constraints.length; i++) {
-                    Matter.World.remove(GameMediator.engine.world, this.mapConfig.arr_Ropes[j].constraints[i]);
-                }
-                //检测最后一根绳子alpha是否为0
-                if (this.mapConfig.arr_Ropes.length == 1) {
-                    for (var i = 0; i < this.contactConstraintsArray.length; i++) {
-                        Matter.World.remove(GameMediator.engine.world, this.contactConstraintsArray[i]);
-                    }
-                    this.contactConstraintsArray = [];
-                    this.doorOpen.visible = true;
-                    //吃到则弹出菜单
-                    if (this.isEat == true) {
-                        this.doorOpen.ani3.play(0, false);
-                        this.isEat = false;
-                    }
-                    //未吃到则重新加载本关
-                    else {
-                        //this.doorOpen.ani5.play(0,false);
-                    }
-                }
-                this.mapConfig.arr_Ropes.splice(j, 1);
+        for (var i = 0; i < this.mapConfig.arr_Ropes.length; i++) {
+            if (this.mapConfig.arr_Ropes[i].ropeAlpha <= 0) {
+                this.mapConfig.arr_Ropes.splice(i, 1);
+            }
+        }
+        if (this.mapConfig.arr_Ropes.length == 0) {
+            Laya.timer.clear(this, this.colorMiss);
+            for (var i = 0; i < this.contactConstraintsArray.length; i++) {
+                Matter.World.remove(GameMediator.engine.world, this.contactConstraintsArray[i]);
+            }
+            this.contactConstraintsArray = [];
+            this.doorOpen.visible = true;
+            //吃到则弹出菜单
+            if (this.isEat == true) {
+                this.doorOpen.ani3.play(0, false);
+                this.isEat = false;
+            }
+            //未吃到则重新加载本关
+            else {
+                //this.doorOpen.ani5.play(0,false);
             }
         }
     };
@@ -370,8 +377,8 @@ var GameMediator = /** @class */ (function (_super) {
     GameMediator.prototype.collisionCheckBalloon = function () {
         for (var i = 0; i < this.mapConfig.arr_Balloons.length; i++) {
             if (DistanceTool.collisionCheck(this.mapConfig.arr_Balloons[i], this.mapConfig.candy, this.mapConfig.arr_Balloons[i].width, this.mapConfig.candy.width, this.mapConfig.arr_Balloons[i].height, this.mapConfig.candy.height)) {
-                this.mapConfig.arr_Balloons[i].balloon.pos(GameMediator.candyBody.position.x, GameMediator.candyBody.position.y);
-                GameMediator.engine.world.gravity.y = -1;
+                Laya.timer.clear(this, this.collisionCheckBalloon);
+                this.mapConfig.arr_Balloons[i].balloon.pos(this.mapConfig.candy.x, this.mapConfig.candy.y);
             }
         }
     };
